@@ -1,0 +1,210 @@
+\section{Computational Readiness}
+
+\subsection{Leadership Classification}
+Three-dimensional CCSN simulation is a quintessential {\it
+  Leadership-class} computational problem. The enormous resolution
+required, incredible number of time steps needed, and the challenging
+nature and variety of the physics involved make it so. Our proposed
+research requires Leadership computing because almost all of our requested allocation
+will be spent on one or a few simulations that run individually at the
+capability-scale ($\sim20\%$ of the system). 
+
+\subsection{Computational Approach}
+\label{sec:approach}
+
+Our primary tool for conducting the planned simulations will be the multi-physics, adaptive mesh refinement simulation framework, FLASH.  
+%FLASH is on open-source, community code that is developed at the University of Chicago. 
+%FLASH has been used by hundreds of scientists around the world and has contributed to more than 700 publications.  
+The code, now in its fourth major release version, has been continuously maintained, updated, extended, and modernized by the scientists at the Flash Center. 
+Additionally, as an acceptance and Early Science application on BG/Q {\it Mira}, FLASH has been exactingly tuned to take advantage of this impressive architecture (see \citet{Daley:2013esp}). 
+We will employ the new, cutting-edge directionally-unsplit staggered-mesh MHD solver \citep{Lee:2013cd} that uses the constrained transport method to maintain $\pmb{\nabla \cdot B} = 0$ to machine precision.  
+The block-structured, oct-tree adaptive mesh refinement in FLASH provides extreme flexibility and efficiency, particularly when combined with hybrid MPI/OpenMP parallelism. 
+Coupled with the neutrino physics and nuclear equation of state that we have already implemented, FLASH is a code ideally suited to tackling the magnetorotational core-collapse supernova problem.
+
+FLASH contains a wide range of numeric solvers for solving
+PDEs on block-structured AMR meshes. FLASH relies on the oct-tree
+based PARAMESH library \citep{MacNeice:2000fc}. The proposed
+simulations will solve the equations of hydrodynamics and
+magnetohydrodynamics using an unsplit, explicit, finite-volume
+Eulerian formulation. The unsplit solvers in FLASH have several
+options for spatial reconstruction including second-order
+MUSCL-Hancock, third-order PPM, and fifth-order WENO. The MHD solver
+uses the Unsplit Staggered Mesh (USM) method which requires
+face-centered variables in addition to the normal cell centered
+quantities.
+
+FLASH utilizes hybrid MPI/OpenMP parallelism in order to make best use
+of the unique BG/Q architecture of {\it Mira}. The hydrodynamics/MHD
+solvers, gravity solvers, and source terms have all been extended to
+include support for thread-level parallelism via OpenMP. FLASH also
+supports parallelization through mesh replication which allows a
+simulation to utilize larger numbers of MPI processes and reduces the
+overall time-to-solution for multigroup radiation-hydrodynamic
+simulations.
+
+
+FLASH writes output files using the HDF5 library. These files can be
+read in directly and visualized in parallel using VisIt or YT
+visualization software. We are transitioning to a new work flow where
+the GLEAN library will used to eliminate I/O bottlenecks
+\cite{vishwanath2011}. The GLEAN library allows FLASH to transfer data
+to separate I/O processes before writing it to files, thereby freeing
+FLASH to continue with the calculation while files are written to
+disk. Finally, we are developing software that will use data provided
+by FLASH/GLEAN to generate images \textsl{before} data is written to
+files.
+
+
+\subsubsection{Workflow Patterns}
+
+The vast majority of the allocated time will be spent on production
+simulations. We will utilize the Simulation management and analysis
+system (Smaash, \citep{Hudson:2011tp}) that has been developed at the
+Flash Center and ALCF explicitly for use in managing FLASH simulations
+and data. Smaash monitors simulation progress, automatically sets-up
+and schedules restarts, and moves data to tape archive. Smaash has an
+intuitive web-based user interface and is built to maintain data
+continuity and repeatability of simulations. Much of the data analysis
+will be done {\it in-situ}.  Other analysis and visualization will be
+conducted on the ALCF resource {\it Tukey} which is attached to the
+same file system as {\it Mira}, obviating the need to move the data for
+analysis.  We will use the QuickFlash library of C++ routines for
+analyzing our data.  We will use VisIt and custom ALCF volume
+rendering software for visualization.
+
+\subsubsection{I/O}
+Flash implements parallel HDF5 and collective I/O wherein a reduced
+number of MPI ranks perform I/O to reduce the number of processes
+accessing the file system at one time. The amount of time spent by
+FLASH on I/O in a production simulation is typically less than five
+percent of the overall run time. Use of the GLEAN library will
+substantially reduce this time to negligible values as has been
+demonstrated previously (see \citet{vishwanath2011}).
+
+\subsubsection{Data Storage}
+For the MRI simulation, the enormous number of zones is reflected
+in large I/O files and storage requirements.  Each checkpoint file
+will be 1 TB in size and plot files will be 300 GB.  We will produce
+750 plot files and 75 checkpoints, which will require 300 TB of online
+storage.  Following analysis and visualization, we will move the data
+to permanent tape archive.  
+The M1 simulations will produce 150 GB checkpoints and 10 GB plot files.
+We request a further 100 TB for storage of these data.
+Disk space usage will be comparable in all three years of this project.
+
+\subsection{Job Characterization \& Use of Resources}
+\label{sec:jobs}
+
+In this proposal, we estimate the computational cost of our
+simulations as follows.  For the purpose of cost estimates, we will
+assume an average shock radius of 300 km, inside of which the grid
+will be refined to the maximum allowed level.   Given $\eta$, the
+average shock radius, and the finest possible grid spacing, $d
+x_{\rm min}$, the time-averaged number of zones, $\bar N_{\rm zones}$,
+can be estimated for each simulation.  Then, given the number of time
+steps needed, $N_{\rm steps}$, the computational cost of a simulation
+is 
+\begin{equation}
+C = \alpha   \bar N_{\rm zones} N_{\rm steps},
+\label{eq:cost}
+\end{equation}
+where $\alpha$ is the use rate in units of core-hours per zone per
+time step. 
+\begin{wrapfigure}[41]{r}{3.5in}
+\begin{tabular}{c}
+\includegraphics[width=3.5in, trim= 0.13in 0in 0.in 0.in,clip]{data/wkScaling2} \\
+\includegraphics[width=3.5in, trim= 0.13in 0in 0in .25in,clip]{data/strScaling} \\
+\includegraphics[width=3.5in, trim= 0.13in 0.in 0.in .25in,clip]{data/thrSpeedup}
+\end{tabular}
+\caption{Weak scaling (top), strong scaling (middle), and threading
+  speedup (bottom) of FLASH-MaRCC1 on {\it Mira}.  Note that for this configuration, use of 8 threads can result in a maximum theoretical speedup of 4x.}
+\label{fig:scaling}
+\end{wrapfigure}  
+The number of time steps needed is determined by the
+evolution time sought and the time step size: $N_{\rm steps} = t_{\rm
+  max} / d t$. 
+The time step for an explicit integrator is $d t = a_{\rm CFL}\ {\rm min}[d x / (c_{\rm S} + v)]$, where $a_{\rm CFL}$ is a number less than one (typically 0.5 for our simulations), $c_{\rm S}$ is the sound speed and $v$ is the flow speed; this expression is computed locally for each zone.  
+Practically, for our simulations $d t$ is always set by zones near the center of the PNS.  Here, $v << c_{\rm S,PNS}$ so we can simplify the expression for the time step to $d t = a_{\rm CFL} d x_{\rm
+  min} / c_{\rm S,PNS}$. The maximum sound speed in the PNS is roughly
+constant post-bounce and is typically around $10^5$ km s$^{-1}$. 
+The use rate, $\alpha$, is determined experimentally from actual simulations (see \S\ref{sec:performance}).  The time-averaged number of zones is estimated based on $d x_{\rm min}$, $\eta$, and the shock radius, behind which we assume maximal resolution.  Comparison to actual production simulations shows that our method for estimating the input parameters of eq. \ref{eq:cost} is accurate.
+
+
+%Much of the allocation will be spent carrying out the one MRI-resolved simulation (\S\ref{sec:mriSim}).  
+%This simulation will be conducted on 8192 {\it Mira} nodes and will require 17 24-hour runs to complete.  
+%Due to the memory requirements of FLASH-MaRCC1 we will run this simulation using 8 MPI ranks/node and 8 OpenMP threads/rank. 
+%We estimate one restart per week, putting the time of completion in November.
+
+
+\subsection{Parallel Performance}
+\label{sec:performance}
+
+
+FLASH has a long history of excellent scaling and performance on Leadership-class platforms. 
+We have benchmarked the performance and scaling of the FLASH-MaRCC1 application on {\it Mira}. 
+Our benchmarks use the full, production version of FLASH-MaRCC1, including MHD, self-gravity, AMR, neutrino leakage/M1 neutrino transport, and nuclear equation of state. 
+In Figure \ref{fig:scaling} we show the weak scaling on {\it Mira} for FLASH-MaRCC1 going up to 32,768 nodes (524k cores) for leakage and 8192 nodes (128k cores) for M1. 
+The leakage variant scales almost perfectly from 512 to 32,768 nodes.  
+Our M1 version of FLASH does not scale as efficiently because it requires a great deal more communication since the M1 calculation needs over 150 extra grid variables than the leakage does.
+We are working on improvements to the communication efficiency for the M1 variant that should increase scaling efficiency prior to the start of the INCITE allocation.
+As is to be expected, IO does not scale perfectly.
+Despite the exponential growth in the time required for IO, it is still only a small fraction ($\sim5\%$) of the total runtime during production simulations since IO occurs so infrequently.  
+We also plot in Fig. \ref{fig:scaling} the strong scaling and thread-to-thread speedup for FLASH-MaRCC1.  
+Both are quite acceptable for capability-level production simulations.
+
+
+In order to gauge our performance, we have benchmarked FLASH against another comparable compressible MHD code, Athena (v4.2).\footnote{This comparison is only included because there was confusion on the part of at least one reviewer during the review of our INCITE proposal last year.
+Concerns were raised over the apparent inefficiency of FLASH based on our performance metrics.  
+The reviewer accused FLASH of being ``10$\times$'' slower than other comparable MHD codes without giving an actual reference.
+Of course this was a major shock and concern for us.
+Thus, we present this comparison with Athena, an excellent MHD code that is well-known as being highly efficient and fast.
+}  
+We use the common Field Loop Advection problem described in \citet{Gardiner:2008dh} and \citet{Lee:2009kq}, which is a standard test problem packaged with the release versions of both codes.  We use a fixed-resolution grid for these tests and the same parameters across all three codes.  
+
+%We first tested the performance on a 4-core laptop using a grid of 32x32x64 zones.  Compared to FLASH, Pluto is 2.9x faster and Athena is 4x faster.  This is a significant inefficiency that we have been working to alleviate.  We have already optimized the non-MHD unsplit solver in FLASH yielding a 2.5x speedup in 3D performance. Consumer grade hardware, however, exhibits very different performance characteristics than leadership-scale hardware.  A great deal of effort has gone into optimizing FLASH for the BG/Q architecture and FLASH has been tested and developed on BG/Q since the start of the Mira Early Science Program.
+
+
+We have conducted the Field Loop Advection problem on BG/Q Cetus using both FLASH and Athena.  
+For all tests on Cetus, we use 4096 zones per MPI ranks and the same fixed-resolution grid.  
+On Cetus, we use 16 MPI ranks per node.  
+Athena utilizes only MPI parallelism without any support for threading.  
+Given the unique architecture of BG/Q, which allows for up to 4 hardware threads per core, this means that Athena cannot utilize the full power of this architecture.  
+We run two Athena benchmarks on Cetus:  in the first we use 1 node (16 cores) and a grid of 32x32x64.  
+In the second Athena run we use 512 nodes (8192 cores) and a grid of 256x256x512.  
+We run several comparable FLASH benchmarks using different OMP thread counts (1 and 4).  
+The results of our benchmarks are shown in Table \ref{table:perf}.  
+The performance numbers show the zone-steps per cpu-second (in parentheses) and MSU per zone-step (first number).  
+
+
+\begin{deluxetable}{ccc}
+\tablecolumns{3}
+\tabletypesize{\scriptsize}
+\tablecaption{
+Performance comparison between FLASH and Athena on BG/Q
+\label{table:perf}
+}
+\tablewidth{0pt}
+\tablehead{
+\colhead{ } &
+\colhead{MSU/zone-step (zone-step/cpu-second), 1 Node} &
+\colhead{MSU/zone-step (zone-step/cpu-second), 512 Nodes} 
+}
+\startdata 
+Athena 1 thrd  &     8.84e-8 (3141)   &    1.01e-7 (2759) \\
+FLASH 1 thrd   &    9.16e-8 (3032)    &   9.39e-8 (2959) \\
+FLASH 4 thrd   &    4.94e-8 (5626) &  
+%FLASH -O3 1 thrd   &    7.43e-8 (3737)   &    7.61e-8 (3649) \\
+%FLASH -O3 4 thrd   &    4.38e-8 (6347)   &  
+\enddata
+\end{deluxetable}
+
+As shown, we find that the 1-node performance of FLASH is very similar to that of Athena on BG/Q, that is when FLASH is run in single-thread mode.  For multiple thread configurations FLASH outperforms Athena. 
+Leveraging the full threading abilities of BG/Q, we see that FLASH is about 2x faster than Athena.  
+Also clear from the 512-node benchmarks, FLASH shows more efficient weak scaling than Athena.  As we demonstrate above, FLASH scales to nearly the entire Mira platform with extreme efficiency. 
+
+The performance of FLASH for the field loop advection problem is significantly better than for the full MaRCC1 application (see Fig. \ref{fig:scaling}) for several reasons.  
+In MaRCC1 we use WENO-5 instead of PPM, a complex microphysical tabular EOS, self-gravity, neutrino physics, extensive on-the-fly data analytics, and I/O.  
+This all serves to approximately double the per zone-step cost of the MaRCC1 application as compared with the simple Field Loop Advection test.
+We further emphasize that while comparable performance for the Field Loop Advection test may be obtained with Athena, Athena lacks the long list of capabilities required to carry out the research we propose (i.e., AMR, nuclear EOS, neutrino physics).
+
+

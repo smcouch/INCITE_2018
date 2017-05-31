@@ -1,0 +1,94 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[pagestyles,raggedright]{titlesec}
+\usepackage{txfonts}
+\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in] {geometry}
+\usepackage{graphicx}  
+
+% Set one inch margins:
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{0.25in}
+\setlength{\headsep}{0.25in}
+
+\pagestyle{fancy}
+
+\newcommand{\doctitle}{Petascale Simulation of the Magnetorotational
+  Instability in Core-Collapse Supernovae}
+
+\begin{document}
+
+\setlength{\parindent}{0in}
+
+\pagestyle{fancy} 
+%\lhead{\doctitle{}} 
+%\rhead{S.M. Couch} 
+\renewcommand{\headrulewidth}{0.0pt}
+
+\begin{center} \textbf{\doctitle{}} \\
+%  A Proposal to the DOE ASCR Leadership Computing Challenge
+\end{center}
+
+\begin{flushleft}
+\textbf{PI}:
+Sean M. Couch, University of Chicago \\
+\medskip
+
+\textbf{Executive Summary:} 
+
+{\parindent 16pt
+
+  Core-collapse supernovae (CCSNe) are the luminous explosions that
+  herald the death of massive stars.  Neutron stars, pulsars,
+  magnetars, and stellar-mass black holes are all born out of these
+  explosions.  Some Gamma-Ray Bursts (GRBs) have been associated with
+  CCSNe, raising the possibility of a common progenitor for both.
+  CCSNe are responsible for the production of many elements throughout
+  the universe, especially those heavier than iron; their importance
+  in galactic chemical evolution cannot be underestimated.  Many of
+  the first stars, expected to be relatively massive, likely ended as
+  CCSNe as well.  These bright events, occurring just a couple of
+  million years after the Big Bang, may be some of the most distant,
+  observable objects in the universe with the upcoming James Webb
+  Space Telescope.  Despite the importance of CCSNe to our
+  understanding of many aspects of the universe the mechanism that
+  reverses stellar core collapse and drives supernova explosions is
+  not fully understood leaving our understanding of many important
+  astrophysical phenomena incomplete.  The CCSN mechanism is one of
+  the most important challenges for modern computational astrophysics.
+  Leadership-class computing is the only path forward toward solving
+  this long-standing problem.
+
+  We propose to conduct a comprehensive study of the impact of
+  rotation and magnetic fields on core-collapse supernovae over a
+  three-year period on the BG/Q {\it Mira} at the Argonne Leadership
+  Computing Facility (ALCF). We will carry out a series of 3D
+  magnetohydrodynamics (MHD) simulations of the collapse of rotating,
+  magnetic stellar cores using the FLASH multi-physics, adaptive mesh
+  refinement (AMR) simulation framework.  We will include in our
+  simulations realistic treatments for neutrino physics, realistic
+  progenitor rotation and magnetic fields, and, for the first time
+  ever, sufficient resolution to capture the growth of the
+  magnetorotational instability (MRI).  We will use these simulations
+  to quantify how much rotational energy of the progenitor cores can
+  be tapped to aid neutrinos in driving successful and robust
+  explosions.  Our simulations will allow us to predict the spins,
+  kicks, magnetic field strengths and alignments of newly-formed
+  neutron stars (NSs), pulsars, and magnetars, as well as the
+  dependence of these parameters on progenitor conditions.  Using {\it
+    in-situ} analysis, we will compute the gravitational wave signal
+  from our simulations, providing valuable theoretical data for
+  experiments such as Advanced LIGO.  Our simulations will be the most
+  physically-detailed and accurate CCSN simulations to include
+  magnetorotational effects ever accomplished, with the potential for
+  uncovering a robust and realistic CCSN explosion mechanism.
+
+}
+\end{flushleft}
+\end{document}

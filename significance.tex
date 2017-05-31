@@ -1,0 +1,141 @@
+\section{Significance of Project}
+
+Core-collapse supernovae (CCSNe) are the luminous explosions that herald the death of massive stars.  
+Neutron stars, pulsars, magnetars, and stellar-mass black holes are all born out of these explosions.  
+Some Gamma-Ray Bursts (GRBs) have been associated with CCSNe, raising the possibility of a common progenitor for both.  
+CCSNe are responsible for the production of many elements throughout the universe, especially those heavier than iron; their importance in galactic chemical evolution cannot be underestimated.  
+Many of the first stars, expected to be relatively massive, likely ended as CCSNe as well.  
+These bright events, occurring just a couple of million years after the Big Bang, may be some of the most distant, observable objects in the universe with the upcoming James Webb Space Telescope.  
+Despite the importance of CCSNe to our understanding of many aspects of the universe the mechanism that reverses stellar core collapse and drives supernova explosions is not fully understood leaving our understanding of many important astrophysical phenomena incomplete.  
+The CCSN mechanism is one of the most important challenges for modern computational astrophysics.  
+Leadership-class computing is the only path forward toward solving this long-standing problem.
+
+The physics of core-collapse supernovae is broad and complex, encompassing the nature of matter at extreme densities and temperatures, neutrino transport and weak interactions, magnetohydrodynamics (MHD), gravity, and general relativity (GR).  
+It is not yet feasible to include high-fidelity treatments of all the relevant physics in a single sufficiently-resolved three-dimensional simulation; such a calculation would require a sustained {\it Exa}-flop platform.  
+%Until such machines are available, significant progress can be made by treating only certain aspects of the physics with high fidelity in a single simulation.  
+%Most theoretical investigations of CCSNe have focused on the role of neutrinos in driving explosions \citep[see,e.g.,][]{Janka:2012jp, Janka:2012cb, Burrows:2013hp}.  
+Simulating neutrino transport with high fidelity is very challenging and expensive, and the impact of neutrinos on CCSNe, including whether or not they drive successful explosions, depends sensitively on the sophistication of the transport scheme employed \citep{Messer:1998ez, {Lentz:2012fy}} and on dimensionality \citep{Nordhaus:2010ct,{Hanke:2012dx}, {Couch:2013fh}}.
+Further complicating the study of CCSNe is the emerging consensus that fully-3D simulations are {\it required} to accurately model the complex dynamics.
+The most sophisticated 3D CCSN simulations accomplished to-date \citep{Hanke:2013kf, {Tamborra:2014tc}} fail to explode, whereas their 2D counterparts result in successful, if under-energetic, explosions \citep{Muller:2012gd, {Bruenn:2013es}}.  
+These results support the arguments made first by \citet{Couch:2013fh} that 2D simulations should be {\it artificially} conducive to explosion.  
+The prospect that our most sophisticated 3D CCSN simulations might fail to explode entirely is a clarion call that we are missing crucial physics, or otherwise treating the included physics with insufficient fidelity.  
+After all, we {\it observe} real, successful CCSN explosions in Nature all the time!
+And consideration of observed stellar-mass black holes tells us that a vast majority of massive stars do indeed explode as CCSN, leaving behind neutron stars rather than black holes.
+Two promising candidates for important physics that is missing from most CCSN simulations are realistic, aspherical progenitor models \citep{{Arnett:2011ga}, Couch:2013bl} and a realistic treatment of magnetorotational effects \citep{{Wheeler:2000ie}, {Wheeler:2002ep}, Thompson:2005iw}.
+%Most 3D CCSN simulations including neutrino effects do not include rotation and magnetic fields; however, rotation and magnetic fields may dramatically alter the character of the SN and, in cases where neutrino heating alone is insufficient, provide additional energy to drive robust explosions \citep{{Wheeler:2000ie}, {Wheeler:2002ep}, Thompson:2005iw}.
+
+We propose an end-to-end, multi-year investigation of CCSNe that includes the effects of rotation, magnetic fields, and progenitor asphericity.
+Our comprehensive research program will consist of 3D MHD CCSN simulations with sophisticated multi-dimensional neutrino transport, the most realistic initial conditions ever adopted for the study of CCSNe, and an intensive comparison to observations through the calculation of gravitational wave emission, detailed nucleosynthesis, and electromagnetic radiative transfer.
+The ambitious objectives of this project will be achievable by leveraging the unique combination of skills in the proposal team, which includes many young researchers already emerging as leaders in the field, cutting-edge open-source software, and the Leadership-class resources available through the INCITE program.
+
+ 
+\subsection{Background}
+
+
+The delayed neutrino-heating mechanism of core-collapse supernovae \citep{Colgate:1966cl, Bethe:1985da}, the leading candidate for the explosion mechanism, fails to consistently produce energetic explosions for the wide range of possible progenitor masses in simulations that include high-fidelity treatments of neutrino transport.  
+Neutrinos must play an important role in the explosion mechanism as the bulk of the gravitational binding energy of the progenitor core, a few $\times10^{53}$ erg, is radiated away as neutrinos as the proto-neutron star (PNS) forms and cools; only about $10^{51}$ erg of this energy needs to be transferred to the collapsing stellar material in order to explain typical CCSNe energies.  
+Only a fraction, however, of the core's original gravitational binding energy, perhaps only several $\times10^{52}$ erg, will be released as neutrino radiation in the first second following the collapse and bounce of the core, approximately the timescale on which a successful explosion must occur.  
+\footnote{If explosions occurred later than this in the majority
+  of CCSN, the NS mass function would have too high a typical NS mass
+  to match observations.}  
+Neutrino radiation-hydrodynamic simulations of core collapse show that this is challenging to achieve, particularly in 1D simulations.  
+It is now clear that multi-dimensional effects, such as proto-neutron star convection \citep{Epstein:1979tg, Burrows:1993ki, Dessart:2006cg, Burrows:2007kha}, neutrino-driven convection \citep{Janka:1996wv, {Murphy:2013eg}}, the standing accretion shock instability (SASI) \citep{Blondin:2003ep}, and turbulence \citep{Murphy:2011ci} play an important role in aiding the neutrino heating mechanism.  
+Together, these multidimensional effects can push some progenitors over the critical threshold, resulting in somewhat marginal explosions in 2D in certain simulations \citep{Marek:2009kc, Suwa:2010wp, Muller:2012gd, Bruenn:2013es}.  
+This result is dependent on details of the numerical scheme and treatment of neutrino transport \citep{Lentz:2012fy, Lentz:2012dy}; \citet{Burrows:2006js, Burrows:2007kh} and \citet{Dolence:2014wp} do not find neutrino-driven explosions for any progenitors in 2D.
+
+
+\begin{comment}
+\begin{wrapfigure}[24]{r}{2.8in}
+\begin{tabular}{cc}
+\includegraphics[width=1.25in,clip]{figures/0237_xray.jpg}
+\includegraphics[width=1.25in, clip=true, trim= 0in 0.3in 0in 0in]{figures/casa2.jpg}  \\
+\includegraphics[width=1.25in,clip]{figures/0052_xray_widefield.jpg}
+\includegraphics[width=1.25in,clip]{figures/sn1987a_acsHubble_c1.jpg}
+\end{tabular}
+\caption{Images of nearby CCSN remnants.  Top left:  X-ray image of
+  Cas A (courtesy {\it Chandra}).  Top right:  X-ray image of Cas A
+  showing regions rich in silicon (courtesy {\it Chandra}).  Bottom
+  left:  X-ray image of the Crab Nebula (courtesy {\it Chandra}).
+  Bottom right:  Optical image of SN 1987 (courtesy {\it Hubble}).
+  All remnants show dramatic asymmetry and bipolar structure. }
+\label{fig:images}
+\end{wrapfigure}
+\end{comment}
+
+All of this indicates, unsurprisingly, that simulations of the neutrino mechanism are sensitive to microphysics and details of how the microphysics is treated.  
+A larger impact on the nature of simulated CCSNe, however, may arise from dimensionality \citep{{Murphy:2008ij}, Nordhaus:2010ct, {Hanke:2012dx},
+  {Couch:2013fh}, {Dolence:2013iw}}.  
+Encouraged by the emergence of marginal explosions in 2D for progenitors that fail to explode in 1D, \citet{Nordhaus:2010ct} sought to determine if this trend continued in 3D.  
+They carried out 3D CCSN simulations using a very simple parametric ``lightbulb'' treatment for the neutrino radiation.  
+Nordhaus et al. found that the critical neutrino luminosity at which explosion is achieved is reduced in 3D as compared with 2D; their results were beset, however, by `inaccuracies' in the self-gravity solver \citep{Burrows:2012gc} that quantitatively changed this result.  
+\citet{Dolence:2013iw} present an updated parameter study similar to that of Nordhaus et al. and find that 3D explodes faster (more easily) than 2D but that there is essentially no difference in the critical neutrino luminosity between 2D and 3D.  
+\citet{Hanke:2012dx} attempted to confirm that explosions are more easily obtained in 3D as compared to 2D but found instead little difference between the explosion times of the simulations carried out in 2D and 3D.  
+Their results were significantly dependent on resolution, however, and they employed much coarser resolution than either Nordhaus et al. or Dolence et al.  
+Using much finer resolution than Hanke et al., comparable to that of Dolence et al, \citet{Couch:2013fh} found that 3D simulations explode {\it later} than 2D.  
+Furthermore, Couch argued on simple physical grounds that we should expect 2D simulations to be artificially easy to explode due to the dichotomous behavior of convection and turbulence between 2D and 3D, as well as the non-physical imposition of axial symmetry in 2D.  
+Irrespective of whether or not 3D explodes more readily than 2D, the undeniable conclusion common to all the 3D simulations to-date is that 3D is qualitatively and quantitatively dramatically different from 2D (see discussions in \citep{Burrows:2012gc, Dolence:2013iw, Couch:2013fh}).
+ 
+
+Recently, \citet{Hanke:2013kf} presented the first 3D CCSN simulation using detailed neutrino transport.\footnote{This single simulation
+  required 100 million core-hours on a BG/Q architecture (H.-T. Janka
+  2013, private communication).}  
+While clearly showing the development of the standing accretion shock instability (SASI), this simulation also shows that 3D alone is not the key to robust neutrino-driven explosions.  
+The 3D full-transport simulation of Hanke et al. fails to explode while the comparable 2D calculation explodes quite readily, providing tacit proof of the arguments made by \citet{Couch:2013fh}.  
+Using discretionary time on ALCC resource {\it Mira}, \citet{Couch:2014fl} have conducted a 2D/3D study using far more sophisticated neutrino physics than most previous work \citep{Nordhaus:2010ct, Hanke:2012dx, Dolence:2013iw, Couch:2013fh} and much better resolution than \citet{Hanke:2013kf} and have confirmed that 2D explodes more readily than 3D (see \S\ref{sec:discretionary}).  
+If it holds up that 3D neutrino-driven explosions are {\it more} difficult to achieve than 2D, and mounting evidence indicates that it will, the efficacy of extant 2D explosions (e.g., \citep{{Marek:2009kc}, {Muller:2012gd}, {Bruenn:2013es}}) is placed in jeopardy, and we are left with the discomforting conclusion that the most sophisticated CCSN simulations to-date are {\it missing
+  critical physics}, or otherwise getting the physics wrong.  
+This must be the case since massive stars explode all the time, the luminous outcomes of which are observed several times everyday.  
+Possible candidates for such missing or incorrect physics include neutrino cross-sections, interactions, and flavor oscillations (e.g.,\citep{Lund:2012kd, Raffelt:2013wj}), a quark-hadron phase transition in the high-density equation of state (EOS, \citep{Fischer:2011iq}), inaccurate progenitor core structures (see \citep{Arnett:2011ga}), and magnetorotational effects (e.g., \citep{Wheeler:2002ep, Burrows:2007gu, {Suwa:2007uk}}).
+
+
+
+All stars rotate and have magnetic fields.  
+\citet{Akiyama:2003jc} pointed out that a collapsing stellar core is generically unstable to growth of the magnetorotational instability (MRI) \citep{{Chandrasekhar:1961uk}, {Balbus:1991fi}}.  
+The MRI grows exponentially on short timescales (about the rotational period), and taps the energy of differential rotation to amplify the magnetic field and drive turbulence.  
+Rapid rotation and strong magnetic fields can lead to powerful outflows from the proto-neutron star (PNS) \citep{Wheeler:2000ie, Wheeler:2002ep, Burrows:2007gu}. 
+The rotational energy of the contracting PNS can be as high as $\sim$10$^{52}$ ergs \citep{Wheeler:2002ep}, providing a vast energy reservoir to power a MHD outflow on dynamically relevant timescales.  
+Such rapid rotation, however, is likely rare in typical CCSN progenitors \citep{Heger:2005bi} and, therefore, such MHD outflows are not expected to be common.  
+The MRI-driven turbulence, on the other hand, may be ubiquitous in CCSN.  
+This turbulence develops in the non-linear phase of the MRI when the field strengths are near their saturation values and can act as an effective viscosity, transporting angular momentum and locally depositing rotational energy as heat.  
+Using a simple $\alpha$-viscosity parameterization of the MRI in the core-collapse context \citet{Thompson:2005iw} and \citet{Ott:2006gs} show that this additional source of heating can result in successful explosions for 1D CCSN simulations including rotation.  
+Furthermore, the work of \citet{Couch:2014fl} and \citet{Ott:2013gz} show that enhancing the heating efficiency in the gain region by a mere 5\% results in successful explosions in 3D.  
+The action of the MRI in both amplifying large-scale magnetic fields and driving turbulence is a promising candidate for aiding successful neutrino-driven explosions and demands detailed exploration in 3D CCSN simulations.  
+The greatest difficulty of the MRI is that the typical length scales on which it grows ($\lesssim100$ m) are small compared with the resolution of all 3D CCSN simulations to-date.
+
+
+\begin{figure}
+\begin{tabular}{ccc}
+\includegraphics[width=2.1in,trim= 5.in 3in 4in 5in ,clip]{figures/s15_n5m2_hf102_volRend_549}
+\includegraphics[width=2.1in,trim= 2.9in .4in .2in 0.5in ,clip]{figures/m25_o220b12_entr}
+\includegraphics[width=2.1in,trim= 3.75in .4in .2in 0.5in ,clip]{figures/m25_o220b12_beta2}
+\end{tabular}
+\caption{
+  Volume renderings from 3D simulations accomplished using this project's discretionary allocation on {\it Mira}.
+  The left panel shows entropy from the successful explosion triggered by pre-collapse progenitor asphericity \citep{Couch:2013bl}.
+  The middle and right panels are from the same MHD CCSN simulation being run now.
+  The middle panel shows entropy and the right panel shows plasma $\beta$, highlighting regions of strong magnetic field.
+  This simulation includes rapid rotation and strong magnetic fields that result in MHD jet production.
+  These jets become unstable in a non-axisymmetric manner similar to the results of \citet{Mosta:2014vl}.
+}
+\label{fig:discSims}
+\end{figure}
+
+\subsection{Progress Achieved with Discretionary Allocation}
+\label{sec:discretionary}
+
+Using ALCF discretionary time, \citet{Couch:2013bl} showed that realistic perturbations in the progenitor star, which are a natural result of pre-collapse convective burning but, heretofore, have been ignored in CCSN simulations, can revive the stalled supernova shock resulting in a successful explosions for models that otherwise fail to explode. 
+Additionally, we are currently running 3D MHD CCSN simulations on {\it Mira} with varied initial magnetic field strength (see \S\ref{sec:mriSim}) as forerunners of the simulations we propose here.
+These simulations represent the most in-depth exploration of rapid rotation and strong magnetic fields in CCSNe yet accomplished in 3D.
+Images from these simulations are shown in Fig. \ref{fig:discSims}.
+
+\subsection{Broader Impacts Through Open-Source Scientific Software}
+
+Our proposed project makes extensive use of open-source scientific software.
+Most notable is FLASH, a standard-bearer in open-source computational science that has contributed to nearly 1000 publications over the last 15 years, or so.
+Through efforts of the last few years, project team members led by Couch have greatly extended the capabilities of FLASH in order to treat the physics of CCSNe with high-fidelity.
+Most of these code extensions have already been publicly released as part of FLASH.
+Additionally, our project will leverage the open-source, 1D GR CCSN code GR1D \citep{OConnor:2010bi}.
+Even the microphysics we employ in our simulations is based on open-source software: our flexible, tabular nuclear equation of state\footnote{\url{http://stellarcollapse.org/equationofstate}} and our neutrino opacities and emissivities, NuLib\footnote{\url{http://github.com/evanoconnor/NuLib}}.
+Our dedication to open-source scientific software will be a central part of our project. 
+We aim to not only foster scientific progress for those who might benefit from the software we develop but we also feel that openness is critical to a clear and forthright scientific discourse.
+%This commitment to open-source is nearly unique amongst the major groups simulating the CCSN mechanism, with the notable exception of the Caltech group led by Christian Ott. 

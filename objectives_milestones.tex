@@ -1,0 +1,240 @@
+\section{Research Objectives and Milestones}
+\label{sec:objectives}
+
+% As B grows due to MRI to saturation, lambda_mri will grow linear
+% with B, making it easier to resolve!  The worst case scenario is in
+% the very beginning, which we are planning for. Also, we are covering
+% several growth times, but will we reach saturation??  That's why we
+% need the time to carry out long-time simulations.
+% Also don't forget about emphasizing realistic progenitors!
+% M1 sims will use domain replication to achieve capability scale. We
+% won't be able to do this for Y3 with energy coupling but we can
+% maybe do increased OMP parallelism on node.
+
+
+\vspace{0.1in} \noindent {\bf Year 1 --} Total Request: 100M {\it Mira} Service Units \vspace{-0.1in}
+
+\subsection{Simulations of the MRI in CCSNe}
+\label{sec:mriSim}
+
+Collapsing stellar cores are unstable to growth of the magnetorotational instability \citep{Akiyama:2003jc}. 
+For a magnetized fluid, however weakly, the instability criterion is a negative rotational gradient with distance from the rotation axis \citep{Balbus:1991fi}, ignoring stabilizing entropy gradients \citep{Obergaulinger:2009fv}. 
+The MRI grows exponentially in time with a characteristic growth time, $\tau_{\rm MRI}$, that is of order twice the rotational period, $P$, making the MRI the most rapid and important magnetic field amplification mechanism active in CCSNe. 
+The growth rate does not depend on the magnetic field strength, but on the magnitude of $\partial \Omega / \partial \ln R$. 
+The wavelength of the fastest-growing mode, $\lambda_{\rm MRI}$, does depend on the initial field strength as $\lambda_{\rm MRI} \sim 2\pi v_A / \Omega$, where $v_A = B/\sqrt{4\pi \rho}$ is the Alfv\'en velocity.
+
+\begin{comment}
+\citet{Heger:2005bi} find that magnetic braking slows the rotation rate of massive stellar cores considerably; for their non-magnetic, rotating 25 $M_\odot$ progenitor, Heger et al. find a central core rotation rate of about 6 rad s$^{-1}$ whereas the same model including magnetic fields rotates at a much reduced rate of 0.6 rad s$^{-1}$. 
+The magnitude of this breaking effect, based on a model for the Spruit-Taylor dynamo mechanism, scales with the magnitude of the initial zero-age, main-sequence field strength. 
+For less magnetized progenitors, the cores retain a greater fraction of their initial angular momentum.  
+These models, however, are certainly not the final word on core-collapse progenitors with rotation and magnetic fields; multidimensional evolutionary models are required and it is not at all clear that the treatments for convection and magnetic dynamo physics used accurately capture these physics.  
+%Additionally, our tests show that the initial magnetic fields of these models do not satisfy the solenoidal constraint, $\pmb{\nabla \cdot B} = 0$.  
+In a separate effort, we are incorporating novel treatments of the MRI into 1D evolutionary stellar models using the open-source MESA \citep{Paxton:2010jf}.  
+If models with improved magnetic physics become available on time scales relevant to this project, we will explore their use in the proposed simulations.
+\end{comment}
+
+Considering the basic properties of the MRI sketched above we see that rotation is inextricably linked to magnetic fields in the core-collapse context.  
+Given an arbitrarily weak $B$-field in the presence of differential rotation, the MRI will drive the field strength up exponentially with time until it reaches saturation levels.  
+The saturation field strength of the MRI in CCSNe is not known with certainty; this is a question we will address quantitatively in this project.  
+The saturation strength must be comparable to the field strength that implies equipartition between magnetic and rotational energies, so that $B_{\rm sat} \approx r \Omega\sqrt{f 8\pi \rho/5}$, where $f$ is a number between 0 and 1 (where $f=1$ reflects genuine equipartition between rotational and magnetic energies).  
+%For slowly rotating progenitors, wherein the MRI is expected to grow more slowly, the initial fields are likely to be stronger than for faster rotators such that saturation may still be achieved on timescales short enough to be relevant in CCSNe.  
+In the saturated regime the MRI will drive turbulence that will dissipate into heat.  
+The magnitude of this dissipation, and how it depends on the rotation rate of the PNS, is unknown and will be directly addressed by our work.  
+%Even for slowly rotating progenitors, the MRI-driven turbulence may become strong since the MRI taps the energy in {\it differential} rotation. 
+
+
+We will carry out the first ever 3D CCSN simulation with sufficient resolution to resolve the fastest-growing mode (FGM) of the MRI.  
+This will be accomplished by the efficient placement of high-resolution AMR blocks in the regions most favorable to the development of the MRI, at the edge of the PNS.  
+For the sake of utilizing the most realistic initial conditions currently available we will use the 25-$M_\odot$ progenitor of \citep{Heger:2005bi}, but may adopt our own enhanced-MHD physics stellar models.  
+We will take the initial rotational profile directly from this progenitor but will initialize the magnetic field as a dipole with typical strength taken from the 1D model. 
+In Fig. \ref{fig:mri} we show characteristic scales associated with the MRI from a 1.5D simulation of m25q6 at 70 ms post-bounce.  
+The wavelength of the FGM, $\lambda_{\rm MRI}$, varies from $\sim0.1$ km at a radius of 40 km to $\sim2$ km just behind the shock ($\sim$130 km).  
+The saturation field strength (assuming $f=0.5$) is typically a few $\times 10^{14}$ G just outside the PNS and as high as $10^{16}$ G near the center of the PNS.  
+The exponential growth times are $150-200$ ms outside the PNS.  
+The resolution necessary to capture the FGM, assumed to be $\lambda_{\rm
+  MRI}/10$, is shown as the red line.
+
+Entropy and composition gradients become significant, and stabilizing, in the PNS core \citep{Obergaulinger:2009fv}.  
+Additionally, the sound speed increases rapidly toward the PNS core.  
+We will, therefore, not place the highest resolution blocks on the PNS core, but will instead focus on the region of strong differential rotation just exterior to the PNS.  
+Our planned resolution elements are displayed as green dashes in Fig. \ref{fig:mri}.  
+Interior to 40 km, we will use $dx = 0.25$ km resolution, from 40 to 60 km, $dx = 0.03$ km, from 60 to 75 km, $dx = 0.06$ km, from 75 to 90 km, $dx = 0.13$ km, and exterior to 90 km, $dx \geq 0.25$ km.  
+The time step size necessary to satisfy the Courant-Friedrichs-Lewy (CFL) condition is $\sim 9\times10^{-7}$ s and is set by the innermost $dx = 0.03$ km zone, though this CFL step size is roughly the same as that required by $dx = 0.25$ km zones at the PNS center.
+We note that the estimates of scales given in Fig. \ref{fig:mri} is based on the purely rotational modes of the MRI, neglecting buoyancy and composition gradients that are relevant for the CCSN context.
+The actual FGM of the MRI, and it's growth rate and saturation, are uncertain for the global CCSN problem, an issue we will address directly in our work.
+
+We will utilize our custom version of FLASH, dubbed FLASH-MaRCC1, which has been highly-optimized for {\it Mira} and extended to included detailed CCSN physics. 
+For this simulation, and all our planned MHD simulations, we will use $5^{\rm th}$-order WENO reconstruction coupled with an HLLD Riemann solver that includes the Alfv\'en waves in its solution. 
+ \citet{Hawley:2013te} show that such a high-order, low-dissipation numerical approach is critical to accurately capturing MRI-driven turbulence.  
+The availability of high-order reconstruction and sophisticated Riemann solvers in FLASH make it ideally suited for simulations of the MRI in CCSNe with significant advantages over previous MHD CCSN simulations that use only $2^{\rm nd}$-order reconstruction and simpler HLL Riemann solvers (e.g., \citep{Endeve:2012ht}).
+
+\begin{wrapfigure}[17]{r}{3.5in}
+\includegraphics[width=3.7in, trim= 0in 0in 0in .27in, clip]{data/m25}
+\caption{MRI characteristic parameters from a 1.5D collapse simulation of a 25 $M_{\odot}$ star at 70 ms post-bounce.  
+Within the PNS ($\lesssim 40$ km) entropy and composition gradients stabilize the MRI.}
+\label{fig:mri}
+\end{wrapfigure}
+All simulations will utilize the efficient and physically-detailed neutrino ``leakage'' scheme described in \citet{OConnor:2010bi}, extended to 3D in the `ray-by-ray' approximation \citep{{Couch:2014fl}}.  
+The leakage of neutrinos is computed along radial rays and neutrino source terms are computed locally following interpolation of the radiation field quantities back to the Cartesian hydro grid.  
+In 3D full-star simulations we use a ray resolution in $r-\theta-\phi$ of $1000\times37\times75$.  
+Our approach is similar to that of \citep{Ott:2012ib} and \citep{Ott:2013gz}.  
+The leakage scheme is parallelized using both MPI communicators and OpenMP threading and scales perfectly (\S\ref{sec:performance}).
+
+
+In order to mitigate the enormous number of grid zones required by such high resolution, we will carry out this simulation in one octant of the full star employing rotating periodic (``rotating-$\pi/2$'') boundary conditions (see, e.g., \citep{Ott:2012ib}).  
+This approach, besides reducing the computational cost by nearly an order-of-magnitude, has the added advantage of suppressing the growth of the SASI.  
+The SASI can itself drive MHD turbulence \citep{Endeve:2012ht} and would make it difficult to disentangle the MRI-driven turbulence from such SASI-driven turbulence.  
+Even in the reduced octant case, the number of zones required will be about 850 million.  
+In order to simulate 500 ms of physical time, roughly three MRI growth times, will require about 550,000 time steps.  
+The use rate, $\alpha$, of the FLASH-MaRCC1 application with neutrino leakage is $1.1\times10^{-7}$ {\it Mira} service units (MSU) per zone per time step bringing the cost of this simulation to 52 million MSU (see \S\ref{sec:jobs} and \S\ref{sec:performance}).  
+This simulation will be a ``capability'' job on {\it Mira} and will be run on 8192 nodes (131k cores).  
+It will require approximately 17 24-hour runs at this scale.  
+%Assuming we execute one such capability run per week, we estimate completion of the simulation approximately four months after the commencement of the ALCC allocation.  
+%Estimating two more months for further analysis and writing, we aim to publish the first paper detailing the results of this simulation by December 2014.  
+In addition, we will run one simulation in which $\lambda_{\rm MRI} / dx_{\rm sim} \sim 5$, rather than 10, for the sake of comparison.  
+This simulations will consist of 125 million zones and 400,000 time steps, costing 7M MSU.  
+Including 1M MSU for testing and development, the total request for our definitive MRI-CCSN study is 60M MSU.
+
+Using our discretionary allocation on {\it Mira}, we have performed a numerical proof-of-principle of the simulation plan described above.
+We have conducted a full 3D MHD CCSN simulation using the 25-$M_\odot$ progenitor of \citet{Heger:2005bi} using a finest resolution of 0.5 km.
+We ran this simulation until the total magnetic energy saturated, about 200 ms post-bounce.
+We then restarted this simulation from about 40 ms post-bounce adding two additional levels of refinement in the MRI-unstable region outside of the PNS, similar to the plan above.
+This simulation, consisting of over 800 million zones, has ran only a short period of time (about 20 ms) but is showing {\it faster}, exponential growth of the total magnetic energy, as would be the expected behavior of the MRI.
+
+\subsection{Full 3D Multi-Dimensional Neutrino Transport Simulations}
+\label{sec:3Dm1}
+
+Additionally in Y1, we will carry out a small number of 3D CCSN simulations employing full multi-dimensional, energy-dependent neutrino transport.  
+These simulations will use the ``M1'' transport scheme of \citet{OConnor:2013ja} (see also \citep{Kuroda:2012fv}).  
+M1 computes the first two moments (the zeroth and first, hence ``M1'') of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.  
+The neutrino fluxes are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.  
+This implicit solve is completely local and requires solving only a 4x4 matrix.
+Our initial implementation of M1 neglects velocity-dependent terms and inelastic scattering of neutrinos.
+This can result in quantitative differences as compared to neutrino transport calculations that include such effects \citep[see][]{Lentz:2012fy} but for Y1 this is a necessary approximation that reduces the expense of the calculations.
+In Y2 and Y3, we will include velocity-dependence and/or inelastic scattering in FLASH-M1.
+These enhancements to our M1 scheme have already been incorporated into our 1D general relativistic code GR1D and our comparisons in 1D between the more advance transport and the simplified transport we propose for Y1 are qualitatively similar, if quantitatively different.
+%We will include our subgrid model of the MRI in at least one M1 simulation. 
+%These M1 simulations will be truly state-of-the-art 3D CCSN calculations.
+
+The M1 approach, thanks to solving for an additional, higher-order moment, is inherently more accurate than zeroth-moment only approaches such as flux-limited diffusion \citep[e.g.,][]{Bruenn:2013es, {Dolence:2014wp}}.
+M1 does not require a flux-limiter-based closure for the radiation fluxes as they are solved for directly.
+Furthermore, the analytic closure we currently use for the moments beyond the first is simple and straightforward yet shows encouraging agreement with 1D Monte Carlo neutrino transport calculations \citep{OConnor:2012phd}.
+As compared with flux-limited diffusion, M1 does not suffer from the inability to capture ``shadows'' inherent to FLD schemes.
+A known limitation of M1 is cases in which distinct beams of radiation intersect.
+The M1 solution in such cases becomes highly diffuse at the intersection.
+This is a problem in, e.g., radiation hydrodynamic calculations of accretion disks.
+For CCSNe, however, the radiation field is highly forward peaked and cases in which distinct beams of radiation might cross are essentially non-existent.
+Hence, M1 is {\it ideally} suited for the CCSN problem due to its accuracy (for the specific problem) and efficiency.
+In addition, the severe limitation of time steps determined by the speed of light is not so drastic in CCSNe since the explicit time step is already just a factor of a few larger than this thanks to the enormous sound speeds in the PNS.
+Another significant advantage of M1 is that it is a fully multidimensional transport scheme, i.e., the solution at a given grid point is dependent on the fluxes from every direction around that point.  
+This is distinct from the often-adopted ``ray-by-ray'' approximation \citep[e.g.,][]{Bruenn:2013es, {Muller:2012gd}, {Hanke:2013kf}} in which the transport problem is solved only along discrete radial rays.
+
+We will use three neutrino species and 12 energy groups per species.  
+We have already conducted 1D and 2D comparisons between 12 energy groups and 18 energy groups and have found good agreement for our M1 transport scheme.
+We have already fully implemented the 3D M1 method in FLASH and are running test simulations now.
+Our performance studies of FLASH-M1 show that it is remarkably efficient compared to other neutrino transport schemes, owing largely to its explicit nature.
+We find a usage rate for 3D FLASH-M1 simulations with 12 energy groups and three neutrino species of $5.5\times10^{-7}$ MSU per zone per step, only roughly 5$\times$ the usage rate of the MHD leakage simulations.
+When factoring in the increase in the number of time steps due to the Courant condition now being set by the speed of light, an additional factor of about three must be included in the expense of the M1 simulations as compared to the leakage simulations (the speed of sound in the PNS is roughly $1/3$ the speed of light).
+
+For Y1, we plan two 3D M1 CCSN simulations, one simulation each for 11.2-$M_\odot$ and 27-$M_\odot$ progenitors.
+These two progenitors are selected to give points of comparison to 3D simulations of the Garching group using ray-by-ray neutrino transport but with inelastic scattering and velocity-dependence \citep{Hanke:2013kf, {Tamborra:2014wq}}.
+Utilizing a finest grid spacing of 0.49 km and an effective angular resolution of $0.54^\circ$, each simulation will consist of a time-averaged zone count of $\sim$57.3 million zones and require over 600,000 time steps to cover 500 ms of post-bounce evolution.
+At the measured usage rate for our 3D M1 simulations, the total cost estimate for each simulation is then 19.3M MSU.  
+With an additional request of 1.2M MSU for development, the total requested allocation for the Y1 M1 simulations is 40M MSU.
+
+
+
+
+\vspace{0.1in} \noindent {\bf Year 2 --} Total Request: 100M {\it Mira} Service Units \vspace{-0.1in}
+
+
+\subsection{3D MHD Parameter Study}
+\label{sec:ParamStudy}
+
+The MRI simulation of Y1 will be used to calibrate a sub-grid model for use in MHD CCSN simulations lacking sufficient resolution to capture the MRI directly.  
+This sub-grid model will include the amplification of large-scale magnetic fields in the linear regime and the dissipation of heat and transport of angular momentum due to unresolved turbulence once the MRI has reached saturation (an $\alpha$-viscosity prescription similar to \citet{Thompson:2005iw}).  
+Using this sub-grid model we will conduct a large parameter study of 3D magnetorotational CCSNe in which we will vary the progenitor model and the initial spin rate of the progenitor core. 
+Using this set of simulations, we will determine the degree to which progenitor rotation and magnetic fields aid neutrinos in driving supernova explosions for a broad range of stars.  
+We will include in these simulations realistic non-spherical velocity fluctuations, via the approach of \citet{Chatzopoulos:2014uj}.
+Such perturbations have been shown to have an important, {\it qualitative} impact on the CCSN mechanism \citep{Couch:2013bl}.
+We will study the resulting properties of newly-formed neutron stars such as spin, magnetic field strength and geometry, and kick velocity. 
+We will use these simulations to study the interplay between the SASI and neutrino-driven convection in aiding supernova shock expansion in the magnetorotational context.  
+We will also compute the gravitational wave signal from the supernovae using {\it in-situ} calculation of the quadrupole moments of the PNS.  
+The parameter study will consist of 7 simulations and for these simulations we will use both the 15 $M_\odot$ and 25 $M_\odot$ rotating, magnetic progenitors of \citet{Heger:2005bi}, or our own, if available.
+
+\begin{comment}
+Previous studies of MRCCSNe in 2D \citep{Burrows:2007gu} and 3D \citep{Winteler:2012fv} have amplified the initial magnetic fields so that the post-bounce fields are of order the estimated MRI-saturation field strengths. 
+Despite what may be reasonable final field strengths, by neglecting the exponential growth of the MRI, these previous studies get the wrong field growth history and geometry. 
+The proposed work will, for the first time, eliminate this arbitrary history of field growth associated with unphysical initial magnetic fields and subsequent unphysically slow growth rates.  
+We will employ a sub-grid model that approximates the amplification due to the MRI using the linear theory of the MRI fastest-growing mode. 
+Semi-global simulations in the context of CCSNe show that the overall growth of the MRI is dominated by the fastest-growing mode \citep{Obergaulinger:2009fv}. 
+Our sub-grid model will allow us to capture the time- and space-dependent amplification of the magnetic field due to the MRI in a realistic way without needing to resolve the length scale of the fastest-growing mode. 
+This model will be calibrated and tuned to match the results of the MRI-resolved simulation of Y1 (\S\ref{sec:mriSim}).
+\end{comment}
+
+We will use the MRCCSNe parameter study to explore the dependence of newly-formed neutron star parameters, such as spin, kick, and magnetic field strength and geometry, on progenitor characteristics. 
+We will calculate the gravitational wave emission and spherical harmonics of the shock. 
+These results will be compared with the non-rotating, non-magnetic models. 
+We will use a finest resolution of 0.5 km and an effective angular resolution of $0.45^\circ$.
+Each simulation will cost 3.8M MSU.  For 7 simulations, we request 27M MSU plus an additional 1M MSU for testing.
+
+\subsection{3D MHD Multi-Dimensional Neutrino Transport Sims}
+\label{sec:enhancedM1}
+
+In Y2, we will carry out three 3D MHD CCSN with M1 neutrino transport, as in Y1.
+As of now, no 3D full transport CCSN simulation in the literature has included magnetic fields.
+Additionally, we will include physically-motivated velocity fluctuations in the progenitor star \citep{Couch:2013bl, Chatzopoulos:2014uj}.
+We have already shown that such fluctuations are important to enhancing the efficiency of the neutrino heating in CCSN, but they could also dramatically enhance the magnetic field amplification behind the stalled shock by enhancing the turbulent dynamo \citep[e.g.][]{Endeve:2012ht}.
+For these simulations, we will take the 15-$M_\odot$, 20-$M_\odot$, and 25-$M_\odot$ progenitors of \citet{Heger:2005bi}.
+Using the same resolution as in the Y1 M1 simulations, each simulation will cost 19M MSU bring the total request for these simulation to 57M MSU.
+
+\subsection{Realistic CCSN Nucleosynthesis}
+\label{sec:nucleo}
+
+CCSNe are principally responsible for the production of elements heavier than Lithium throughout the universe.  
+The nucleosynthetic yields from CCSN simulations is a key quantity that can be directly compared to observations and laboratory measurements of cosmic abundances.
+As such, we propose to compute detailed nucleosynthesis from our CCSN simulation results.  
+This will be accomplished as a post-processing step using large ($\sim$1000 isotopes) nuclear reaction networks furnished by Co-I's Arcones and Fr\"ohlich.
+The input for the nuclear reaction networks will be passive tracer particle data that records thermodynamic trajectory information from our FLASH CCSN simulations.
+FLASH already includes a well-developed, efficient passive particles framework that has been used extensively in the calculation of nucleosynthesis in Type Ia supernova simulations \citep[e.g.,][]{Long:2014dv}.
+
+The nucleosynthesis during the first second post-bounce is interesting and scientifically valuable by itself, but we will also go beyond this short time.
+In collaboration with Co-I Arcones and her graduate student, we have adapted our FLASH CCSN application to smoothly transition from the high-density NSE EOS to a reduced nuclear reaction network and appropriate EOS at low densities.
+%FLASH includes several nuclear reaction networks to choose from, but in order to make the transition from the four-species NSE at high densities, we have added the ability to incorporate an additional neutron-rich tracer nucleus to the networks that allows us to match the $\bar A$ and $\bar Z$ of the NSE network making for a smooth EOS transition.
+%At high densities, the multispecies approximate network is maintained in NSE through use of an appropriate NSE solver.
+The ability to accurately simulate the nucleosynthesis and thermodynamics of low-density regions allows us to extend our CCSN simulations to late times and large radii, even to follow the development of explosions through the entire progenitor \citep[e.g.,][]{{Kifonidis:2003hs}, Couch:2009bu, {Couch:2011cf}}.
+With these multidimensional simulations we will be able to take a remarkably detailed look at nucleosynthesis and mixing in the earliest stages of the formation of a young CCSN remnant \citep{Hammer:2010di}.
+Comparison to observations of galactic CCSN remnants, such as Cas A \citep{Grefenstette:2014ds}, will be made as well as comparison to cosmic chemical abundances.
+
+The post-processing nuclear reaction networks are embarrassingly parallel, requiring no interprocess communication. 
+The large number of particles that will be required for each 3D simulation ($\sim$millions) will easily make these Capability class simulations, though only short runtimes will be needed.  
+For this we request 5M MSU.
+The 3D simulations of long timescale CCSN mixing, using the methods developed in \citet{Couch:2011cf}, will require a roughly equal amount of computing resources for each decade in radius simulated.
+These simulations will not require neutrino transport and so are relatively inexpensive.
+Restricting ourselves to compact progenitor stars ($R_* \sim 10^{6}$ km), we plan two 3D whole-star simulations each, requiring about 5M MSU.  The total request for the nucleosynthesis and 3D whole-star simulations is then 15M MSU.
+
+\vspace{0.1in} \noindent {\bf Year 3 --} Total Request: 100M {\it Mira} Service Units\vspace{-0.1in}
+
+\subsection{3D Multi-Dimensional Neutrino Transport Sims with Enhanced Physics}
+\label{sec:enhancedM1}
+
+In the third year of the project we will extend our M1 calculations to include velocity terms and inelastic scattering in the transport equations.  
+This will dramatically increase the expense of the simulations, but as \citet{Lentz:2012fy} point out, these terms can have an important impact on the results of CCSN simulations.  
+These calculations will push forward the leading edge of sophistication in CCSN simulation.  
+The realistic neutrino transport, coupled with our handling of the MRI, will make these the most physically-complete and accurate CCSN simulations yet attempted.  
+The coupled-energy group version of the M1 code is already developed in GR1D.  
+Early tests indicate that the expense is approximately four times the current M1 scheme.
+%Given the great cost, we will conduct this simulation in reduced resolution.  
+We will simulate a rotating, magnetic progenitor and include the MRI sub-grid model.  
+For $dx_{\rm min} = 0.5$ km and effective angular resolution of $0.55^\circ$ the simulation will consist of 53 million zones and 600,000 time steps to simulation 500 ms of post-bounce evolution, costing 70M MSU.  
+We request a further 5M MSU for testing and development of the energy-coupled M1 code.
+
+\subsection{Monte Carlo Radiative Transfer of 3D CCSN Simulations}
+\label{sec:radtrans}
+
+In Y3 of this project, we will make direct comparison to EM observations of CCSNe through the calculation of light curves and spectra from our simulations.
+We will utilize the newly-developed Implicit Monte Carlo/Discrete Diffusion Monte Carlo radiative transfer code, SuperNu \citep{Wollaeger:2013ix}.
+SuperNu is presently being extended to 3D by utilizing the very same AMR grid package as FLASH, making compatibility between the two codes straight-forward.
+We will use as input for these calculations the hydrodynamic and nucleosynthetic results of the previous two years.
+Being a Monte Carlo method, SuperNu is inherently embarrassingly parallel, though testing in 1D indicates a very large number of Monte Carlo particle packets are necessary for good signal-to-noise.
+Thus we anticipate these calculations to be expensive for 3D data and request an allocation of 25M MSU for our Y3 3D radiative transfer calculations. 

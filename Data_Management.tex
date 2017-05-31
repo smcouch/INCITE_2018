@@ -1,0 +1,73 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage[T1]{fontenc} % Standard package for selecting font encodings
+\usepackage{txfonts} % makes spacing between characters space correctly
+\usepackage{xcolor} % Driver-independent color extensions for LaTeX and pdfLaTeX.
+%\usepackage[pagestyles]{titlesec} % related with sections—namely titles, headers and contents
+%\usepackage{blindtext} % To create text
+%\usepackage{mdwlist} % mdwlist for compact enumeration/list items 
+\usepackage{fancyhdr} % header footer placement
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in] {geometry} % Margins
+\usepackage{graphicx}  % Essential for adding images to you document.
+
+\usepackage{sectsty}
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize \it}
+
+\usepackage{caption}
+\captionsetup{labelsep=period}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+\pagestyle{fancy} % allows you to use the header and footer commands
+
+
+\raggedright
+\begin{document}
+
+\setlength{\parindent}{0in} % Amount of indentation at the first line of a paragraph.
+
+
+\pagestyle{fancy} \lhead{Petascale Simulation of Magnetorotational
+  Core-Collapse Supernovae} \rhead{S.M. Couch} \renewcommand{%
+\headrulewidth}{0.0pt}
+
+\begin{center}
+\bf \large {REQUEST FOR INFORMATION} \\
+\end{center}
+
+\vspace{-.25in}
+
+Data management for this project will be accomplished primarily the
+Smaash software system developed specifically for managing both the
+data and execution of FLASH simulations.  Smaash has an intuitive web
+interface that acts as a database display as well as control panel.
+Smaash automatically schedules restart of simulations as well as
+movement of data to permanent tape storage.
+
+\vspace{-.15in}
+\begin{itemize}
+
+\item Does your community currently share data? If yes, what
+  mechanisms are employed? \\ 
+No.  Simulation data is not typically shared in our community.\\
+\item What is the effective lifetime of useful data from your
+  community? Do data storage requirements entail preserving data for
+  weeks? Months? Years? \\
+Years.  Simulation data can be mined for useful insight well into the future.\\
+\item Characterize short- and long-term data storage requirements for
+  you and/or your community.\\
+Typically short-term storage (on-disk) would be desired for up to a
+year, or until after all papers hinging on analysis of the data are
+accepted for publication.  \\
+\item What types of tools for data storage, compression (reduction),
+  movement, and analysis do you currently use? Where do you see the
+  need for tools development?\\
+We use the Smaash tool mentioned above.
+\end{itemize} 
+\vspace{-.15in}
+
+
+\end{document}

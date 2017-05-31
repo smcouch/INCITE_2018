@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ...
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{wrapfig}
+%\usepackage{natbib}
+\usepackage[square,comma,numbers,sort]{natbib}
+\usepackage[pdftex, plainpages=false, colorlinks=true, linkcolor=blue, citecolor=blue, bookmarks=false]{hyperref}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{sectsty}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage{times}
+\usepackage[tiny,compact]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{deluxetable}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{verbatim}
+
+\setlength{\textwidth}{6.5in}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.2in}
+\setlength{\textheight}{9.in}
+%\setlength{\footskip}{-0.2in}
+%\setlength{\voffset}{0.0in}
+
+
+\sectionfont{\normalsize}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
+\singlespacing
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\fancyplain{}{Petascale Simulation of Magnetorotational Core-Collapse Supernovae}}
+\rhead{\fancyplain{}{S.M. Couch}}
+\rfoot{\fancyplain{}{\thepage}}
+
+%\bibliographystyle{apj}
+\bibliographystyle{hapj}
+%\bibliographystyle{physrev}
+
+
+\input macros.tex
+\input journal_abbr.tex
+
+\titlespacing*{\section}{0in}{0.2in}{0in}
+\titlespacing*{\subsection}{0in}{0.1in}{0in}
+\titleformat*{\subsection}{\itshape}
+\titlespacing*{\subsubsection}{0in}{0.in}{0in}
+\titleformat*{\subsubsection}{\itshape}
+\setlength{\abovecaptionskip}{3pt}
+
+\begin{document}
+
+
+\begin{center}
+{\bf Project Narrative} \vspace{-0.2in}
+%\section*{Project Narrative}
+\end{center}
+
+\input{significance}
+
+\input{objectives_milestones}
+
+\input{computational_readiness}
+
+\renewcommand\bibsection{\section*{References}}
+\setlength{\bibsep}{2pt}
+\begin{multicols}{2}
+\bibliography{papersDB,extraRefs}
+\end{multicols}
+
+
+\end{document}

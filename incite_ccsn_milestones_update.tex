@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\pagestyle{empty}
+
+\usepackage[landscape]{geometry}
+\usepackage{fancyhdr}
+
+\usepackage[x11names]{xcolor}
+\usepackage{colortbl}
+
+\setlength{\oddsidemargin}{-0.3in}
+\setlength{\evensidemargin}{-0.3in}
+\setlength{\textheight}{6.5in}
+\setlength{\textwidth}{9in}
+%
+\setlength{\topmargin}{-0.5in}
+\setlength{\headsep}{0.2in}
+\setlength{\topskip}{0in}
+\setlength{\headheight}{0in}
+
+%\setlength{\minrowclearance}{15pt}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\arrayrulewidth}{1.0pt}
+\setlength{\doublerulesep}{0pt}
+
+\pagestyle{fancy} 
+
+\lhead{Petascale Simulation of Magnetorotational Core-Collapse Supernovae} 
+\rhead{S.M. Couch} 
+\renewcommand{\headrulewidth}{0.0pt}
+
+\begin{document}
+
+\begin{table}[t]
+\begin{tabular}{|p{2.00in}|p{5.6in}|p{1.20in}|}
+%%%%
+\multicolumn{3}{c}{\textbf{UPDATED MILESTONE TABLE: YEAR 1}}\\
+\hline\hline
+%%%%
+\rowcolor{Gold1}[0.92\tabcolsep]
+\textbf{Milestone$^1$}&\textbf{Details}&
+\textbf{Comp. Date}\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+%\raggedright
+%General Relativistic Monopole Gravity &
+%%
+%.&
+%%
+%\raggedright
+%Pior to January 2013&
+%%
+%& \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Start low-resolution ``pilot'' MHD Simulations&
+%
+As described in \S2.1 of the proposal, we will carry out 3D MHD CCSN simulations using a finest grid spacing of 125 m.
+In the original proposal, we proposed to evolve the simulations targeting the magnetorotational instability for fully three growth times, or about 500 ms of post-bounce time.
+In order to achieve our scientific goals with a reduced allocation, we will instead evolve the MRI simulations for only 1.5 growth times, or 250 ms.  
+This is still a sufficiently long period to see at least one $e$-folding of the instability and, thus, to address the central question of the proposal.
+&
+%
+\raggedright
+1 January 2015 \tabularnewline
+\hline
+
+%%%%%%%%%%%%%%%%
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\raggedright
+Finish Optimization of M1 Transport Code&
+%
+In conjunction with our Catalyst, we will profile and optimize our M1 neutrino transport code.
+As discussed in the original proposal, this will at the least included reducing the amount of data 
+communicated by about half, dramatically increasing weak scaling performance.
+&
+%
+\raggedright
+31 March 2015 \tabularnewline
+\hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Finish low-resolution ``pilot'' MHD Simulations&
+%
+Completion of runs and analysis for pilot simulations.  
+Expected resource usage: 3.5M MSU.
+&
+%
+\raggedright
+31 March 2015 \tabularnewline
+\hline
+
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Start High-Resolution MRI Simulation&
+%
+Begin the major production simulation for Year 1, a 3D simulation with finest grid spacing of 30 m, run for 250 ms post-bounce.
+&
+%
+\raggedright
+1 April 2015  \tabularnewline
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Start of M1 Simulations &
+%
+\S2.2. Begin 3D full-transport simulations.  Due to the reduced amount of time awarded, we will run only one full-3D M1 transport simulation instead of two.
+Furthermore, we will aim to evolve this simulation for only 400 ms post-bounce, instead of 500 ms.  
+This will bring the cost of the simulation down to 15.5M MSU, allowing us time to carry out two more full transport simulations in a reduced 3D octant geometry. 
+The octant 3D simulations will cost 2M MSU each.
+&
+%
+\raggedright
+1 April 2015 \tabularnewline
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Finish High-Resolution MRI Simulation &
+%
+\S2.1. The simulation should require about six months to complete, assuming about one 24-hour run per week.
+Expected resource usage (including low-resolution pilot cases): 30M MSU.
+&
+%
+\raggedright
+1 October 2015 \tabularnewline
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Finish 3D M1 Transport Simulations &
+%
+\S2.2. Complete full transport simulations.
+Expected resource usage: 20M MSU.
+&
+%
+\raggedright
+30 November 2015 \tabularnewline
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%\rowcolor{LavenderBlush2}[0.92\tabcolsep]
+%\raggedright
+%Paper:  3D MHD Convection&
+%%
+%&
+%%
+%\raggedright
+%December 2013&
+%%
+%&
+%%
+%%The test simulations will require about 1 TB of storage space.\\
+% \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+%\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+%    Request on {\it Mira}: 100M SU, 400 TB storage.}} \
+%
+%\hline\hline
+%%
+%\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total De-Scope Request:  12M CPU-Hrs, 87 TB storage}}\\
+\hline
+\end{tabular}
+\raisebox{-0.5cm}{\quad$^1$Yellow: code development; 
+Teal: simulations on Mira.}\\
+\raisebox{-0.5cm}{\quad$^2$MSU = {\it Mira} Service Unit.}\\
+\end{table}
+\newpage
+
+\end{document}

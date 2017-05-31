@@ -1,0 +1,436 @@
+\documentclass[11pt]{article}
+\pagestyle{empty}
+
+\usepackage[landscape]{geometry}
+\usepackage{fancyhdr}
+
+\usepackage[x11names]{xcolor}
+\usepackage{colortbl}
+
+\setlength{\oddsidemargin}{-0.3in}
+\setlength{\evensidemargin}{-0.3in}
+\setlength{\textheight}{6.5in}
+\setlength{\textwidth}{9in}
+%
+\setlength{\topmargin}{-0.5in}
+\setlength{\headsep}{0.2in}
+\setlength{\topskip}{0in}
+\setlength{\headheight}{0in}
+
+%\setlength{\minrowclearance}{15pt}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\arrayrulewidth}{1.0pt}
+\setlength{\doublerulesep}{0pt}
+
+\pagestyle{fancy} 
+
+\lhead{Petascale Simulation of Magnetorotational Core-Collapse Supernovae} 
+\rhead{S.M. Couch} 
+\renewcommand{\headrulewidth}{0.0pt}
+
+\begin{document}
+
+\begin{table}[t]
+\begin{tabular}{|p{2.00in}|p{4.1in}|p{1.00in}|p{0.95in}|p{0.65in}|}
+%%%%
+\multicolumn{5}{c}{\textbf{MILESTONE TABLE: YEAR 1}}\\
+\hline\hline
+%%%%
+\rowcolor{Gold1}[0.92\tabcolsep]
+\textbf{Milestone$^1$}&\textbf{Details}&
+\textbf{Comp. Date}&\textbf{Core Hours$^2$}&
+\textbf{Storage}\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+%\raggedright
+%General Relativistic Monopole Gravity &
+%%
+%.&
+%%
+%\raggedright
+%Pior to January 2013&
+%%
+%& \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Commence MRI simulation in ``production mode''&
+%
+\S 2.1.  Following initial startup time, this milestone will be
+achieved when we have entered the large resolved-MRI simulation into
+production mode.  This will mean that the simulation is stable and the
+Smaash system is automatically managing the restarting of the
+simulation and movement of data.&
+%
+\raggedright
+January 2015  &
+%
+60M MSU &
+%
+%Each 1 km-resolution simulation will produce approximately 200 10 GB output
+%files. Each 0.5 km-resolution simulation will produce approximately 200 50
+%GB output files. The total storage space requirement is then about 80 TB.\\
+300 TB \\
+\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{DarkOliveGreen1}[0.92\tabcolsep]
+%\raggedright
+%Constrained geometry/neutrino heating simulations&
+%%
+%&
+%%
+%\raggedright
+%March 2013 &
+%%
+%9.3M ICH &
+%%
+%20 TB
+%\\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Commence 3D M1 Neutrino Transport Simulations&
+%
+\S2.2.  Full multi-dimensional transport simulations. &
+%
+\raggedright
+March 2015&
+%
+40M MSU &
+%
+100 TB
+ \\
+\hline
+%\end{tabular}
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{table}[t]
+%\begin{tabular}{|p{1.80in}|p{3.25in}|p{1.00in}|p{2.10in}|p{0.65in}|}
+%%%%%
+%\multicolumn{5}{c}{\textbf{MILESTONE TABLE: CORE-COLLAPSE SN, YEAR 1 (CON'T)}}\\
+%\hline\hline
+%%%%
+%\rowcolor{Gold1}[0.92\tabcolsep]
+%\textbf{Milestone}&\textbf{Details}&
+%\textbf{Comp. Date}&\textbf{CPU Time}&
+%\textbf{Storage$^\dagger$}\\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Complete MRI Simulation&
+%
+\S 2.1. Completion of the simulation in which the fastest-growing mode
+of the MRI is resolved.&
+%
+\raggedright
+June 2015  &
+%
+&
+%%
+%These simulations will produce about 200 10 GB files each.  Additionally,
+%each simulations will produce 1TB of tracer particle data. The total
+%Storage is 6 TB.\\
+\\
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Completion of M1 Simulations &
+%
+\S2.2. Completion of full transport simulations in two progenitors. &
+%
+\raggedright
+October 2014&
+%
+&
+%
+
+ \\
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%\rowcolor{LavenderBlush2}[0.92\tabcolsep]
+%\raggedright
+%Paper:  3D MHD Convection&
+%%
+%&
+%%
+%\raggedright
+%December 2013&
+%%
+%&
+%%
+%%The test simulations will require about 1 TB of storage space.\\
+% \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request on {\it Mira}: 100M SU, 400 TB storage.}}\\
+%
+%\hline\hline
+%%
+%\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total De-Scope Request:  12M CPU-Hrs, 87 TB storage}}\\
+\hline
+\end{tabular}
+\raisebox{-0.5cm}{\quad$^1$Yellow: code development; 
+Teal: simulations on Mira.}\\
+\raisebox{-0.5cm}{\quad$^2$MSU = {\it Mira} Service Unit.}\\
+\end{table}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[b]
+\begin{tabular}{|p{2.00in}|p{4.1in}|p{1.00in}|p{0.95in}|p{0.65in}|}
+%%%%
+\multicolumn{5}{c}{\textbf{MILESTONE TABLE:  YEAR 2}}\\
+\hline\hline
+%%%%
+\rowcolor{Gold1}[0.92\tabcolsep]
+\textbf{Milestone}&\textbf{Details}&
+\textbf{Comp. Date}&\textbf{Core Hours}&
+\textbf{Storage$^\dagger$}\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\raggedright
+Nucleosynthesis code development&
+%
+Completion of extensions to FLASH for proper treatment of nucleosynthesis.&
+%
+\raggedright
+January 2016&
+%
+&
+%
+
+\\
+\hline
+%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+3D MRCCSNe parameter study&
+%
+\S2.3. Completion of high-resolution full-star MHD simulations using
+the MRI sub-grid model.&
+%
+\raggedright
+April 2016 &
+%
+28M MSU&
+%
+50 TB
+\\
+\hline
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+%\raggedright
+%Magnetorotational CCSN Capstone Simulation&
+%%
+%We will conduct one simulation with sufficient resolution to resolve the
+%fastest growing mode of the MRI (about 0.1 km).  This simulation will
+%require approximately 1B zones and will cover about 500 ms of physical
+%time.&
+%%
+%December 2013&
+%%
+%26M hours on Intrepid &
+%%
+%%200 175 GB output files = 35 TB.  Plus 4 TB for particle data storage.\\
+%39 TB \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+3D MHD simulations with M1 neutrino transport&
+%
+\S2.4. Completion of the M1 neutrino transport simulations including magnetic fields and progenitor perturbations in three initial models.&
+%
+\raggedright
+October 2016&
+%
+57M MSU&
+%
+150 TB
+\\
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Nucleosynthesis calculations from 3D CCSN simulations&
+%
+\S2.5. Detailed post-processing of particle data through full nuclear network.&
+%
+\raggedright
+December 2016&
+%
+15M MSU&
+%
+100 TB
+\\
+\hline
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%\rowcolor{Aquamarine1}[0.92\tabcolsep]
+%\raggedright
+%Nucleosynthesis of MHD Models$^*$&
+%%
+%We will compute the nucleosynthesis for 4 3D MHD models from the above
+%parameter study.&
+%%
+%\raggedright
+%September 2013&
+%%
+%Evolution to homologous expansion:  2.8M hours.  Nuclear network
+%calculation:  3.2M hours.&
+%%
+%%200 15 GB output files per simulation.  Particle data storage will require
+%%an addition 4 TB, for a total of 16 TB.\\
+%16 TB  \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{Aquamarine1}[0.92\tabcolsep]
+%\raggedright
+%Radiative transport of MHD Models &
+%%
+%We will use the output of the MHD simulations and the nuclear network calculations to compute light curves and spectra of our models.  &
+%%
+%November 2013 &
+%%
+%For 4 simulations, 4M hours.  &
+%\\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request on {\it Mira}: 100M MSU, 300 TB storage}}\\
+%
+\hline
+%
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t]
+\begin{tabular}{|p{1.80in}|p{3.25in}|p{1.00in}|p{2.10in}|p{0.65in}|}
+%%%%
+\multicolumn{5}{c}{\textbf{MILESTONE TABLE: CORE-COLLAPSE SN, YEAR 3}}\\
+\hline\hline
+%%%%
+\rowcolor{Gold1}[0.92\tabcolsep]
+\textbf{Milestone}&\textbf{Details}&
+\textbf{Comp. Date}&\textbf{CPU Time}&
+\textbf{Storage$^\dagger$}\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\raggedright
+Extend M1 transport scheme&
+%
+We will incorporate velocity-dependent terms and inelastic scattering
+into our M1 transport scheme.  This will introduce energy bin coupling.&
+%
+\raggedright
+January 2017&
+%
+&
+%
+\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Enhanced M1 CCSN simulation&
+%
+\S2.6. Completion of the M1 transport CCSN simulation with energy bin
+coupling. &
+%
+\raggedright
+August 2017&
+%
+75M MSU&
+%
+200 TB\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\raggedright
+Finish 3D version of SuperNu&
+%
+Completion of 3D AMR version of Monte Carlo transport code SuperNu.&
+%
+\raggedright
+September 2017&
+%
+&
+%
+\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\raggedright
+Radiative transfer of 3D CCSNe&
+%
+\S2.7. Monte Carlo simulations of light curve and spectra from 3D CCSN simulations using SuperNu. &
+%
+\raggedright
+December 2017&
+%
+25M MSU&
+%
+100 TB\\
+\hline\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{LavenderBlush2}[0.92\tabcolsep]
+%\raggedright
+%Neutrino-MHD 3D parameter study&
+%%
+%We will conduct an analogous parameter study as in previous years, now
+%using MGFLD rather than the more approximate neutrino heating/cooling
+%scheme used previously.  10 0.5-km resolution and 4 0.25-km resolution
+%simulations will be conducted.&
+%%
+%\raggedright
+%August 2014&
+%%
+%2M hours per 0.5-km simulation, 8M per 0.25-km simulation. 
+%Total 52M.&
+%%
+%300 TB \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+%\rowcolor{LavenderBlush2}[0.92\tabcolsep]
+%\raggedright
+%Neutrino-MHD 3D capstone simulation&
+%%
+%We will run a simulation with sufficient resolution to resolve the MRI, as
+%was done in Year 2, but with MGFLD for neutrinos.&
+%%
+%\raggedright
+%November 2014 &
+%%
+%25M hours &
+%%
+%50 TB \\
+%\hline\hline
+%%%%%%%%%%%%%%%%
+\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request on {\it Mira}: 
+100M MCH, 300 TB storage}}\\
+%
+\hline
+%
+%\multicolumn{5}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total De-Scope Request (assumes availability of Mira):  65M CPU-Hrs}}\\
+%\hline
+\end{tabular}
+\end{table}
+
+\end{document}
