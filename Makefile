@@ -1,4 +1,4 @@
-NAME=ms
+NAME=ProjectNarrative
 TARGET=$(NAME).pdf
 SOURCE=$(NAME).tex
 AUX=$(NAME).aux
@@ -31,5 +31,8 @@ clean:
 
 quick:  $(SOURCE) $(FIGS) $(BIBS) .FORCE
 	@pdflatex $(SOURCE)
+
+milestones: .FORCE
+	@pdflatex incite_ccsn_milestones.tex 
 
 .FORCE:

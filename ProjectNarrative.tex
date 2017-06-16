@@ -1,4 +1,5 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
+\usepackage{times}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ...
 %\geometry{landscape}                % Activate for for rotated page geometry
@@ -8,20 +9,21 @@
 \usepackage{amsmath}
 \usepackage{epstopdf}
 \usepackage{wrapfig}
-%\usepackage{natbib}
-\usepackage[square,comma,numbers,sort]{natbib}
+\usepackage{natbib}
+%\usepackage[square,comma,numbers,sort]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
 \usepackage[pdftex, plainpages=false, colorlinks=true, linkcolor=blue, citecolor=blue, bookmarks=false]{hyperref}
 \usepackage{setspace}
 \usepackage{multicol}
 \usepackage{sectsty}
 \usepackage{url}
 \usepackage{lipsum}
-\usepackage{times}
 \usepackage[tiny,compact]{titlesec}
 \usepackage{fancyhdr}
 \usepackage{deluxetable}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{verbatim}
+\usepackage[super]{nth}
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0.0cm}
@@ -33,6 +35,7 @@
 %\setlength{\footskip}{-0.2in}
 %\setlength{\voffset}{0.0in}
 
+\newcommand{\todo}[1]{{\color{red}$\blacksquare$~\textsf{[TODO: #1]}}}
 
 \sectionfont{\normalsize}
 \subsectionfont{\normalsize}
@@ -41,27 +44,29 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\fancyplain{}{Petascale Simulation of Magnetorotational Core-Collapse Supernovae}}
-\rhead{\fancyplain{}{S.M. Couch}}
+\lhead{\fancyplain{}{Extreme-scale Supernovae and Magnetars}}
+\rhead{\fancyplain{}{PI: S.M. Couch}}
 \rfoot{\fancyplain{}{\thepage}}
 
 %\bibliographystyle{apj}
-\bibliographystyle{hapj}
+\bibliographystyle{nsf}
 %\bibliographystyle{physrev}
 
 
 \input macros.tex
 \input journal_abbr.tex
 
-\titlespacing*{\section}{0in}{0.2in}{0in}
-\titlespacing*{\subsection}{0in}{0.1in}{0in}
+%\titlespacing*{\section}{0in}{0.2in}{0in}
+%\titlespacing*{\subsection}{0in}{0.1in}{0in}
 \titleformat*{\subsection}{\itshape}
-\titlespacing*{\subsubsection}{0in}{0.in}{0in}
+%\titlespacing*{\subsubsection}{0in}{0.in}{0in}
 \titleformat*{\subsubsection}{\itshape}
 \setlength{\abovecaptionskip}{3pt}
 
 \begin{document}
 
+\setcounter{page}{1} \pagenumbering{arabic} \renewcommand{\thepage}
+           {Project Narrative -- \arabic{page}}%\pagestyle{plain}
 
 \begin{center}
 {\bf Project Narrative} \vspace{-0.2in}
@@ -74,11 +79,16 @@
 
 \input{computational_readiness}
 
+\newpage
+
+\setcounter{page}{1} \pagenumbering{arabic} \renewcommand{\thepage}
+           {Bibliography -- \arabic{page}}
+
 \renewcommand\bibsection{\section*{References}}
 \setlength{\bibsep}{2pt}
-\begin{multicols}{2}
-\bibliography{papersDB,extraRefs}
-\end{multicols}
+%\begin{multicols}{2}
+\bibliography{ProjectNarrative,extraRefs}
+%\end{multicols}
 
 
 \end{document}

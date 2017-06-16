@@ -4,7 +4,7 @@
 \usepackage{xcolor} % Driver-independent color extensions for LaTeX and pdfLaTeX.
 %\usepackage[pagestyles]{titlesec} % related with sections—namely titles, headers and contents
 %\usepackage{blindtext} % To create text
-%\usepackage{mdwlist} % mdwlist for compact enumeration/list items 
+%\usepackage{mdwlist} % mdwlist for compact enumeration/list items
 \usepackage{fancyhdr} % header footer placement
 
 \usepackage[top=1in, bottom=1in, left=1in, right=1in] {geometry} % Margins
@@ -18,6 +18,8 @@
 \usepackage{caption}
 \captionsetup{labelsep=period}
 
+\input macros.tex
+
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -30,8 +32,7 @@
 \setlength{\parindent}{0in} % Amount of indentation at the first line of a paragraph.
 
 
-\pagestyle{fancy} \lhead{Petascale Simulation of Magnetorotational
-  Core-Collapse Supernovae} \rhead{S.M. Couch} \renewcommand{%
+\pagestyle{fancy} \lhead{\doctitle} \rhead{S.M. Couch} \renewcommand{%
 \headrulewidth}{0.0pt}
 
 \begin{center}
@@ -51,7 +52,7 @@ movement of data to permanent tape storage.
 \begin{itemize}
 
 \item Does your community currently share data? If yes, what
-  mechanisms are employed? \\ 
+  mechanisms are employed? \\
 No.  Simulation data is not typically shared in our community.\\
 \item What is the effective lifetime of useful data from your
   community? Do data storage requirements entail preserving data for
@@ -66,7 +67,7 @@ accepted for publication.  \\
   movement, and analysis do you currently use? Where do you see the
   need for tools development?\\
 We use the Smaash tool mentioned above.
-\end{itemize} 
+\end{itemize}
 \vspace{-.15in}
 
 

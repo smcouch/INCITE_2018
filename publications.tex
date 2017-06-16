@@ -4,7 +4,7 @@
 \usepackage{xcolor} % Driver-independent color extensions for LaTeX and pdfLaTeX.
 %\usepackage[pagestyles]{titlesec} % related with sections—namely titles, headers and contents
 %\usepackage{blindtext} % To create text
-%\usepackage{mdwlist} % mdwlist for compact enumeration/list items 
+%\usepackage{mdwlist} % mdwlist for compact enumeration/list items
 \usepackage{fancyhdr} % header footer placement
 
 \usepackage[top=1in, bottom=1in, left=1in, right=1in] {geometry} % Margins
@@ -18,6 +18,8 @@
 \usepackage{caption}
 \captionsetup{labelsep=period}
 
+\input macros.tex
+
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -30,8 +32,7 @@
 \setlength{\parindent}{0in} % Amount of indentation at the first line of a paragraph.
 
 
-\pagestyle{fancy} \lhead{Petascale Simulation of Magnetorotational
-  Core-Collapse Supernovae} \rhead{S.M. Couch} \renewcommand{%
+\pagestyle{fancy} \lhead{\doctitle} \rhead{S.M. Couch} \renewcommand{%
 \headrulewidth}{0.0pt}
 
 \begin{center}
@@ -48,14 +49,14 @@ Field of Massive Stars'', The Astrophysics Journal, under review. \\
  Couch, S.M., O'Connor, E.P. 2014, ``High-resolution Three-dimensional Simulations of Core-collapse Supernovae in Multiple Progenitors,''
   {\it Astrophysical Journal}, {\bf 775}, 35. \\
  Couch, S.M., Ott, C.D. 2013, ``Revival of the Stalled Core-collapse Supernova Shock Triggered by Precollapse Asphericity in the Progenitor Star,''
-  {\it Astrophysical Journal Letters}, {\bf 778}, L7. \\ 
+  {\it Astrophysical Journal Letters}, {\bf 778}, L7. \\
  Couch, S.M. 2013, ``On the Impact of Three Dimensions in
   Simulations of Neutrino-Driven Core-Collapse Supernova Explosions,''
-  {\it Astrophysical Journal}, {\bf 775}, 35. \\ 
+  {\it Astrophysical Journal}, {\bf 775}, 35. \\
  Couch, S.M. 2013, ``The Dependence of the Neutrino
   Mechanism for Core-Collapse Supernovae on the Equation of State,''
-  {\it Astrophysical Journal}, {\bf 765}, 29. \\ 
+  {\it Astrophysical Journal}, {\bf 765}, 29. \\
  Couch, S.M., Graziani, C., Flocke, N. 2013, ``An Improved Multipole Approximation for Self-gravity and Its Importance for Core-collapse Supernova Simulations,''
-  {\it Astrophysical Journal}, {\bf 778}, 181. \\ 
+  {\it Astrophysical Journal}, {\bf 778}, 181. \\
 
 \end{document}
