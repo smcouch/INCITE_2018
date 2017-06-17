@@ -1,4 +1,4 @@
-# INCITE_2018
+# Extreme-scale Simulation of Supernovae and Magnetars from Realistic Progenitors
 
 What's the driving question? Is the neutrino mechanism the right mechanism? What's missing from it? Progenitor structure, for sure. (Maybe vector spherical harmonics.) But perhaps also MHD and rotation. All stars rotate and have B-fields. MRI: may not be important for slow rotators? May not need to FULLY resolve so long as it reaches saturation!
 
