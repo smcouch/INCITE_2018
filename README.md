@@ -42,6 +42,8 @@ SIMpliPy + yt + in-situ
 
 Predictions: The hero simulations provide CRUCIAL calibration!
 
+Multi-D progenitors could explain remnants like Cas A and pre-SN eruptions.
+
 ## Objectives
 
 List of simulations

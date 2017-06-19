@@ -8,70 +8,92 @@ Our results will directly inform our understanding of the characteristics of new
 
 \subsection{The Spark-M1 CCSN Application}
 
-\citet{Couch:2017}
+Our primary research software instrument for this project will be the \sparkmone CCSN application built in the \flash simulation framework \citep{Fryxell:2000, Dubey:2009}.
+\sparkmone utilizes the new \spark high-order MHD solver \citep{Couch:2017}, the M1 two-moment explicit neutrino transport method \citep{Kuroda:2012, OConnor:2015, OConnor:2015a}, an accurate and efficient multipole gravity solver \citep{Couch:2013c} including the general relativistic monopole correction \citep{Marek:2006}, an approximate 21-isotope nuclear network for accurately tracking the composition at low densities \citep{Couch:2015a}, and the \flash framework for adaptive mesh refinement (AMR), I/O, and runtime management.
+The methods and physics including in \sparkmone make it one of the most high-fidelity and high-performance CCSN simulation tools in the world.
+A detailed analysis of the performance characteristics of \sparkmone is given in Section \todo{WHAT?}.
+In the remainder of this subsection we briefly described the numerical approach used in \sparkmone.
 
-Spark
+The \spark MHD solver \citep{Couch:2017} implements the cell-centered method of generalized Lagrangian multipliers \citep[GLM;][]{Dedner:2002, Mignone:2010} to control the growth of the divergence of the magnetic field.
+The GLM-MHD scheme employs hyperbolic advection and parabolic damping of divergence errors in order to avoid expensive elliptic divergence cleaning \citep[e.g.,][]{Jiang:1999} or complicated staggered-mesh constrained transport \citep[e.g.,][]{Gardiner:2005, Lee:2009a, Lee:2013}.
+\spark implements the GLM-MHD scheme via a finite-volume approach using high-order primitive reconstruction, multiple Riemann solvers for flux calculation, and method-of-lines time integration using multi-stage strong stability preserving (SSP) low-storage Runge-Kutta (RK) integrators of second- and third-order \citep[e.g.,][]{Gottlieb:1998}.
+For realistic, non-Gamma-law equations of state, \spark avoids the approach of \citet{Colella:1985} used in other \flash solvers and adopts the volumetric internal energy, $\rho e$, as an auxiliary thermodynamic primitive variable instead, as in \citet{Almgren:2010}.
+We have found this approach to be generally more robust but either method should be technically equivalent \citep[e.g.,][]{Zingale:2015}.
+For our CCSN application, we use fifth-order WENO reconstruction \citep{Borges:2008}, second-order time integration, and the HLLD approximate Riemann solver which includes MHD waves \citep{Miyoshi:2005}.
 
-M1
+\spark has been architected for performance.
+Options such as reconstruction and Riemann solver are selected at compilation rather than runtime and are generally directly in-lined into the respective calling routines in order to avoid function call overhead.
+Aggressive use of Fortran array operations are employed to facilitate easy vectorization by the compiler.
+In order to minimize cache misses, the reconstruction and flux calculation steps in \spark take place on auxiliary 1D ``pencil'' arrays that flatten an entire 1D ray of zones into a data structure that is contiguous in memory and much smaller than a one entire AMR block data structure.
+All 1D reconstruction and flux computations are completed on these rays then before moving on to other rays, maximizing the number of operations performed per byte of data moved from memory.
+This approach, illustrated in Fig. \todo{WHAT?}, also facilitates efficient OpenMP threading wherein each thread operates on a collection of pencil arrays.
+Communication is avoided during the multi-stage RK integration by filling and updating extra layers of guard, or halo, zones.
+Thus, for WENO5, with a five-point stencil, and RK2 we require six guard zones per direction.
 
-Pencil approach
-
-RK3 approach
-
-WENO5
-
-1D CCSN comparison of central density
-
-Convergence rate plots
-
-\vspace{0.1in} \noindent {\bf Year 1 --} Total Request: 100M {\it Mira} Service Units \vspace{-0.1in}
-
-
-\subsection{Full 3D Multi-Dimensional Neutrino Transport Simulations}
-\label{sec:3Dm1}
-
-Additionally in Y1, we will carry out a small number of 3D CCSN simulations employing full multi-dimensional, energy-dependent neutrino transport.
-These simulations will use the ``M1'' transport scheme of \citet{OConnor:2013ja} (see also \citep{Kuroda:2012fv}).
-M1 computes the first two moments (the zeroth and first, hence ``M1'') of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.
+\todo{EVAN: Check this part.} \citet{OConnor:2017a}
+Neutrino transport in \sparkmone is carried out using the M1 two-moment explicit approach described in \citet{OConnor:2015, OConnor:2015a}.
+M1 computes the first two moments of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.
 The neutrino fluxes are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
-This implicit solve is completely local and requires solving only a 4x4 matrix.
-Our initial implementation of M1 neglects velocity-dependent terms and inelastic scattering of neutrinos.
-This can result in quantitative differences as compared to neutrino transport calculations that include such effects \citep[see][]{Lentz:2012fy} but for Y1 this is a necessary approximation that reduces the expense of the calculations.
-In Y2 and Y3, we will include velocity-dependence and/or inelastic scattering in FLASH-M1.
-These enhancements to our M1 scheme have already been incorporated into our 1D general relativistic code GR1D and our comparisons in 1D between the more advance transport and the simplified transport we propose for Y1 are qualitatively similar, if quantitatively different.
-%We will include our subgrid model of the MRI in at least one M1 simulation.
-%These M1 simulations will be truly state-of-the-art 3D CCSN calculations.
+This implicit solve is completely local and requires solving only a 4x4 matrix. \todo{Still true for O(v/c)?}
+Our M1 solver includes all velocity-dependent terms up to $\mathcal{O}(v/c)$
+We currently do not include inelastic neutrino scattering in the multidimensional version of our transport solver although it is included in the 1D implementation in GR1D \citet{OConnor:2015}.
+We plan to implement and include inelastic scattering in our 3D simulations in Years 2 and 3 of this project.
 
-The M1 approach, thanks to solving for an additional, higher-order moment, is inherently more accurate than zeroth-moment only approaches such as flux-limited diffusion \citep[e.g.,][]{Bruenn:2013es, {Dolence:2014wp}}.
+The two-moment M1 approach is inherently more accurate than zeroth-moment only approaches such as flux-limited diffusion \citep[e.g.,][]{Bruenn:2013, Dolence:2015, Lentz:2015}.
 M1 does not require a flux-limiter-based closure for the radiation fluxes as they are solved for directly.
-Furthermore, the analytic closure we currently use for the moments beyond the first is simple and straightforward yet shows encouraging agreement with 1D Monte Carlo neutrino transport calculations \citep{OConnor:2012phd}.
+Furthermore, the analytic closure we currently use for the moments beyond the first is simple and straightforward yet shows encouraging agreement with 1D Monte Carlo neutrino transport calculations \citep{OConnor:2015, Murchikova:2017}.
 As compared with flux-limited diffusion, M1 does not suffer from the inability to capture ``shadows'' inherent to FLD schemes.
-A known limitation of M1 is cases in which distinct beams of radiation intersect.
+A known limitation of M1 is cases in which distinct beams of radiation intersect, causing radiation ``shocks.''
 The M1 solution in such cases becomes highly diffuse at the intersection.
 This is a problem in, e.g., radiation hydrodynamic calculations of accretion disks.
 For CCSNe, however, the radiation field is highly forward peaked and cases in which distinct beams of radiation might cross are essentially non-existent.
 Hence, M1 is {\it ideally} suited for the CCSN problem due to its accuracy (for the specific problem) and efficiency.
 In addition, the severe limitation of time steps determined by the speed of light is not so drastic in CCSNe since the explicit time step is already just a factor of a few larger than this thanks to the enormous sound speeds in the PNS.
 Another significant advantage of M1 is that it is a fully multidimensional transport scheme, i.e., the solution at a given grid point is dependent on the fluxes from every direction around that point.
-This is distinct from the often-adopted ``ray-by-ray'' approximation \citep[e.g.,][]{Bruenn:2013es, {Muller:2012gd}, {Hanke:2013kf}} in which the transport problem is solved only along discrete radial rays.
+This is distinct from the often-adopted ``ray-by-ray'' approximation \citep[e.g.,][]{Bruenn:2013, Bruenn:2016, Muller:2012a, Hanke:2013, Melson:2015, Lentz:2015} in which the transport problem is solved only along discrete radial rays.
+The advantages of M1 for neutrino transport in CCSNe have not gone unnoticed and a number of groups are now exploring or adopting this approach \citep{Just:2015, Kuroda:2016, Skinner:2016, Roberts:2016}.
 
-We will use three neutrino species and 12 energy groups per species.
-We have already conducted 1D and 2D comparisons between 12 energy groups and 18 energy groups and have found good agreement for our M1 transport scheme.
-We have already fully implemented the 3D M1 method in FLASH and are running test simulations now.
-Our performance studies of FLASH-M1 show that it is remarkably efficient compared to other neutrino transport schemes, owing largely to its explicit nature.
-We find a usage rate for 3D FLASH-M1 simulations with 12 energy groups and three neutrino species of $5.5\times10^{-7}$ MSU per zone per step, only roughly 5$\times$ the usage rate of the MHD leakage simulations.
-When factoring in the increase in the number of time steps due to the Courant condition now being set by the speed of light, an additional factor of about three must be included in the expense of the M1 simulations as compared to the leakage simulations (the speed of sound in the PNS is roughly $1/3$ the speed of light).
+The M1 equations form a hyperbolic system of PDEs that is extremely similar to the MHD equations in structure and, thus, can be solved with similar methods.
+Our implementation is a finite volume approach using second-order spatial reconstruction and third-order SSP RK time integration.
+This approach makes full use of all six guard zones per direction and the high-order time integration increases stability, allowing M1-limited time steps up to CFL factors of $\gtrsim$0.9, greater than the typical MHD-limited CFL factor of $\sim$0.5.
+This mitigates to some extent the increased number of time steps required by the explicit radiation transport approach.
 
-For Y1, we plan two 3D M1 CCSN simulations, one simulation each for 11.2-$M_\odot$ and 27-$M_\odot$ progenitors.
-These two progenitors are selected to give points of comparison to 3D simulations of the Garching group using ray-by-ray neutrino transport but with inelastic scattering and velocity-dependence \citep{Hanke:2013kf, {Tamborra:2014wq}}.
-Utilizing a finest grid spacing of 0.49 km and an effective angular resolution of $0.54^\circ$, each simulation will consist of a time-averaged zone count of $\sim$57.3 million zones and require over 600,000 time steps to cover 500 ms of post-bounce evolution.
-At the measured usage rate for our 3D M1 simulations, the total cost estimate for each simulation is then 19.3M MSU.
-With an additional request of 1.2M MSU for development, the total requested allocation for the Y1 M1 simulations is 40M MSU.
+In our \flash CCSN application we have assumed that the composition of the matter throughout the entire computational domain is determined by nuclear statistical equilibrium (NSE).
+This common approximation \citep[e.g.,][]{Burrows:2007, Ott:2008, Dolence:2015, Skinner:2016, Roberts:2016, Kuroda:2016} is appropriate at high densities and temperatures where the nuclear reaction rates are sufficiently fast to establish equilibrium essentially instantly but becomes increasingly incorrect at low densities such as those in the silicon and oxygen shells surrounding the collapsing iron core.
+Critically, correctly predicting the explosion energy or nucleosynthetic products such as radioactive nickel can be severely impacted by the inappropriate assumption of NSE \citep{Bruenn:2016}.
+\citet{Bruenn:2016} advocate the use of an approximate nuclear network in regions that are not in NSE, while other groups \citep[e.g.,][]{Muller:2012a, Melson:2015} use a ``flashing'' approach rather than a full network calculation.
+We have recently implemented a method for transitioning to a nuclear network and appropriate EOS at low densities.
+Our new approach blends the pressures between the high- and low-density EOS's to prevent spurious pressure discontinuities and uses an auxiliary variable to track whether a zone is entering or exiting NSE, allowing us to appropriately set the composition in the transition region.
+
+Our use of high-order accurate methods can have tremendous advantages in correctly capturing the turbulent dynamics of the CCSN mechanism \citep{Radice:2015}.
+\citet{Rembiasz:2016} give a detailed analysis of the benefits of high-order methods for astrophysical MHD.
+They present an approach for directly measuring the effective numerical viscosity of a particular MHD solver.
+The numerical viscosity is directly related to the truncation error (i.e., accuracy) of a numerical scheme.
+In Figure \ref{fig:converge} we show the effective numerical viscosity as a function of grid resolution for \spark using various difference spatial reconstruction schemes.
+We also show the numerical viscosity for \flash's unsplit PPM solver.
+The PPM approach \citep{Colella:1984} has been the most common hydrodynamics scheme used in simulating CCSNe  \citep[e.g.,][]{Fryxell:1991, Janka:1995, Rampp:2000, Blondin:2003, Nordhaus:2010, Couch:2013a, Dolence:2015, Lentz:2015, Muller:2012a}.
+The expected rates of convergence are recovered but we also see that at the same resolution, higher-order methods achieve substantially lower numerical viscosities, i.e., the magnitude of the truncation error of high-order schemes is smaller at equivalent resolution.
+The impact of this fact on computational efficiency can be profound.
+Say that for a given application it was decided that a numerical viscosity, in the units of Figure \ref{fig:converge}, no greater than $10^{-6}$ was required.
+Figure \ref{fig:converge} implies that a third-order scheme such as PPM would require about {\it ten times} the resolution of the fifth-order WENO scheme.
+In 3D, this equates to can increase of 10,000 in computational expense!
+
+Figure \ref{fig:converge} also shows the post-bounce central density evolution from several 1D CCSN simulations at different grid resolutions comparing \sparkmone using WENO5 to \flash's PPM solver.
+The effect of low resolution and excessive numerical viscosity would be to slow the contraction of the PNS.
+This is exactly what we find for coarser resolutions in Figure \ref{fig:converge} but the comparison between WENO5 and PPM is striking.
+The impact of decreased resolution on PPM is much more dramatic and 1 km resolution PPM is no longer able to hold the PNS together and the central density actually {\it decreases} following core bounce.
+The difference between the central density evolution for WENO5 is far more subtle and WENO5 is able to keep the PNS together even at a grid resolution of 1 km.
 
 
+\begin{figure}
+  \begin{tabular}{c}
+    \includegraphics[width=3.5in]{figs/convergence}\\
+    \includegraphics[width=3.5in]{figs/centralDens}
+  \end{tabular}
+  \caption{convergence}
+  \label{fig:converge}
+\end{figure}
 
-
-\vspace{0.1in} \noindent {\bf Year 2 --} Total Request: 100M {\it Mira} Service Units \vspace{-0.1in}
 
 
 \subsection{3D MHD Parameter Study}

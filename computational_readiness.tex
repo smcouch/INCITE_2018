@@ -1,5 +1,9 @@
 \section{Computational Readiness}
 
+Single core performance comparison for both Hydro and M1: laptop, intel-16, \mira, \thet.
+
+Say that all calculations are for leaf blocks only.
+
 \subsection{Leadership Classification}
 Three-dimensional CCSN simulation is a quintessential {\it
   Leadership-class} computational problem. The enormous resolution
@@ -166,25 +170,25 @@ The results of our benchmarks are shown in Table \ref{table:perf}.
 The performance numbers show the zone-steps per cpu-second (in parentheses) and MSU per zone-step (first number).
 
 
-\begin{deluxetable}{ccc}
-\tablecolumns{3}
+\begin{deluxetable}{llll}
+\tablecolumns{4}
 \tabletypesize{\scriptsize}
 \tablecaption{
-Performance comparison between FLASH and Athena on BG/Q
+Single-thread performance comparisons on different hardware platforms in units of core-hours/zone-step (zone-step/core-second).
 \label{table:perf}
 }
 \tablewidth{0pt}
 \tablehead{
 \colhead{ } &
-\colhead{MSU/zone-step (zone-step/cpu-second), 1 Node} &
-\colhead{MSU/zone-step (zone-step/cpu-second), 512 Nodes}
+\colhead{FieldLoop \spark} &
+\colhead{FieldLoop USM-CT} &
+\colhead{CCSN \sparkmone}
 }
 \startdata
-Athena 1 thrd  &     8.84e-8 (3141)   &    1.01e-7 (2759) \\
-FLASH 1 thrd   &    9.16e-8 (3032)    &   9.39e-8 (2959) \\
-FLASH 4 thrd   &    4.94e-8 (5626) &
-%FLASH -O3 1 thrd   &    7.43e-8 (3737)   &    7.61e-8 (3649) \\
-%FLASH -O3 4 thrd   &    4.38e-8 (6347)   &
+  Intel Core i7 (I7-6567U) & 2.15e-09 (129,075) & 7.09e-09 (39,173) & 1.80e-07 (1545) \\
+  Intel Xeon E5-2680v4     & 1.76e-09 (157,808) & 4.42e-09 (62,779) & \\
+  IBM BG/Q A2              & 2.58e-08 (10,787)  & 6.58e-08 (4221) & 2.75e-06 (103) \\
+  Intel KNL                &                    &                 & 7.00e-07 (397)
 \enddata
 \end{deluxetable}
 
@@ -197,13 +201,16 @@ In MaRCC1 we use WENO-5 instead of PPM, a complex microphysical tabular EOS, sel
 This all serves to approximately double the per zone-step cost of the MaRCC1 application as compared with the simple Field Loop Advection test.
 We further emphasize that while comparable performance for the Field Loop Advection test may be obtained with Athena, Athena lacks the long list of capabilities required to carry out the research we propose (i.e., AMR, nuclear EOS, neutrino physics).
 
-% \begin{wrapfigure}[41]{r}{3.5in}
-% \begin{tabular}{c}
-% \includegraphics[width=3.5in, trim= 0.13in 0in 0.in 0.in,clip]{figs/wkScaling2} \\
-% \includegraphics[width=3.5in, trim= 0.13in 0in 0in .25in,clip]{figs/strScaling} \\
-% \includegraphics[width=3.5in, trim= 0.13in 0.in 0.in .25in,clip]{figs/thrSpeedup}
-% \end{tabular}
-% \caption{Weak scaling (top), strong scaling (middle), and threading
-%   speedup (bottom) of FLASH-MaRCC1 on {\it Mira}.  Note that for this configuration, use of 8 threads can result in a maximum theoretical speedup of 4x.}
-% \label{fig:scaling}
-% \end{wrapfigure}
+%\begin{wrapfigure}[41]{r}{3.5in}
+\begin{figure}
+
+  \begin{tabular}{c}
+    \includegraphics[width=3.5in]{figs/wkScaleSparkM1} \\
+    \includegraphics[width=3.5in]{figs/strScaleSparkM1} \\
+    \includegraphics[width=3.5in]{figs/thrdSpeedupSparkM1}
+  \end{tabular}
+  \caption{Weak scaling (top), strong scaling (middle), and threading
+  speedup (bottom) of FLASH-MaRCC1 on {\it Mira}.  Note that for this configuration, use of 8 threads can result in a maximum theoretical speedup of 4x.}
+  \label{fig:scaling}
+\end{figure}
+%\end{wrapfigure}
