@@ -6,7 +6,10 @@ This project will develop and employ 3D massive stellar progenitor models at the
 We will address the critically important questions of whether rotation and magnetic fields aid successful explosions for ``normal'' CCSNe and how rotation and magnetic fields effect the nucleosynthesis in CCSNe.
 Our results will directly inform our understanding of the characteristics of newborn pulsars and magnetars, information that can be directly compared to observational data.
 
-\subsection{The Spark-M1 CCSN Application}
+Our project will address two critical questions: How do plausible rotation rates and magnetic field strengths influence the CCSN mechanism? and What is the impact of realistic 3D progenitor structure including rotation and magnetic fields on the CCSN mechanism and observables?
+
+%%%%%%%%%
+\subsection{The \sparkmone CCSN Application}
 
 Our primary research software instrument for this project will be the \sparkmone CCSN application built in the \flash simulation framework \citep{Fryxell:2000, Dubey:2009}.
 \sparkmone utilizes the new \spark high-order MHD solver \citep{Couch:2017}, the M1 two-moment explicit neutrino transport method \citep{Kuroda:2012, OConnor:2015, OConnor:2015a}, an accurate and efficient multipole gravity solver \citep{Couch:2013c} including the general relativistic monopole correction \citep{Marek:2006}, an approximate 21-isotope nuclear network for accurately tracking the composition at low densities \citep{Couch:2015a}, and the \flash framework for adaptive mesh refinement (AMR), I/O, and runtime management.
@@ -90,10 +93,73 @@ The difference between the central density evolution for WENO5 is far more subtl
     \includegraphics[width=3.5in]{figs/convergence}\\
     \includegraphics[width=3.5in]{figs/centralDens}
   \end{tabular}
-  \caption{convergence}
+  \caption{convergence. Need to note that the CFL was small for these.}
   \label{fig:converge}
 \end{figure}
 
+%===========
+\vspace{0.1in} \noindent {\bf Year 1 --} \todo{Some snazy catch phrase here?} \vspace{-0.1in}
+%===========
+
+%%%%%%%%%
+\subsection{High-fidelity 3D Simulations of Magnetorotational CCSNe}
+\label{sec:Y1mrccsn}
+
+In Year 1, we will carry out a set of high-resolution 3D CCSN simulations using \sparkmone using progenitors that include realistic rotation rates and magnetic field strengths.
+We will construct our own 1D progenitor models using the open-source MESA code \citep{Paxton:2011, Paxton:2013, Paxton:2015} including rotational mixing instabilities and the Tayler-Spruit dynamo mechanism for magnetic field generation and angular momentum transport \citep{Spruit:2002, Heger:2005}.
+Recent asteroseismology results for low-mass stars seem to indicate that the Tayler-Spruit mechanism {\it underestimates} the amount of angular momentum transport out of rotating stellar cores \citep{Cantiello:2014}.
+Thus, we will explore different coupling parameters in the stellar evolution models to construct cores of differing rotation rates for the same zero-age main sequence (ZAMS) masses.
+Using MESA, we will simulate a range of ZAMS masses and angular momentum transport parameters.
+From these models, we will select four to simulate in 3D using \sparkmone: ``low'' and ``high'' core rotation rates for a $\sim$10-\msun star and a $\sim$20-\msun star.
+The exact initial models used will be decided based on the results of a set of 2D simulations using \sparkmone that will be completed prior to the start of Year 1.
+The initial magnetic field strengths for the 3D simulations will be taken directly from the values achieved in the 1D MESA models.
+
+We will simulate in 3D these four models from the onset of core collapse through core bounce to $\sim$500 ms post-bounce.
+Using AMR on a 3D Cartesian mesh, the maximum allowed refinement level will drop approximately logarithmically with radius from the center of the PNS.
+The highest level of refinement will achieve a resolution of 650 m and cover the inner $\sim$80 km in radius, sufficient to keep the entire PNS and neutrinospheres at the same resolution.
+The second level of refinement at resolution of 1.3 km will reach out to 160 km in radius, sufficient to encompass the entire post-shock gain region until the onset of explosive shock expansion in most cases.
+This roughly equates to ``angular'' resolution varying between 0.47$^\circ$ and  0.93$^\circ$.
+This is slightly coarser than the resolution we are using in the ``high''-resolution 3D simulations of our current INCITE project but our results from those simulations do not show dramatic differences at this reduced resolution (see Section \ref{sec:achievements}).
+Furthermore, our use of higher-order WENO5 for the MHD solver will mitigate this substantially and, likely, result in a {\it reduced} numerical viscosity as compared to slight higher resolution simulations using PPM (see Fig. \ref{fig:converge}).
+And this resolution is still substantially greater than the $\sim$2$^\circ$ angular resolution used by other comparable high-fidelity 3D simulations of CCSNe \citep[e.g.,][]{Melson:2015, Lentz:2015, Janka:2016}.
+Each of the four 3D simulations will require 16M core-hours on \mira and \todo{Some Storage}, totaling 64M core-hours for this milestone (see Section \ref{sec:performance}).
+
+\todo{What's the payoff?}
+
+\todo{What do we want to say about the initial field geometry?}
+
+%%%%%%%%
+\subsection{3D Simulations of Iron Core Collapse in Rotating Stars}
+
+One of the most remarkable and exciting results of recent 3D simulations of the CCSN mechanism is the discovery that  realistic non-spherical structure in the progenitor star can have a dramatic impact \citep{Couch:2013b, Couch:2015, Couch:2015a, Muller:2015, Muller:2017}.
+The breaking of spherical symmetry is manifest in the turbulent convection driven by nuclear burning in the cores of massive stars.
+As a massive star nears collapse, strongly convective burning in the Si and O shells surrounding the iron core can reach speeds of nearly 1000 km s$^{-1}$ and is characteristically very large in spatial scale \citep{Arnett:2011, Couch:2015a, Muller:2016a}.
+These convective perturbations will reach the stalled shock shortly after core bounce and can aid neutrino-driven explosions by either enhancing the strength of post-shock turbulence \citep{Couch:2015} or causing large scale ``forced shock deformations'' \citep{Muller:2017}, or both.
+These results serve to remind us that CCSN mechanism simulations are initial value problems and that the details of our initial conditions matter tremendously!
+Our work inaugurated the era of detailed investigation into the impact of 3D progenitor structure on the CCSN mechanism \citep{Couch:2013b, Couch:2015a}.
+As part of this INCITE project we will substantially expand the investigation into realistic progenitor structure for use in CCSN simulations.
+
+We propose to carry out a series of new, high-fidelity 3D simulations of the final minutes of stellar evolution to the point of iron core collapse.
+As part of the pending SciDAC TEAMS collaboration, we are working with M. Zingale to adapt the Maestro low-mach number code \citep{Almgren:2007} to massive stellar cores.
+This will allow simulation of much longer time scales than currently possible \citep[a few minutes;][]{Couch:2015a, Muller:2016a}.
+In the meantime, as part of this INCITE project we will continue the use of \flash in simulating the minutes up to core collapse in 3D.
+For these simulations we will use the \spark MHD solver \citep{Couch:2017} and include rotation and magnetic fields {\it for the first time ever} in a 3D CCSN progenitor simulation.
+Specifically, we will use the four 1D MESA progenitor models selected for 3D CCSN simulation in Section \ref{sec:Y1mrccsn}, initialized in 3D approximately five minutes prior to core collapse.
+We will follow the final build up of the iron core to its critical mass and ensuing collapse using an approximate 21-isotope nuclear network \citep{Couch:2015a}.
+We have recently made improvements to this network's handling of weak interactions that bring the evolution into better agreement with the 1D evolution from the MESA code.
+We are currently simulating non-rotating, non-magnetic progenitors with this application in 2D and 3D.
+
+Using AMR in Cartesian coordinates, we will use and approximate angular resolution of $\sim$0.5$^\circ$, as in \citep{Couch:2015a} and finer than that used by \citep{Muller:2017}.
+Additionally, we will use \spark's high-order WENO5 reconstruction to achieve much lower numerical viscosity than PPM at comparable resolution.
+Each such simulation will require 5M core-hours on \mira, for a total of 20M core-hours for the four simulations.
+We will make these 3D progenitor models publicly available and provide reader and interpolation routines in Fortran and Python for accessing the data so that other groups can readily incorporate these new 3D progenitors into their CCSN simulations.
+We will incorporate these first-of-their-kind 3D magnetorotational progenitor models into our CCSN mechanism simulations in Year 2 and 3 of this INCITE project.
+
+%%%%%%%%
+\subsection{High-resolution Simulation of Magnetorotational Turbulence in CCSNe}
+
+
+\citet{Melson:2015a}: difference between 2D and 3D turbulence. \citet{Muller:2017} too.
 
 
 \subsection{3D MHD Parameter Study}

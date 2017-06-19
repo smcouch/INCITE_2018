@@ -4,6 +4,8 @@ Single core performance comparison for both Hydro and M1: laptop, intel-16, \mir
 
 Say that all calculations are for leaf blocks only.
 
+Emphasize effectively THREE steps per guardcell fill/synchronization. This is a big win. Hides the expense of communication with extra computation.
+
 \subsection{Leadership Classification}
 Three-dimensional CCSN simulation is a quintessential {\it
   Leadership-class} computational problem. The enormous resolution
@@ -186,7 +188,7 @@ Single-thread performance comparisons on different hardware platforms in units o
 }
 \startdata
   Intel Core i7 (I7-6567U) & 2.15e-09 (129,075) & 7.09e-09 (39,173) & 1.80e-07 (1545) \\
-  Intel Xeon E5-2680v4     & 1.76e-09 (157,808) & 4.42e-09 (62,779) & \\
+  Intel Xeon E5-2680v4     & 1.76e-09 (157,808) & 4.42e-09 (62,779) & 1.05e-07 (2658) \\
   IBM BG/Q A2              & 2.58e-08 (10,787)  & 6.58e-08 (4221) & 2.75e-06 (103) \\
   Intel KNL                &                    &                 & 7.00e-07 (397)
 \enddata

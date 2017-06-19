@@ -18,7 +18,7 @@ lref = int(sys.argv[4])
 
 #some constants
 nblkx = 12.
-ndim = 3
+ndim = 2
 avShR = 150 # km
 
 # Flags for various different assumptions
@@ -29,7 +29,7 @@ energyCoupling = True
 prebounce = False
 octant = False
 subCycle = False
-mri = True
+mri = False
 turbRes = False
 trackShock = False
 
@@ -86,7 +86,8 @@ cpuHrPerZnStp = 1.5e-7 # Spark + Aprox21 on Mira
 if M1:
     if energyCoupling:
         cpuHrPerZnStp = 7.2e-7 # M1 with 3 species, 18 energy groups, energy bin coupling, velocity terms
-        cpuHrPerZnStp = 2.5e-6
+        cpuHrPerZnStp = 2.75e-6 # Mira, vdep 12^3 M1-RK3
+        cpuHrPerZnStp = 1.3e-7 # Laconia, vdep  12^3 M1-RK3
     else:
         cpuHrPerZnStp += 4.2e-7 # M1 with 3 species, 18 energy groups
         cpuHrPerZnStp = 8.e-7 # 16 threads per rank, 12 energy groups, 24^3

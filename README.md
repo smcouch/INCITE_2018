@@ -90,8 +90,8 @@ What is required to form a magnetar?
 
 - 20 Msun NR 3D progen non-mag
 - 20 Msun NR 1D progen non-mag
-- 10 Msun NR 1D progen non-mag
-- 15 Msun NR 1D progen non-mag
+- x 10 Msun NR 1D progen non-mag
+- x 15 Msun NR 1D progen non-mag
 
 two progenitors, different rot/B
 
