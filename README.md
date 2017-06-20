@@ -88,6 +88,8 @@ What is required to form a magnetar?
 
 ### Theta capability run A (8M):
 
+For the 2018 Cycle Theta will be allocated in Mira- equivalent core hours. Applicants who are basing core-hour estimates on KNL Theta/Cori benchmarking should use 3.25 Mira core hours per Theta core hour.
+
 - 20 Msun NR 3D progen non-mag
 - 20 Msun NR 1D progen non-mag
 - x 10 Msun NR 1D progen non-mag
@@ -133,18 +135,21 @@ MRI in PNS run. Fast rot 3D progen with AMR trick at edge of PNS (15 km to 40 km
 - 25 Msun MHD fast rot progen sim
 - 25 Msun MHD slow rot progen sim
 
-### Theta capability run A (8M):
+### Theta capability run A (16M):
 
 - 10 Msun MHD fast rot 3D progen ccsn sim
 - 10 Msun MHD slow rot 3D progen ccsn sim
 - 20 Msun MHD fast rot 3D progen ccsn sim
 - 20 Msun MHD slow rot 3D progen ccsn sim
 
-### Theta capability run B (8M):
-
-Some other parameter varied? - Inclusion of NES?
-
 ## Year 3
+
+- 15 Msun MHD fast rot 3D-progen ccsn sim
+- 15 Msun MHD slow rot 3D-progen ccsn sim
+- 25 Msun MHD fast rot 3D-progen ccsn sim
+- 25 Msun MHD slow rot 3D-progen ccsn sim
+
+3D Black hole formation?? - Initial spin of BH! GW/neutrino signal just prior to
 
 Incorporation of AMReX capability? Task parallelism? Parallel in time?
 
