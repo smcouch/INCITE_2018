@@ -33,18 +33,17 @@ This approach, illustrated in Fig. \todo{WHAT?}, also facilitates efficient Open
 Communication is avoided during the multi-stage RK integration by filling and updating extra layers of guard, or halo, zones.
 Thus, for WENO5, with a five-point stencil, and RK2 we require six guard zones per direction.
 
-\todo{EVAN: Check this part.} \citet{OConnor:2017a}
-Neutrino transport in \sparkmone is carried out using the M1 two-moment explicit approach described in \citet{OConnor:2015, OConnor:2015a}.
+Neutrino transport in \sparkmone is carried out using the M1 two-moment explicit approach described in \citet{OConnor:2015, OConnor:2015a, OConnor:2017a}.
 M1 computes the first two moments of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.
-The neutrino fluxes are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
-This implicit solve is completely local and requires solving only a 4x4 matrix. \todo{Still true for O(v/c)?}
-Our M1 solver includes all velocity-dependent terms up to $\mathcal{O}(v/c)$
-We currently do not include inelastic neutrino scattering in the multidimensional version of our transport solver although it is included in the 1D implementation in GR1D \citet{OConnor:2015}.
+The neutrino fluxes, both in real space and in energy space) are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
+This implicit solve is completely local and requires solving only a 4x4 matrix. 
+Our M1 solver is fully velocity-dependent, except in the calculation of the explicit flux terms, which is done to $\mathcal{O}(v/c)$
+We currently do not include inelastic neutrino scattering in the multidimensional version of our transport solver although inelastic neutrino electron scattering is included in the 1D implementation in GR1D \citep{OConnor:2015}.
 We plan to implement and include inelastic scattering in our 3D simulations in Years 2 and 3 of this project.
 
 The two-moment M1 approach is inherently more accurate than zeroth-moment only approaches such as flux-limited diffusion \citep[e.g.,][]{Bruenn:2013, Dolence:2015, Lentz:2015}.
 M1 does not require a flux-limiter-based closure for the radiation fluxes as they are solved for directly.
-Furthermore, the analytic closure we currently use for the moments beyond the first is simple and straightforward yet shows encouraging agreement with 1D Monte Carlo neutrino transport calculations \citep{OConnor:2015, Murchikova:2017}.
+Furthermore, the analytic closure we currently use for the moments beyond the first is simple and straightforward yet shows encouraging agreement with 1D Boltzmann and Monte Carlo neutrino transport calculations \citep{OConnor:2015, Murchikova:2017}.
 As compared with flux-limited diffusion, M1 does not suffer from the inability to capture ``shadows'' inherent to FLD schemes.
 A known limitation of M1 is cases in which distinct beams of radiation intersect, causing radiation ``shocks.''
 The M1 solution in such cases becomes highly diffuse at the intersection.
@@ -54,7 +53,7 @@ Hence, M1 is {\it ideally} suited for the CCSN problem due to its accuracy (for 
 In addition, the severe limitation of time steps determined by the speed of light is not so drastic in CCSNe since the explicit time step is already just a factor of a few larger than this thanks to the enormous sound speeds in the PNS.
 Another significant advantage of M1 is that it is a fully multidimensional transport scheme, i.e., the solution at a given grid point is dependent on the fluxes from every direction around that point.
 This is distinct from the often-adopted ``ray-by-ray'' approximation \citep[e.g.,][]{Bruenn:2013, Bruenn:2016, Muller:2012a, Hanke:2013, Melson:2015, Lentz:2015} in which the transport problem is solved only along discrete radial rays.
-The advantages of M1 for neutrino transport in CCSNe have not gone unnoticed and a number of groups are now exploring or adopting this approach \citep{Just:2015, Kuroda:2016, Skinner:2016, Roberts:2016}.
+The advantages of M1 for neutrino transport in CCSNe have not gone unnoticed and a number of groups are now exploring or adopting this approach \citep{OConnor:2013, Just:2015, Kuroda:2016, Skinner:2016, Roberts:2016}.
 
 The M1 equations form a hyperbolic system of PDEs that is extremely similar to the MHD equations in structure and, thus, can be solved with similar methods.
 Our implementation is a finite volume approach using second-order spatial reconstruction and third-order SSP RK time integration.
