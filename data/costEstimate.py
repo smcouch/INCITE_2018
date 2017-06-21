@@ -18,7 +18,7 @@ lref = int(sys.argv[4])
 
 #some constants
 nblkx = 12.
-ndim = 2
+ndim = 3
 avShR = 150 # km
 
 # Flags for various different assumptions

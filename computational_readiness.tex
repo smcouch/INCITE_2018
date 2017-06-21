@@ -1,10 +1,13 @@
 \section{Computational Readiness}
+\label{sec:readiness}
 
 Single core performance comparison for both Hydro and M1: laptop, intel-16, \mira, \thet.
 
 Say that all calculations are for leaf blocks only.
 
 Emphasize effectively THREE steps per guardcell fill/synchronization. This is a big win. Hides the expense of communication with extra computation.
+
+In testing, we used thread layout 1. In production, we use thread layout 2 to keep neighborhood threads together.
 
 \subsection{Leadership Classification}
 Three-dimensional CCSN simulation is a quintessential {\it
@@ -189,8 +192,8 @@ Single-thread performance comparisons on different hardware platforms in units o
 \startdata
   Intel Core i7 (I7-6567U) & 2.15e-09 (129,075) & 7.09e-09 (39,173) & 1.80e-07 (1545) \\
   Intel Xeon E5-2680v4     & 1.76e-09 (157,808) & 4.42e-09 (62,779) & 1.05e-07 (2658) \\
-  IBM BG/Q A2              & 2.58e-08 (10,787)  & 6.58e-08 (4221) & 2.75e-06 (103) \\
-  Intel KNL                &                    &                 & 7.00e-07 (397)
+  IBM BG/Q A2              & 2.58e-08 (10,787)  & 6.58e-08 (4221)   & 2.75e-06 (103) \\
+  Intel KNL                & 7.41e-09 (37,494)  & 2.81e-08 (9881)   & 7.00e-07 (397)
 \enddata
 \end{deluxetable}
 
@@ -203,13 +206,13 @@ In MaRCC1 we use WENO-5 instead of PPM, a complex microphysical tabular EOS, sel
 This all serves to approximately double the per zone-step cost of the MaRCC1 application as compared with the simple Field Loop Advection test.
 We further emphasize that while comparable performance for the Field Loop Advection test may be obtained with Athena, Athena lacks the long list of capabilities required to carry out the research we propose (i.e., AMR, nuclear EOS, neutrino physics).
 
-%\begin{wrapfigure}[41]{r}{3.5in}
+%\begin{wrapfigure}[41]{r}{3.25in}
 \begin{figure}
 
-  \begin{tabular}{c}
-    \includegraphics[width=3.5in]{figs/wkScaleSparkM1} \\
-    \includegraphics[width=3.5in]{figs/strScaleSparkM1} \\
-    \includegraphics[width=3.5in]{figs/thrdSpeedupSparkM1}
+  \begin{tabular}{r}
+    \includegraphics[width=3.25in]{figs/wkScaleSparkM1} \\
+    \includegraphics[width=3.25in]{figs/strScaleSparkM1} \\
+    \includegraphics[width=3.25in]{figs/thrdSpeedupSparkM1}
   \end{tabular}
   \caption{Weak scaling (top), strong scaling (middle), and threading
   speedup (bottom) of FLASH-MaRCC1 on {\it Mira}.  Note that for this configuration, use of 8 threads can result in a maximum theoretical speedup of 4x.}
