@@ -9,66 +9,86 @@ Emphasize effectively THREE steps per guardcell fill/synchronization. This is a 
 
 In testing, we used thread layout 1. In production, we use thread layout 2 to keep neighborhood threads together.
 
-\subsection{Leadership Classification}
-Three-dimensional CCSN simulation is a quintessential {\it
-  Leadership-class} computational problem. The enormous resolution
-required, incredible number of time steps needed, and the challenging
-nature and variety of the physics involved make it so. Our proposed
-research requires Leadership computing because almost all of our requested allocation
-will be spent on one or a few simulations that run individually at the
-capability-scale ($\sim20\%$ of the system).
+State cost of progenitor simulation .
+% \subsection{Leadership Classification}
+% Three-dimensional CCSN simulation is a quintessential {\it
+%   Leadership-class} computational problem. The enormous resolution
+% required, incredible number of time steps needed, and the challenging
+% nature and variety of the physics involved make it so. Our proposed
+% research requires Leadership computing because almost all of our requested allocation
+% will be spent on one or a few simulations that run individually at the
+% capability-scale ($\sim20\%$ of the system).
+
+\subsection{Job Characterization \& Use of Requested Resources}
+\label{sec:jobs}
+
+We estimate the computational cost of our
+simulations as follows.  We
+assume an average shock radius of 200 km, inside of which the grid
+will be refined to the maximum allowed level.
+The maximum refinement level is radius dependent, establishing a grid in which the resolution increase logarithmically with radius.
+Given the rate of this decrease in refinement with radius, the
+average shock radius, and the finest possible grid spacing, $d
+x_{\rm min}$, the time-averaged number of zones, $\bar N_{\rm zones}$,
+can be estimated for each simulation.  Then, given the number of time
+steps needed, $N_{\rm steps}$, the computational cost of a simulation
+is $C = \alpha   \bar N_{\rm zones} N_{\rm steps}$,
+where $\alpha$ is the use rate in units of core-hours per zone-step.
+The number of time steps needed is determined by the
+evolution time sought and the time step size: $N_{\rm steps} = t_{\rm
+  max} / d t$.
+The time step for an explicit integrator is $d t = a_{\rm CFL}\ {\rm min}[d x / (c_{\rm S} + v)]$, where $a_{\rm CFL}$ is a number less than one (typically 0.5 for MHD and 0.9 for M1 transport), $c_{\rm S}$ is the maximum signal speed and $v$ is the flow speed; this expression is computed locally for each zone.
+For \sparkmone, the explicit neutrino transport approach makes the maximum signal speed the speed of light, which is about three times the sound speed in the center of the PNS and, thus, is always the limiting signal speed (even though we use a larger $a_{\rm CFL}$ for the M1 update).
+The use rate, $\alpha$, is determined experimentally from actual simulations (see \S\ref{sec:performance}).  The time-averaged number of zones is estimated based on $d x_{\rm min}$, $\eta$, and the shock radius, behind which we assume maximal resolution.  Comparison to actual production simulations shows that our method for estimating the the computational cost is accurate.
+
+The vast majority of our requested allocation will be expended on jobs at the Capability scale (20\% or more of the machine).
+We take two approaches to achieving this: large monolithic jobs and packaged smaller jobs.
+Specifically, the simulations proposed in Sections \ref{sec:Y1mrccsn}, \ref{sec:Y1progen}, \ref{sec:Y2late}, and \ref{sec:Y2progen} will be packaged into 8192-node jobs on \mira wherein each individual simulation is running on a sub-partition of 2048 nodes.
+
 
 \subsection{Computational Approach}
 \label{sec:approach}
 
 Our primary tool for conducting the planned simulations will be the multi-physics, adaptive mesh refinement simulation framework, FLASH.
-%FLASH is on open-source, community code that is developed at the University of Chicago.
-%FLASH has been used by hundreds of scientists around the world and has contributed to more than 700 publications.
+Specifically, we will primarily use our custom CCSN application \sparkmone that incorporates the new, high-performance \spark MHD solver \citep{Couch:2017} and our explicit two-moment neutrino transport solver \citep{OConnor:2015, OConnor:2015a}.
 The code, now in its fourth major release version, has been continuously maintained, updated, extended, and modernized by the scientists at the Flash Center.
 Additionally, as an acceptance and Early Science application on BG/Q {\it Mira}, FLASH has been exactingly tuned to take advantage of this impressive architecture (see \citet{Daley:2013esp}).
-We will employ the new, cutting-edge directionally-unsplit staggered-mesh MHD solver \citep{Lee:2013cd} that uses the constrained transport method to maintain $\pmb{\nabla \cdot B} = 0$ to machine precision.
 The block-structured, oct-tree adaptive mesh refinement in FLASH provides extreme flexibility and efficiency, particularly when combined with hybrid MPI/OpenMP parallelism.
-Coupled with the neutrino physics and nuclear equation of state that we have already implemented, FLASH is a code ideally suited to tackling the magnetorotational core-collapse supernova problem.
+Coupled with the neutrino physics and nuclear equation of state that we have already implemented, FLASH is a code ideally suited to tackling the magnetorotational CCSN problem.
 
 FLASH contains a wide range of numeric solvers for solving
 PDEs on block-structured AMR meshes. FLASH relies on the oct-tree
-based PARAMESH library \citep{MacNeice:2000fc}. The proposed
+based PARAMESH library \citep{MacNeice:2000}. The proposed
 simulations will solve the equations of hydrodynamics and
 magnetohydrodynamics using an unsplit, explicit, finite-volume
-Eulerian formulation. The unsplit solvers in FLASH have several
-options for spatial reconstruction including second-order
-MUSCL-Hancock, third-order PPM, and fifth-order WENO. The MHD solver
-uses the Unsplit Staggered Mesh (USM) method which requires
-face-centered variables in addition to the normal cell centered
-quantities.
-
+Eulerian formulation (see Sec. \ref{sec:spark}).
 FLASH utilizes hybrid MPI/OpenMP parallelism in order to make best use
-of the unique BG/Q architecture of {\it Mira}. The hydrodynamics/MHD
+of many-core architectures. The hydrodynamics/MHD
 solvers, gravity solvers, and source terms have all been extended to
-include support for thread-level parallelism via OpenMP. FLASH also
-supports parallelization through mesh replication which allows a
-simulation to utilize larger numbers of MPI processes and reduces the
-overall time-to-solution for multigroup radiation-hydrodynamic
-simulations.
-
-
+include support for thread-level parallelism via OpenMP.
 FLASH writes output files using the HDF5 library. These files can be
-read in directly and visualized in parallel using VisIt or YT
-visualization software. We are transitioning to a new work flow where
-the GLEAN library will used to eliminate I/O bottlenecks
-\cite{vishwanath2011}. The GLEAN library allows FLASH to transfer data
-to separate I/O processes before writing it to files, thereby freeing
-FLASH to continue with the calculation while files are written to
-disk. Finally, we are developing software that will use data provided
-by FLASH/GLEAN to generate images \textsl{before} data is written to
-files.
+read in directly and visualized in parallel using VisIt or yt
+visualization software \citep{Turk:2011}.
+
+Our \sparkmone application has been architected for performance.
+Options such as reconstruction and Riemann solver are selected at compilation rather than runtime and are generally directly in-lined into the  calling routines in order to avoid function call overhead.
+Aggressive use of Fortran array operations are employed and facilitate easy vectorization by the compiler.
+In order to minimize cache misses, the reconstruction and flux calculation steps in \spark take place on auxiliary 1D ``pencil'' arrays that flatten an entire 1D ray of zones into a data structure that is contiguous in memory and much smaller than a one entire AMR block data structure.
+All 1D reconstruction and flux computations are completed on these rays then before moving on to other rays, maximizing the number of operations performed per byte of data moved from memory.
+This approach also facilitates efficient OpenMP threading wherein each thread operates on a collection of pencil arrays.
+Communication is avoided during the multi-stage RK integration by filling and updating extra layers of guard, or halo, zones.
+Thus, for WENO5, with a five-point stencil, and RK2 we require six guard zones per direction.
+The M1 neutrino transport equations form a hyperbolic system of PDEs that is extremely similar to the MHD equations in structure and, thus, can be solved with similar methods.
+Our implementation is a finite volume approach using second-order spatial reconstruction and third-order SSP RK time integration.
+This approach makes full use of all six guard zones per direction and the high-order time integration increases stability, allowing M1-limited time steps up to CFL factors of $\gtrsim$0.9, greater than the typical MHD-limited CFL factor of $\sim$0.5.
+This mitigates to some extent the increased number of time steps required by the explicit radiation transport approach and reduces the ratio of communication-to-calculation.
 
 
 \subsubsection{Workflow Patterns}
 
 The vast majority of the allocated time will be spent on production
 simulations. We will utilize the Simulation management and analysis
-system (Smaash, \citep{Hudson:2011tp}) that has been developed at the
+system (Smaash, \citep{Hudson:2011}) that has been developed at the
 Flash Center and ALCF explicitly for use in managing FLASH simulations
 and data. Smaash monitors simulation progress, automatically sets-up
 and schedules restarts, and moves data to tape archive. Smaash has an
@@ -101,32 +121,7 @@ The M1 simulations will produce 150 GB checkpoints and 10 GB plot files.
 We request a further 100 TB for storage of these data.
 Disk space usage will be comparable in all three years of this project.
 
-\subsection{Job Characterization \& Use of Resources}
-\label{sec:jobs}
 
-In this proposal, we estimate the computational cost of our
-simulations as follows.  For the purpose of cost estimates, we will
-assume an average shock radius of 300 km, inside of which the grid
-will be refined to the maximum allowed level.   Given $\eta$, the
-average shock radius, and the finest possible grid spacing, $d
-x_{\rm min}$, the time-averaged number of zones, $\bar N_{\rm zones}$,
-can be estimated for each simulation.  Then, given the number of time
-steps needed, $N_{\rm steps}$, the computational cost of a simulation
-is
-\begin{equation}
-C = \alpha   \bar N_{\rm zones} N_{\rm steps},
-\label{eq:cost}
-\end{equation}
-where $\alpha$ is the use rate in units of core-hours per zone per
-time step.
-The number of time steps needed is determined by the
-evolution time sought and the time step size: $N_{\rm steps} = t_{\rm
-  max} / d t$.
-The time step for an explicit integrator is $d t = a_{\rm CFL}\ {\rm min}[d x / (c_{\rm S} + v)]$, where $a_{\rm CFL}$ is a number less than one (typically 0.5 for our simulations), $c_{\rm S}$ is the sound speed and $v$ is the flow speed; this expression is computed locally for each zone.
-Practically, for our simulations $d t$ is always set by zones near the center of the PNS.  Here, $v << c_{\rm S,PNS}$ so we can simplify the expression for the time step to $d t = a_{\rm CFL} d x_{\rm
-  min} / c_{\rm S,PNS}$. The maximum sound speed in the PNS is roughly
-constant post-bounce and is typically around $10^5$ km s$^{-1}$.
-The use rate, $\alpha$, is determined experimentally from actual simulations (see \S\ref{sec:performance}).  The time-averaged number of zones is estimated based on $d x_{\rm min}$, $\eta$, and the shock radius, behind which we assume maximal resolution.  Comparison to actual production simulations shows that our method for estimating the input parameters of eq. \ref{eq:cost} is accurate.
 
 
 %Much of the allocation will be spent carrying out the one MRI-resolved simulation (\S\ref{sec:mriSim}).
@@ -206,9 +201,13 @@ In MaRCC1 we use WENO-5 instead of PPM, a complex microphysical tabular EOS, sel
 This all serves to approximately double the per zone-step cost of the MaRCC1 application as compared with the simple Field Loop Advection test.
 We further emphasize that while comparable performance for the Field Loop Advection test may be obtained with Athena, Athena lacks the long list of capabilities required to carry out the research we propose (i.e., AMR, nuclear EOS, neutrino physics).
 
+\subsection{Developmental Work}
+
+\subsection{Development plan for next-generation systems}
+
+
 %\begin{wrapfigure}[41]{r}{3.25in}
 \begin{figure}
-
   \begin{tabular}{r}
     \includegraphics[width=3.25in]{figs/wkScaleSparkM1} \\
     \includegraphics[width=3.25in]{figs/strScaleSparkM1} \\

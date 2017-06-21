@@ -115,7 +115,7 @@ Shift toward Theta as primary machine
 
 Improved opacities/EOS from TEAMS
 
-### Mira 8192 run A (64M):
+### Mira 8192 run A (64M+2):
 
 Long time scales! Continue some of the medium res runs from Year 1\. Same physics.
 
@@ -124,18 +124,18 @@ Long time scales! Continue some of the medium res runs from Year 1\. Same physic
 - 20 Msun MHD fast rot late times
 - 20 Msun MHD slow rot late times
 
-### Mira 8192 run B (60M):
+### Mira 8192 run B (60M+2):
 
 MRI in PNS run. Fast rot 3D progen with AMR trick at edge of PNS (15 km to 40 km). 60 million
 
-### Mira 8192 run C (20M):
+### Mira 8192 run C (20M+2):
 
 - 15 Msun MHD fast rot progen sim
 - 15 Msun MHD slow rot progen sim
 - 25 Msun MHD fast rot progen sim
 - 25 Msun MHD slow rot progen sim
 
-### Theta capability run A (16M):
+### Theta capability run A (16M+2):
 
 - 10 Msun MHD fast rot 3D progen ccsn sim
 - 10 Msun MHD slow rot 3D progen ccsn sim
@@ -144,10 +144,27 @@ MRI in PNS run. Fast rot 3D progen with AMR trick at edge of PNS (15 km to 40 km
 
 ## Year 3
 
+### Theta capability run A (16M):
+
 - 15 Msun MHD fast rot 3D-progen ccsn sim
 - 15 Msun MHD slow rot 3D-progen ccsn sim
 - 25 Msun MHD fast rot 3D-progen ccsn sim
 - 25 Msun MHD slow rot 3D-progen ccsn sim
+
+### Theta capability run B (16M):
+
+- 10 Msun MHD fast rot 3D progen ccsn sim late times
+- 10 Msun MHD slow rot 3D progen ccsn sim late times
+- 20 Msun MHD fast rot 3D progen ccsn sim late times
+- 20 Msun MHD slow rot 3D progen ccsn sim late times
+
+### Aurora:
+
+Assume same per-core performance as Theta. Add late times (8M per), then add inelastic scattering (1.5x) = 12M per sim.
+
+Re-do all eight 3D progenitors (96M core-hours)
+
+12 masses, 2 rotation rates = 24 other sims
 
 3D Black hole formation?? - Initial spin of BH! GW/neutrino signal just prior to
 
