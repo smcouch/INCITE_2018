@@ -29,7 +29,7 @@ energyCoupling = True
 prebounce = False
 octant = False
 subCycle = False
-mri = False
+mri = True
 turbRes = False
 trackShock = False
 
