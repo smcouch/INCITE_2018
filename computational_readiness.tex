@@ -43,7 +43,7 @@ The use rate, $\alpha$, is determined experimentally from actual simulations (se
 
 The vast majority of our requested allocation will be expended on jobs at the Capability scale (20\% or more of the machine).
 We take two approaches to achieving this: large monolithic jobs and packaged smaller jobs.
-Specifically, the simulations proposed in Sections \ref{sec:Y1mrccsn}, \ref{sec:Y1progen}, \ref{sec:Y2late}, and \ref{sec:Y2progen} will be packaged into 8192-node jobs on \mira wherein each individual simulation is running on a sub-partition of 2048 nodes.
+Specifically, the simulations proposed in Sections \ref{sec:Y1mrccsn}, \ref{sec:Y1progen}, \ref{sec:Y2late}, and \ref{sec:Y2progen} will be packaged into 8192-node jobs on \mira wherein each individual simulation will run on a sub-partition of 2048 nodes.
 
 
 \subsection{Computational Approach}
@@ -205,16 +205,25 @@ We further emphasize that while comparable performance for the Field Loop Advect
 
 \subsection{Development plan for next-generation systems}
 
+Kuo-Chuan is going to ATPESC.
 
 %\begin{wrapfigure}[41]{r}{3.25in}
 \begin{figure}
-  \begin{tabular}{r}
-    \includegraphics[width=3.25in]{figs/wkScaleSparkM1} \\
-    \includegraphics[width=3.25in]{figs/strScaleSparkM1} \\
-    \includegraphics[width=3.25in]{figs/thrdSpeedupSparkM1}
+  \begin{tabular}{l}
+    \includegraphics[width=3.2in]{figs/wkScaleSparkM1} \\
+    \includegraphics[width=3.2in]{figs/strScaleSparkM1} \\
+    \includegraphics[width=3.2in]{figs/thrdSpeedupSparkM1}
   \end{tabular}
   \caption{Weak scaling (top), strong scaling (middle), and threading
   speedup (bottom) of FLASH-MaRCC1 on {\it Mira}.  Note that for this configuration, use of 8 threads can result in a maximum theoretical speedup of 4x.}
   \label{fig:scaling}
 \end{figure}
 %\end{wrapfigure}
+
+\begin{figure}
+  \begin{tabular}{ll}
+    \includegraphics[width=3.2in]{figs/wkScaleSparkM1_theta} & \hspace{-16pt}
+    \includegraphics[width=3.2in]{figs/thrdSpeedupSparkM1_theta}
+  \end{tabular}
+  \caption{\thet scaling!}
+\end{figure}
