@@ -68,30 +68,32 @@ Evan needs to write something about our neutrino opacity fidelity.
 
 What is required to form a magnetar?
 
-### Mira 8192 run A (64M):
+### Mira 8192 run A (64M+2):
 
 - 10 Msun MHD fast rot
 - 10 Msun MHD slow rot
 - 20 Msun MHD fast rot
 - 20 Msun MHD slow rot
 
-### Mira 8192 run B (20M):
+### Mira 8192 run B (20M+2):
 
 - 10 Msun MHD fast rot progen sim
 - 10 Msun MHD slow rot progen sim
 - 20 Msun MHD fast rot progen sim
 - 20 Msun MHD slow rot progen sim
 
-### Mira 8192 run C (60M):
+### Mira 8192 run C (60M+2):
 
 - Hero sim: 0.65 km throughout the gain region! 60 Million core-hours (most promising MHD)
 
 ### Theta capability run A (8M):
 
-- 20 Msun NR 3D progen non-mag
+For the 2018 Cycle Theta will be allocated in Mira- equivalent core hours. Applicants who are basing core-hour estimates on KNL Theta/Cori benchmarking should use 3.25 Mira core hours per Theta core hour.
+
+- x 20 Msun NR 3D progen non-mag
 - 20 Msun NR 1D progen non-mag
 - 10 Msun NR 1D progen non-mag
-- 15 Msun NR 1D progen non-mag
+- x 15 Msun NR 1D progen non-mag
 
 two progenitors, different rot/B
 
@@ -113,7 +115,7 @@ Shift toward Theta as primary machine
 
 Improved opacities/EOS from TEAMS
 
-### Mira 8192 run A (64M):
+### Mira 8192 run A (64M+2):
 
 Long time scales! Continue some of the medium res runs from Year 1\. Same physics.
 
@@ -122,29 +124,49 @@ Long time scales! Continue some of the medium res runs from Year 1\. Same physic
 - 20 Msun MHD fast rot late times
 - 20 Msun MHD slow rot late times
 
-### Mira 8192 run B (60M):
+### Mira 8192 run B (60M+2):
 
 MRI in PNS run. Fast rot 3D progen with AMR trick at edge of PNS (15 km to 40 km). 60 million
 
-### Mira 8192 run C (20M):
+### Mira 8192 run C (20M+2):
 
 - 15 Msun MHD fast rot progen sim
 - 15 Msun MHD slow rot progen sim
 - 25 Msun MHD fast rot progen sim
 - 25 Msun MHD slow rot progen sim
 
-### Theta capability run A (8M):
+### Theta capability run A (16M+2):
 
 - 10 Msun MHD fast rot 3D progen ccsn sim
 - 10 Msun MHD slow rot 3D progen ccsn sim
 - 20 Msun MHD fast rot 3D progen ccsn sim
 - 20 Msun MHD slow rot 3D progen ccsn sim
 
-### Theta capability run B (8M):
-
-Some other parameter varied? - Inclusion of NES?
-
 ## Year 3
+
+### Theta capability run A (16M):
+
+- 15 Msun MHD fast rot 3D-progen ccsn sim
+- 15 Msun MHD slow rot 3D-progen ccsn sim
+- 25 Msun MHD fast rot 3D-progen ccsn sim
+- 25 Msun MHD slow rot 3D-progen ccsn sim
+
+### Theta capability run B (16M):
+
+- 10 Msun MHD fast rot 3D progen ccsn sim late times
+- 10 Msun MHD slow rot 3D progen ccsn sim late times
+- 20 Msun MHD fast rot 3D progen ccsn sim late times
+- 20 Msun MHD slow rot 3D progen ccsn sim late times
+
+### Aurora:
+
+Assume same per-core performance as Theta. Add late times (8M per), then add inelastic scattering (1.5x) = 12M per sim.
+
+Re-do all eight 3D progenitors (96M core-hours)
+
+12 masses, 2 rotation rates = 24 other sims
+
+3D Black hole formation?? - Initial spin of BH! GW/neutrino signal just prior to
 
 Incorporation of AMReX capability? Task parallelism? Parallel in time?
 
