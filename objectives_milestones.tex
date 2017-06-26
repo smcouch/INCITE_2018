@@ -29,7 +29,7 @@ Neutrino transport in \sparkmone is carried out using the M1 two-moment explicit
 M1 computes the first two moments of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.
 The neutrino fluxes, both in real space and in energy space) are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
 This implicit solve is completely local and requires solving only a 4x4 matrix.
-Our M1 solver is fully velocity-dependent, except in the calculation of the explicit flux terms, which is done to $\mathcal{O}(v/c)$
+Our M1 solver is fully velocity-dependent, except in the calculation of the explicit flux terms, which is done to $\mathcal{O}(v/c)$.
 We currently do not include inelastic neutrino scattering in the multidimensional version of our transport solver although inelastic neutrino electron scattering is included in the 1D implementation in GR1D \citep{OConnor:2015}.
 We plan to implement and include inelastic scattering in our 3D simulations in Years 2 and 3 of this project.
 
@@ -170,7 +170,7 @@ We propose to carry out the highest resolution neutrino-radiation hydrodynamic C
 This simulation will have critical value as a validation of the resolution used in current 3D CCSN simulations.
 For this simulation, we will allow the entire post-shock region to be refined up to a resolution of 650 m, twice the resolution of our fiducial model set (Section \ref{sec:Y1mrccsn}).
 Coupled with the higher-order WENO5 scheme we will use, this simulation should achieve the highest numerical Reynolds number of any 3D CCN simulation yet.
-We will careful study the character and properties of the gain region turbulence in this simulation and compare to our fiducial models.
+We will study the gain region turbulence in this simulation and make a careful comparison to our fiducial models.
 We will select the initial based on the results of the simulations in Section \ref{sec:Y1mrccsn}.
 This simulation will comprise approximately 100 million computational zones.
 We will simulate approximately 500 ms of post-bounce evolution, bringing the request for this simulation to 60M core-hours and 40 TB of online storage.
@@ -300,6 +300,7 @@ We will use MESA for constructing these initial models and will include rotation
 In these simulations, since the progenitors themselves will be 1D, we will apply realistic perturbations to the velocity fields in the convective shells following either \citet{Muller:2015} or \citet{Chatzopoulos:2014}.
 For all 32 simulations, we request 384M core-hours on \aurora, plus 16M core-hours for development and testing.
 This milestone will require 2 PB of online storage.
+The specifics of these simulations may be 
 
 
 % \subsection{Monte Carlo Radiative Transfer of 3D CCSN Simulations}
