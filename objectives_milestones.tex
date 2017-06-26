@@ -13,7 +13,7 @@ Our project will address two critical questions: How do plausible rotation rates
 \label{sec:spark}
 
 Our primary research software instrument for this project will be the \sparkmone CCSN application built in the \flash simulation framework \citep{Fryxell:2000, Dubey:2009}.
-\sparkmone utilizes the new \spark high-order MHD solver \citep{Couch:2017}, the M1 two-moment explicit neutrino transport method \citep{Kuroda:2012, OConnor:2015, OConnor:2015a}, an accurate and efficient multipole gravity solver \citep{Couch:2013c} including the general relativistic monopole correction \citep{Marek:2006}, an approximate 21-isotope nuclear network for accurately tracking the composition at low densities \citep{Couch:2015a}, and the \flash framework for adaptive mesh refinement (AMR), I/O, and runtime management.
+\sparkmone utilizes the new \spark high-order MHD solver \citep{Couch:2017}, the M1 two-moment explicit neutrino transport method \citep{Shibata:2011a, OConnor:2015, OConnor:2015a}, an accurate and efficient multipole gravity solver \citep{Couch:2013c} including the general relativistic monopole correction \citep{Marek:2006}, an approximate 21-isotope nuclear network for accurately tracking the composition at low densities \citep{Couch:2015a}, and the \flash framework for adaptive mesh refinement (AMR), I/O, and runtime management.
 The methods and physics including in \sparkmone make it one of the most high-fidelity and high-performance CCSN simulation tools in the world.
 A detailed analysis of the performance characteristics of \sparkmone is given in Section \todo{WHAT?}.
 In the remainder of this subsection we briefly described the numerical approach used in \sparkmone.
@@ -26,8 +26,8 @@ We have found this approach to be generally more robust but either method should
 For our CCSN application, we use fifth-order WENO reconstruction \citep{Borges:2008}, second-order time integration, and the HLLD approximate Riemann solver which includes MHD waves \citep{Miyoshi:2005}.
 
 Neutrino transport in \sparkmone is carried out using the M1 two-moment explicit approach described in \citet{OConnor:2015, OConnor:2015a, OConnor:2017a}.
-M1 computes the first two moments of the Boltzmann equation for neutrinos with an analytic closure for the higher-order moments.
-The neutrino fluxes, both in real space and in energy space) are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
+The M1 scheme evolves the first two angular moments of the Boltzmann distribution function for neutrinos and utilizes an analytic closure for the higher-order moments.
+The neutrino fluxes, both in real space and in energy space, are computed explicitly as a hyperbolic system resulting in favorable performance and scaling properties (at the cost of time step sizes limited by the speed of light) while the matter-radiation source terms are computed implicitly.
 This implicit solve is completely local and requires solving only a 4x4 matrix.
 Our M1 solver is fully velocity-dependent, except in the calculation of the explicit flux terms, which is done to $\mathcal{O}(v/c)$.
 We currently do not include inelastic neutrino scattering in the multidimensional version of our transport solver although inelastic neutrino electron scattering is included in the 1D implementation in GR1D \citep{OConnor:2015}.
@@ -45,7 +45,7 @@ Hence, M1 is {\it ideally} suited for the CCSN problem due to its accuracy (for 
 In addition, the severe limitation of time steps determined by the speed of light is not so drastic in CCSNe since the explicit time step is already just a factor of a few larger than this thanks to the enormous sound speeds in the PNS.
 Another significant advantage of M1 is that it is a fully multidimensional transport scheme, i.e., the solution at a given grid point is dependent on the fluxes from every direction around that point.
 This is distinct from the often-adopted ``ray-by-ray'' approximation \citep[e.g.,][]{Bruenn:2013, Bruenn:2016, Muller:2012a, Hanke:2013, Melson:2015, Lentz:2015} in which the transport problem is solved only along discrete radial rays.
-The advantages of M1 for neutrino transport in CCSNe have not gone unnoticed and a number of groups are now exploring or adopting this approach \citep{OConnor:2013, Just:2015, Kuroda:2016, Skinner:2016, Roberts:2016}.
+The advantages of M1 for neutrino transport in CCSNe have not gone unnoticed and a number of groups are now exploring or adopting this approach \citep{Just:2015, Kuroda:2016, Skinner:2016, Roberts:2016}.
 
 
 In our \flash CCSN application we have assumed that the composition of the matter throughout the entire computational domain is determined by nuclear statistical equilibrium (NSE).
@@ -85,12 +85,14 @@ The difference between the central density evolution for WENO5 is far more subtl
 \end{figure}
 
 %===========
-\vspace{0.1in} \noindent {\bf Year 1 -- Total Request: 150M \mira core-hours; 9M \thet core-hours}
+\vspace{0.1in} \noindent {\bf Year 1 -- Total Request: 150M \mira core-hours; 9M \thet core-hours} \todo{missing 2M core hours, text only has 148M}
 %===========
 
 %%%%%%%%%
 \subsection{High-fidelity 3D Simulations of Magnetorotational CCSNe}
 \label{sec:Y1mrccsn}
+
+\todo{EOC: Comment, we probably shouldn't call these magnetorotational CCSNe as that  implies high magnetic fields/high rotation and the driving explosion mechanism not neutrino powered.}
 
 In Year 1, we will carry out a set of high-resolution 3D CCSN simulations using \sparkmone using progenitors that include realistic rotation rates and magnetic field strengths.
 We will construct our own 1D progenitor models using the open-source MESA code \citep{Paxton:2011, Paxton:2013, Paxton:2015} including rotational mixing instabilities and the Tayler-Spruit dynamo mechanism for magnetic field generation and angular momentum transport \citep{Spruit:2002, Heger:2005}.
@@ -148,7 +150,7 @@ We will follow the final build up of the iron core to its critical mass and ensu
 We have recently made improvements to this network's handling of weak interactions that bring the evolution into better agreement with the 1D evolution from the MESA code.
 We are currently simulating non-rotating, non-magnetic progenitors with this application in 2D and 3D.
 
-Using AMR in Cartesian coordinates, we will use and approximate angular resolution of $\sim$0.5$^\circ$, as in \citep{Couch:2015a} and finer than that used by \citep{Muller:2017}.
+Using AMR in Cartesian coordinates, we will use an approximate angular resolution of $\sim$0.5$^\circ$, as in \citep{Couch:2015a} and finer than that used by \citep{Muller:2017}.
 Additionally, we will use \spark's high-order WENO5 reconstruction to achieve much lower numerical viscosity than PPM at comparable resolution.
 Each such simulation will require 5M core-hours on \mira, for a total of 20M core-hours for the four simulations, plus 2M core-hours for development.
 We request 10 TB of online storage for these simulations.
@@ -165,7 +167,7 @@ This could have a significant impact on the dynamics of the simulations, includi
 Since the transition from stalled shock to explosion in 3D is attended by the appearance of the large-scale buoyant plumes behind the shock \citep{Dolence:2013, Muller:2017}, this bottleneck could have a crucial impact on the qualitative outcome of CCSN simulations.
 
 The highest-resolution 3D CCSN simulations with high-fidelity neutrino transport have only used $\sim$1 km resolution in the gain region \citep{Roberts:2016, OConnor:2017}.
-The parameterized simulations \citet{Radice:2016} show that this resoulution is not sufficient to correctly capture the turbulent cascade, though it it close to correctly calculating the turbulent kinetic energy on large scales.
+The parameterized simulations \citet{Radice:2016} show that this resolution is not sufficient to correctly capture the turbulent cascade, though it it close to correctly calculating the turbulent kinetic energy on large scales.
 We propose to carry out the highest resolution neutrino-radiation hydrodynamic CCSN simulation yet.
 This simulation will have critical value as a validation of the resolution used in current 3D CCSN simulations.
 For this simulation, we will allow the entire post-shock region to be refined up to a resolution of 650 m, twice the resolution of our fiducial model set (Section \ref{sec:Y1mrccsn}).
@@ -202,7 +204,7 @@ We will simulate approximately 500 ms of post-bounce evolution, bringing the req
 
 
 %===========
-\vspace{0.1in} \noindent {\bf Year 2 -- Total Request: 150M \mira core-hours; 18M \thet core-hours}
+\vspace{0.1in} \noindent {\bf Year 2 -- Total Request: 150M \mira core-hours; 18M \thet core-hours \todo{same, only 148M in the text}}
 %===========
 
 \subsection{Late time 3D Simulations of Magnetorotational CCSNe}
@@ -214,11 +216,11 @@ For any of the simulations that fail to explode, we will attempt to simulate lat
 This has the potential to elucidate some details of the formation of stellar mass black holes, such as those that have been detected by aLIGO \citep{Abbott:2016, Abbott:2017}.
 We have recently shown \citep{Pan:2017} that the GR effective potential approach can fairly accurately predict black hole formation time in 2D as compared to 1D fully GR simulations \citep{OConnor:2011}.
 
-The nucleosynthetic yields from CCSN simulations is a key quantity that can be directly compared to observations and laboratory measurements of cosmic abundances.
+The nucleosynthetic yields from CCSN simulations are a key quantity that can be directly compared to observations and laboratory measurements of cosmic abundances.
 We will compute the detailed nucleosynthesis from these late-time CCSN simulations.
 This will be accomplished as a post-processing step using the open-source SkyNet nuclear reaction network code developed by Co-I Roberts.
-The input for the nuclear reaction networks will be passive tracer particle data that records thermodynamic trajectory information from our FLASH CCSN simulations.
-FLASH already includes a well-developed, efficient passive particles framework that has been used extensively in the calculation of nucleosynthesis in Type Ia supernova simulations \citep[e.g.,][]{Long:2014}.
+The input for the nuclear reaction networks will be passive tracer particle data that records thermodynamic trajectory information from our \flash CCSN simulations.
+\flash already includes a well-developed, efficient passive-particle framework that has been used extensively in the calculation of nucleosynthesis in Type Ia supernova simulations \citep[e.g.,][]{Long:2014}.
 We will compute detailed abundances for elements such as radioactive nickel and titanium, two key observable quantities, and we will also examine how rotation and magnetic fields can influence the conditions for very heavy element formation and the r-process.
 
 Each of the four 3D simulations will require 16M core-hours on \mira and 10 TB of online storage (see Section \ref{sec:performance}).
@@ -246,13 +248,11 @@ We request 10 TB of online storage for these simulations.
 There is a very strong shear layer at the edge of rotating PNS's that is unstable to the magnetorotational instability \citep[MRI,][]{Akiyama:2003, Burrows:2007}.
 The presence of convection combined with rotation in the PNS can also lead to an $\alpha$-$\Omega$ dynamo \citep{Mosta:2015}.
 Both mechanisms can lead to exponential amplification of magnetic fields with dramatic implications for the CCSN mechanism.
-Accurately capture either process is extremely challenging computationally, requiring extremely high resolution to capture the fastest growing modes of these instabilities \citep{Mosta:2015}.
+Accurately capturing either process is extremely challenging computationally, requiring extremely high resolution to capture the fastest growing modes of these instabilities \citep{Mosta:2015}.
 In Year 2 of this project, we will carry out an extremely high resolution simulation of a rotating PNS in order to study the rapid growth of magnetic fields via the MRI and dynamo.
 This simulation will go beyond \citet{Mosta:2015} in a number of ways: we will use our M1 neutrino transport method rather than leakage, we will include the entire solid angle of the sphere rather than just a 90$^\circ$ wedge, and will simulate to later times in the aim of capturing the saturation of the magnetic fields.
-Using AMR, we will add two extra levels of refinement beyond our fiducial resolution (see Section \ref{sec:Y1mrccsn}) only in the shear layer surrounding the PNS.
+Using AMR, we will add two extra levels of refinement beyond our fiducial resolution (see Section \ref{sec:Y1mrccsn}) only in the shear layer surrounding the PNS, between 15\,km and 40\,km, bringing the finest resolution elements to 163\,m. 
 This approach was piloted for capturing turbulence in the gain region during our current INCITE project and will avoid adding additional zones in regions that are stable to the instabilities of interest.
-
-In the PNS shear layer from 15 km to 40 km in radius we will add resolution elements with finest spacing of 163 m.
 This is not as high as the highest resolution used by \citet{Mosta:2015} but we plan to go to much longer time scales, as much as 100 ms post-bounce.
 This simulation will comprise about 100 million zones in 3D and require about 200,000 time steps to reach 100 ms.
 The expense for this simulation will be 60M core-hours on \mira and will require 40 TB of online storage. We request an additional 2M core-hours for testing and development.
@@ -260,7 +260,7 @@ The expense for this simulation will be 60M core-hours on \mira and will require
 \subsection{MHD CCSN Simulations Using 3D Progenitors on \thet}
 
 In Year 2 we will use the 3D progenitor models generated in Year 1 (Sec. \ref{sec:Y1progen}) for 3D MHD CCSN simulations on \thet.
-For these simulations, we will enhance the physical fidelity of our neutrino transport by incorporating the SciDAC TEAMS microphysics framework, if avaialble.
+For these simulations, we will enhance the physical fidelity of our neutrino transport by incorporating the SciDAC TEAMS microphysics framework, if available.
 This planned open-source microphysics framework will incorporate the latest, state of the art neutrino interactions and cross sections that are fully self-consistent with the underlying EOS.
 
 For these four simulations we will use the 10- and 20-\msun 3D progenitors of Sec. \ref{sec:Y1progen}.
