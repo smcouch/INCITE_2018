@@ -15,7 +15,7 @@ Our project will address two critical questions: How do plausible rotation rates
 Our primary research software instrument for this project will be the \sparkmone CCSN application built in the \flash simulation framework \citep{Fryxell:2000, Dubey:2009}.
 \sparkmone utilizes the new \spark high-order MHD solver \citep{Couch:2017}, the M1 two-moment explicit neutrino transport method \citep{Shibata:2011a, OConnor:2015, OConnor:2015a}, an accurate and efficient multipole gravity solver \citep{Couch:2013c} including the general relativistic monopole correction \citep{Marek:2006}, an approximate 21-isotope nuclear network for accurately tracking the composition at low densities \citep{Couch:2015a}, and the \flash framework for adaptive mesh refinement (AMR), I/O, and runtime management.
 The methods and physics including in \sparkmone make it one of the most high-fidelity and high-performance CCSN simulation tools in the world.
-A detailed analysis of the performance characteristics of \sparkmone is given in Section \todo{WHAT?}.
+A detailed analysis of the performance characteristics of \sparkmone is given in Section \ref{sec:performance}.
 In the remainder of this subsection we briefly described the numerical approach used in \sparkmone.
 
 The \spark MHD solver \citep{Couch:2017} implements the cell-centered method of generalized Lagrangian multipliers \citep[GLM;][]{Dedner:2002, Mignone:2010} to control the growth of the divergence of the magnetic field.
@@ -85,14 +85,13 @@ The difference between the central density evolution for WENO5 is far more subtl
 \end{figure}
 
 %===========
-\vspace{0.1in} \noindent {\bf Year 1 -- Total Request: 150M \mira core-hours; 9M \thet core-hours} \todo{missing 2M core hours, text only has 148M}
+\vspace{0.1in} \noindent {\bf Year 1 -- Total Request: 150M \mira core-hours; 9M \thet core-hours}
 %===========
 
 %%%%%%%%%
-\subsection{High-fidelity 3D Simulations of Magnetorotational CCSNe}
+\subsection{High-fidelity 3D MHD Simulations of CCSNe}
 \label{sec:Y1mrccsn}
 
-\todo{EOC: Comment, we probably shouldn't call these magnetorotational CCSNe as that  implies high magnetic fields/high rotation and the driving explosion mechanism not neutrino powered.}
 
 In Year 1, we will carry out a set of high-resolution 3D CCSN simulations using \sparkmone using progenitors that include realistic rotation rates and magnetic field strengths.
 We will construct our own 1D progenitor models using the open-source MESA code \citep{Paxton:2011, Paxton:2013, Paxton:2015} including rotational mixing instabilities and the Tayler-Spruit dynamo mechanism for magnetic field generation and angular momentum transport \citep{Spruit:2002, Heger:2005}.
@@ -125,8 +124,6 @@ In this approach, each MPI rank will keep in memory only a reduced table coverin
 For these two simulations we request a total of 8M \thet core-hours (26M \mira-equivalent core-hours) and 20 TB of online storage.
 Plus an additional 1M \thet core-hours for development and testing, the total request for \thet in Y1 is 9M core-hours (29.25M \mira-equivalent core-hours).
 
-
-\todo{What's the payoff?}
 
 %%%%%%%%
 \subsection{3D Simulations of Iron Core Collapse in Rotating Stars}
@@ -175,7 +172,7 @@ Coupled with the higher-order WENO5 scheme we will use, this simulation should a
 We will study the gain region turbulence in this simulation and make a careful comparison to our fiducial models.
 We will select the initial based on the results of the simulations in Section \ref{sec:Y1mrccsn}.
 This simulation will comprise approximately 100 million computational zones.
-We will simulate approximately 500 ms of post-bounce evolution, bringing the request for this simulation to 60M core-hours and 40 TB of online storage.
+We will simulate approximately 500 ms of post-bounce evolution, bringing the request for this simulation to 62M core-hours and 40 TB of online storage.
 
 % \subsection{Realistic CCSN Nucleosynthesis}
 % \label{sec:nucleo}
@@ -204,7 +201,7 @@ We will simulate approximately 500 ms of post-bounce evolution, bringing the req
 
 
 %===========
-\vspace{0.1in} \noindent {\bf Year 2 -- Total Request: 150M \mira core-hours; 18M \thet core-hours \todo{same, only 148M in the text}}
+\vspace{0.1in} \noindent {\bf Year 2 -- Total Request: 150M \mira core-hours; 18M \thet core-hours }
 %===========
 
 \subsection{Late time 3D Simulations of Magnetorotational CCSNe}
@@ -242,6 +239,7 @@ We will simulate the final five minutes of stellar evolution to core collapse in
 As in Year 1, all final models will be made publicly available.
 Each such simulation will require 5M core-hours on \mira, for a total of 20M core-hours for the four simulations.
 We request 10 TB of online storage for these simulations.
+We request an additional 2M core-hours for testing and development.
 
 \subsection{Capturing the Magnetorotational Instability and $\alpha$-$\Omega$ Dynamo in the PNS}
 
@@ -251,13 +249,14 @@ Both mechanisms can lead to exponential amplification of magnetic fields with dr
 Accurately capturing either process is extremely challenging computationally, requiring extremely high resolution to capture the fastest growing modes of these instabilities \citep{Mosta:2015}.
 In Year 2 of this project, we will carry out an extremely high resolution simulation of a rotating PNS in order to study the rapid growth of magnetic fields via the MRI and dynamo.
 This simulation will go beyond \citet{Mosta:2015} in a number of ways: we will use our M1 neutrino transport method rather than leakage, we will include the entire solid angle of the sphere rather than just a 90$^\circ$ wedge, and will simulate to later times in the aim of capturing the saturation of the magnetic fields.
-Using AMR, we will add two extra levels of refinement beyond our fiducial resolution (see Section \ref{sec:Y1mrccsn}) only in the shear layer surrounding the PNS, between 15\,km and 40\,km, bringing the finest resolution elements to 163\,m. 
+Using AMR, we will add two extra levels of refinement beyond our fiducial resolution (see Section \ref{sec:Y1mrccsn}) only in the shear layer surrounding the PNS, between 15\,km and 40\,km, bringing the finest resolution elements to 163\,m.
 This approach was piloted for capturing turbulence in the gain region during our current INCITE project and will avoid adding additional zones in regions that are stable to the instabilities of interest.
 This is not as high as the highest resolution used by \citet{Mosta:2015} but we plan to go to much longer time scales, as much as 100 ms post-bounce.
 This simulation will comprise about 100 million zones in 3D and require about 200,000 time steps to reach 100 ms.
 The expense for this simulation will be 60M core-hours on \mira and will require 40 TB of online storage. We request an additional 2M core-hours for testing and development.
 
 \subsection{MHD CCSN Simulations Using 3D Progenitors on \thet}
+\label{sec:Y2thet}
 
 In Year 2 we will use the 3D progenitor models generated in Year 1 (Sec. \ref{sec:Y1progen}) for 3D MHD CCSN simulations on \thet.
 For these simulations, we will enhance the physical fidelity of our neutrino transport by incorporating the SciDAC TEAMS microphysics framework, if available.
@@ -272,12 +271,14 @@ Plus an additional 2M \thet core-hours for development and testing, the total re
 %===========
 
 \subsection{MHD CCSN Simulations Using 3D Progenitors}
+\label{sec:Y3mrccsn}
 
 In Year 3 we will use the 3D progenitor models generated in Year 2 (Sec. \ref{sec:Y2progen}) for 3D MHD CCSN simulations on \thet.
 For these four simulations we will use the 15- and 25-\msun 3D progenitors for both ``high'' and ``low'' rotation rates.
 For this milestone we request a total of 16M \thet core-hours (52M \mira-equivalent core-hours) and 40 TB of online storage.
 
 \subsection{Late time 3D Simulations of Magnetorotational CCSNe from 3D Progenitors}
+\label{sec:Y3late}
 
 In Year 3 we will continue the four CCSN simulations in the 10- and 20-\msun progenitors to about one second post-bounce.
 As in Sec. \ref{sec:Y2late}, we will study the explosion energies, PNS masses, nucleosynthesis, and black hole formation times in these simulations as appropriate.
@@ -285,6 +286,7 @@ For this milestone we request a total of 16M \thet core-hours (52M \mira-equival
 
 
 \subsection{Enhanced Physics CCSN Simulations in 3D Progenitors on \aurora}
+\label{sec:Y3aurora}
 
 The advent of \aurora will be transformative for CCSN science.
 While many details remain to be worked out, \aurora will allow for larger parameter studies of high-fidelity, high-resolution, long-time scale 3D CCSN simulations.
@@ -300,7 +302,7 @@ We will use MESA for constructing these initial models and will include rotation
 In these simulations, since the progenitors themselves will be 1D, we will apply realistic perturbations to the velocity fields in the convective shells following either \citet{Muller:2015} or \citet{Chatzopoulos:2014}.
 For all 32 simulations, we request 384M core-hours on \aurora, plus 16M core-hours for development and testing.
 This milestone will require 2 PB of online storage.
-The specifics of these simulations may be 
+The specifics of these simulations may be altered based on the results of the work in Years 1 and 2.
 
 
 % \subsection{Monte Carlo Radiative Transfer of 3D CCSN Simulations}
