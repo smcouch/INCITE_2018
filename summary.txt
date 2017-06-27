@@ -1,0 +1,2 @@
+Core-collapse supernovae are the explosive deaths of massive stars that are key to cosmic chemical evolution and the formation of compact objects, but the mechanism driving these explosions is still uncertain.
+This project will transform our understanding of supernovae through extreme-scale simulations including rotation, magnetic fields, and multidimensional stellar progenitors.

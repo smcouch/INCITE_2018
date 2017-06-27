@@ -5,6 +5,10 @@
 *.log
 ProjectNarrative.pdf
 incite_ccsn_milestones.pdf
+Data_Management.pdf
+exec_summary.pdf
+personnel.pdf
+publications.pdf
 *.fdb_latexmk
 msNotes.bib
 *~
