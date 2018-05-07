@@ -17,7 +17,7 @@ delXmin = float(sys.argv[3]) # in km
 lref = int(sys.argv[4])
 
 #some constants
-nblkx = 12.
+nblkx = 16.
 ndim = 3
 avShR = 150 # km
 
@@ -25,11 +25,11 @@ avShR = 150 # km
 anteS = False
 leak = False
 M1 = True
-energyCoupling = True
+energyCoupling = False
 prebounce = False
 octant = False
 subCycle = False
-mri = True
+mri = False
 turbRes = False
 trackShock = False
 
