@@ -147,5 +147,35 @@ Algebra solvers, FFT, active and passive particles, structured grids,
 and AMR.
 
 
+\section{Theta}
+
+(KC: we might need to spread this section to other sections.)
+
+At beginning of our allocation, we had technical issues with the Intel fortran compiler on Theta when enabling OpenMP.
+After a few weeks of investigation, we decided to switch to GNU fortran compiler.    
+After that, we moved one high-resolution production simulation from Mira to Theta 
+and tuned our application on Theta to continue that simulation. 
+A weak scaling test of restarting that simulation is shown in Figure~\ref{fig:theta}.
+Figure~\ref{fig:theta} suggests that the performance is getting worse when using more than 300 nodes on Theta.
+However, we noticed that after the maintenance on May 21, 2018, the wall-clock limit on Theta is limited to 6 hours 
+with $> 256$ nodes and 9 hours with $> 384$ nodes.
+Since our simulations require more than 50 of restarts, this limitation made us difficult to monitor our simulation.
+Therefore, we developed a simply automation job scheduling script to re-submit our job on Theta.    
+ 
+Recently, we have encountered another technical issue, where memory fragmentation happened randomly. 
+This might be a memory leak or simply insufficient memory but we don't observe this issue on Mira. 
+We are still investigating this issue and this issue break our job scheduling script.
+The production run is still running but the progress become slower due to this issue.    
+Currently, we have spend 7M core-hours on Theta, which is 78\% of our allocation. 
+
+\begin{figure}
+  \begin{tabular}{cc}
+    \includegraphics[width=6.5in]{./theta/fig_theta_scaling_j4.pdf}
+  \end{tabular}
+  \caption{Weak scaling test on Theta. different colors represent different combinations of MPI and OpenMP tasks. }
+  \label{fig:theta}
+\end{figure}
+
+
 
 \end{document}
