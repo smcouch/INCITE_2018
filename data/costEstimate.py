@@ -17,18 +17,18 @@ delXmin = float(sys.argv[3]) # in km
 lref = int(sys.argv[4])
 
 #some constants
-nblkx = 16.
+nblkx = 12.
 ndim = 3
-avShR = 150 # km
+avShR = 500 # km
 
 # Flags for various different assumptions
 anteS = False
 leak = False
 M1 = True
-energyCoupling = False
+energyCoupling = True
 prebounce = False
 octant = False
-subCycle = False
+subCycle = True
 mri = False
 turbRes = False
 trackShock = False

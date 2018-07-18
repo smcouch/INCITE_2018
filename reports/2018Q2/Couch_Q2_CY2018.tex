@@ -19,7 +19,7 @@
 
 \title{DOE Office of Science INCITE Project:\\
 {\it Extreme-scale Simulation of Supernovae and Magnetars from Realistic Progenitors}\\
-2018 Q1 Report}
+2018 Q2 Report}
 
 \author{Principal Investigator:\\Sean M. Couch\\
   Michigan State University \vspace{0.1in}\\
@@ -31,7 +31,7 @@
   MacKenzie Warren (Michigan State University) \\
 }
 
-\date{April 1, 2018}
+\date{July 1, 2018}
 
 
 \begin{document}
@@ -49,23 +49,45 @@
 \begin{figure}
   \begin{tabular}{cc}
     \includegraphics[width=3.25in]{on_track_graph.png}
-    \includegraphics[width=3.25in]{categorized_hours_graph.png}
+    \includegraphics[width=3.25in]{categorized_hours_graph.png} \\
+    \includegraphics[width=3.25in]{on_track_graph_theta}
+    \includegraphics[width=3.25in]{categorized_hours_graph_theta} 
   \end{tabular}
   \caption{Allocation usage.}
   \label{fig:usage}
 \end{figure}
 
-In Q1 we have used 27.1M core-hours on Mira.
-This is 18.1\% of our allocation, putting us slightly behind the ideal usage curve.
-A slow start was expected since the simulations we are running grow in expense with time.
-This fact is also reflected in our categorized hours (Figure \ref{fig:usage}).
-As of about March 1, our simulations are now large enough to scale to the capability queue and our usage rate is now increasing substantially.
+Thus far, we have expended 60.6M core-hours on Mira, 40.4\% of our 2018 allocation (see Figure \ref{fig:usage}).
+We are slightly behind the ideal usage curve, but in Q3 we will commence production 3D progenitor simulations, adding a second capability-scale job to our workflow.
+Overall, we anticipate catching up quickly to the on-track usage curve.
+The vast majority of our usage on Mira has been at the capability level.
 
-On Theta, we have expended only 1.8\% of our allocation.
-This is because we have spent this quarter tuning our application for the new architecture.
-We are now satisfied with the performance of our application and are ready to begin production runs on Theta.
-Furthermore, we are moving one of the already-large simulations from Mira to Theta and so we should be able to run a capability scale from the outset.
-We expect to dramatically increase our burn rate on Theta during Q2.
+
+We have so far expended 7.3M core-hours on Theta, 81.3\% of our 2018 allocation. 
+At beginning of our allocation, we had technical issues with the Intel fortran compiler on Theta when enabling OpenMP.
+After a few weeks of investigation, we decided to switch to GNU fortran compiler.    
+After that, we moved one high-resolution production simulation from Mira to Theta 
+and tuned our application on Theta to continue that simulation. 
+A weak scaling test of restarting that simulation is shown in Figure~\ref{fig:theta}.
+Figure~\ref{fig:theta} suggests that the performance is getting worse when using more than 300 nodes on Theta.
+However, we noticed that after the maintenance on May 21, 2018, the wall-clock limit on Theta is limited to 6 hours 
+with $> 256$ nodes and 9 hours with $> 384$ nodes.
+Since our simulations require more than 50 of restarts, this limitation made us difficult to monitor our simulation.
+Therefore, we developed a simply automation job scheduling script to re-submit our job on Theta.    
+ 
+Recently, we have encountered another technical issue, where memory fragmentation happened randomly. 
+This might be a memory leak or simply insufficient memory but we don't observe this issue on Mira. 
+We are still investigating this issue and this issue break our job scheduling script.
+The production run is still running but the progress become slower due to this issue.    
+Currently, we have spend 7M core-hours on Theta, which is 78\% of our allocation. 
+
+\begin{figure}
+  \begin{tabular}{cc} 
+    \includegraphics[width=6.5in]{./theta/fig_theta_scaling_j4.pdf}
+  \end{tabular}
+  \caption{Weak scaling test on Theta. different colors represent different combinations of MPI and OpenMP tasks. }
+  \label{fig:theta}
+\end{figure}
 
 
 
@@ -76,11 +98,11 @@ We expect to dramatically increase our burn rate on Theta during Q2.
 
 Our milestones for Year 1, and corresponding progress, are:
 \begin{enumerate}
-  \item {\it 3D simulations of magnetorotational core-collapse supernovae} -- These simulations have been started and are running at capability on Mira. The Theta simulations will commence in earnest in Q2.
-  \item {\it 3D simulations of iron core collapse in massive stars} -- In Q1, we have optimized our simulation setup for Mira and have run preliminary simulations in reduced geometry to determine the optimal parameters and initial conditions. We plan to commence production runs in Q2.
-  \item {\it High-resolution simulations of magnetorotational turbulence} -- These simulations will be started in Q2.
-  \item {\it Develop SIMpliPy workflow tool} -- Work on this continues and will be accelerated in Q2. We will have two summer undergraduate REU students joining the group that will work exclusively on this tool.
-  \item {\it Implement marching cubes for EOS and opacities} -- This will begin Q2 or Q3.
+  \item {\it 3D simulations of magnetorotational core-collapse supernovae} -- These simulations have been started and are running at capability on Mira. The simulations have progressed sufficiently that we are beginning to see the impact of including rotation and magnetic fields. These simulations are on track to meet our scientific goals for 2018. The simulations on Theta involved rapidly-rotating initial conditions and have moved very quickly, thanks to our greater computational efficiency on Theta and higher queue throughput.
+  \item {\it 3D simulations of iron core collapse in massive stars} -- In Q1 and Q2, we have optimized our simulation setup for Mira and have run preliminary simulations in reduced geometry to determine the optimal parameters and initial conditions. We plan to commence production runs in Q3.
+  \item {\it High-resolution simulations of magnetorotational turbulence} -- These simulations will be started in Q3.
+  \item {\it Develop SIMpliPy workflow tool} -- Work on this continues. We have two summer undergraduate REU students in the group that are working on this tool.
+  \item {\it Implement marching cubes for EOS and opacities} -- This will begin Q3.
 \end{enumerate}
 
 
@@ -145,36 +167,6 @@ required to configure \texttt{FLASH} for particular simulations.
 Algorithm classes used within \texttt{FLASH} include Sparse Linear
 Algebra solvers, FFT, active and passive particles, structured grids,
 and AMR.
-
-
-\section{Theta}
-
-(KC: we might need to spread this section to other sections.)
-
-At beginning of our allocation, we had technical issues with the Intel fortran compiler on Theta when enabling OpenMP.
-After a few weeks of investigation, we decided to switch to GNU fortran compiler.    
-After that, we moved one high-resolution production simulation from Mira to Theta 
-and tuned our application on Theta to continue that simulation. 
-A weak scaling test of restarting that simulation is shown in Figure~\ref{fig:theta}.
-Figure~\ref{fig:theta} suggests that the performance is getting worse when using more than 300 nodes on Theta.
-However, we noticed that after the maintenance on May 21, 2018, the wall-clock limit on Theta is limited to 6 hours 
-with $> 256$ nodes and 9 hours with $> 384$ nodes.
-Since our simulations require more than 50 of restarts, this limitation made us difficult to monitor our simulation.
-Therefore, we developed a simply automation job scheduling script to re-submit our job on Theta.    
- 
-Recently, we have encountered another technical issue, where memory fragmentation happened randomly. 
-This might be a memory leak or simply insufficient memory but we don't observe this issue on Mira. 
-We are still investigating this issue and this issue break our job scheduling script.
-The production run is still running but the progress become slower due to this issue.    
-Currently, we have spend 7M core-hours on Theta, which is 78\% of our allocation. 
-
-\begin{figure}
-  \begin{tabular}{cc}
-    \includegraphics[width=6.5in]{./theta/fig_theta_scaling_j4.pdf}
-  \end{tabular}
-  \caption{Weak scaling test on Theta. different colors represent different combinations of MPI and OpenMP tasks. }
-  \label{fig:theta}
-\end{figure}
 
 
 
