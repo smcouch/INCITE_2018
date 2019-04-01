@@ -17,9 +17,9 @@ delXmin = float(sys.argv[3]) # in km
 lref = int(sys.argv[4])
 
 #some constants
-nblkx = 12.
+nblkx = 16.
 ndim = 3
-avShR = 500 # km
+avShR = 200 # km
 
 # Flags for various different assumptions
 anteS = False

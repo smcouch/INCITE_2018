@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ...
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{natbib}
+%\usepackage[square,comma,numbers,sort]{natbib}
+\usepackage[pdftex, plainpages=false, colorlinks=true, linkcolor=blue, citecolor=blue, bookmarks=false]{hyperref}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{sectsty}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage{times}
+\usepackage[tiny,compact]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{deluxetable}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{verbatim}
+
+\setlength{\textwidth}{6.5in}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.2in}
+\setlength{\textheight}{9.in}
+%\setlength{\footskip}{-0.2in}
+%\setlength{\voffset}{0.0in}
+
+
+\sectionfont{\normalsize}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
+\singlespacing
+
+\input ../macros.tex
+\input ../journal_abbr.tex
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\fancyplain{}{\doctitle}}
+\rhead{\fancyplain{}{S.M. Couch}}
+\rfoot{\fancyplain{}{\thepage}}
+
+\bibliographystyle{aasjournal}
+%\bibliographystyle{hapj}
+%\bibliographystyle{physrev}
+
+
+
+
+%\titlespacing*{\section}{0in}{0.2in}{0in}
+%\titlespacing*{\subsection}{0in}{0.1in}{0in}
+\titleformat*{\subsection}{\itshape}
+%\titlespacing*{\subsubsection}{0in}{0.in}{0in}
+\titleformat*{\subsubsection}{\itshape}
+\setlength{\abovecaptionskip}{3pt}
+
+\begin{document}
+
+
+\begin{center}
+{\bf Year 2 - CY2019 Allocation Renewal} \vspace{-0.1in}
+\end{center}
+
+\section*{Project Plans for Year 2}
+
+We are essentially on track to achieve all of our Year 1 milestones with only minor modifications. 
+As such, we plan to stick very close to our proposed Year 2 plan. 
+Our goals and milestones for Year 2 of this INCITE project are detailed below.
+
+\section{Late time 3D Simulations of Magnetorotational CCSNe}
+\label{sec:Y2late}
+
+In Year 2 of this project, we will carry four of the 3D simulations of magnetorotational CCSNe from Year 1 to late times, at least one second post-bounce.
+Long time scale simulations are crucial for accurately predicting the explosion energy, PNS mass, nucleosynthesis, etc. \citep{bruenn:2016, muller:2017}.
+For any simulations that fail to explode, we will attempt to simulate late enough times to capture the onset of PNS collapse to a black hole.
+This has the potential to elucidate the details of the formation of stellar mass black holes, such as those that have been detected by aLIGO \citep{abbott:2016, abbott:2017}.
+We have recently shown \citep{pan:2018} that the GR effective potential approach can fairly accurately predict black hole formation time in 2D as compared to 1D fully GR simulations \citep{oconnor:2011}.
+
+The nucleosynthetic yields from CCSN simulations are a key quantity that can be directly compared to observations and laboratory measurements of cosmic abundances.
+We will compute the detailed nucleosynthesis from these late-time CCSN simulations.
+This will be accomplished as a post-processing step using the open-source SkyNet nuclear reaction network code developed by Co-I Roberts.
+The input for the nuclear reaction networks will be passive tracer particle data that records thermodynamic trajectory information from our \flash CCSN simulations.
+\flash already includes a well-developed, efficient passive-particle framework that has been used extensively in the calculation of nucleosynthesis in Type Ia supernova simulations \citep[e.g.,][]{Long:2014}.
+We will compute detailed abundances for elements such as radioactive nickel and titanium, two key observable quantities, and we will also examine how rotation and magnetic fields can influence the conditions for very heavy element formation and the r-process.
+
+Each of the four 3D simulations will require 1M node-hours on \mira and 10 TB of online storage.
+Including 125k \mira node-hours for development and testing, the total request for this milestone is 4.125M \mira node-hours and 40 TB of online storage.
+
+% The post-processing nuclear reaction networks are embarrassingly parallel, requiring no interprocess communication.
+% The large number of particles that will be required for each 3D simulation ($\sim$millions) will easily make these Capability class simulations, though only short runtimes will be needed.
+% For this we request 5M MSU.
+% The 3D simulations of long timescale CCSN mixing, using the methods developed in \citet{Couch:2011cf}, will require a roughly equal amount of computing resources for each decade in radius simulated.
+% These simulations will not require neutrino transport and so are relatively inexpensive.
+% Restricting ourselves to compact progenitor stars ($R_* \sim 10^{6}$ km), we plan two 3D whole-star simulations each, requiring about 5M MSU.  The total request for the nucleosynthesis and 3D whole-star simulations is then 15M MSU.
+
+
+\section{3D Simulations of Iron Core Collapse in Rotating Stars}
+\label{sec:Y2progen}
+
+In Year 2, we will extend the Year 1 study of iron core collapse in rotating stars to an additional initial stellar mass.
+We will simulate the final five minutes of stellar evolution to core collapse in 3D for a 25-\msun progenitor star for both ``high'' and ``low'' core rotation rates.
+As in Year 1, all final models will be made publicly available.
+Each such simulation will require 625k node-hours on \mira, for a total of 1.25M node-hours for the two simulations.
+We request 10 TB of online storage for these simulations.
+We request an additional 125k node-hours for testing and development.
+ 
+\section{Capturing the Magnetorotational Instability and $\alpha$-$\Omega$ Dynamo in the PNS}
+
+There is a very strong shear layer at the edge of the rotating PNS that is unstable to the magnetorotational instability \citep[MRI,][]{Akiyama:2003, Burrows:2007}.
+The presence of convection combined with rotation in the PNS can also lead to an $\alpha$-$\Omega$ dynamo \citep{Mosta:2015}.
+Both mechanisms can lead to exponential amplification of magnetic fields with dramatic implications for the CCSN mechanism.
+Accurately capturing either process is extremely challenging computationally, requiring extremely high resolution to capture the fastest growing modes of these instabilities \citep{Mosta:2015}.
+In Year 2 of this project, we will carry out an extremely high resolution simulation of a rotating PNS in order to study the rapid growth of magnetic fields via the MRI and dynamo.
+This simulation will go beyond \citet{Mosta:2015} in a number of ways: we will use our M1 neutrino transport method rather than leakage, we will include the entire solid angle of the sphere rather than just a 90$^\circ$ wedge, and will simulate to later times in the aim of capturing the saturation of the magnetic fields.
+Using AMR, we will add two extra levels of refinement beyond our fiducial resolution only in the shear layer surrounding the PNS, between 15\,km and 40\,km, bringing the finest resolution elements to 163\,m.
+This approach was piloted for capturing turbulence in the gain region during our previous INCITE project and will avoid adding additional zones in regions that are not susceptible to the instabilities of interest.
+This is not as high as the highest resolution used by \citet{Mosta:2015} but we plan to go to much longer time scales, as much as 100 ms post-bounce.
+This simulation will comprise about 100 million zones in 3D and require about 200,000 time steps to reach 100 ms.
+The expense for this simulation will be 3.75M node-hours on \mira and will require 40 TB of online storage. We request an additional 125k node-hours for testing and development.
+
+\section{MHD CCSN Simulations Using 3D Progenitors on \thet}
+\label{sec:Y2thet}
+
+In Year 2 we will use the 3D progenitor models generated in Year 1 for 3D MHD CCSN simulations on \thet.
+For these simulations, we will enhance the physical fidelity of our neutrino transport by incorporating the SciDAC TEAMS microphysics framework, if available.
+This planned open-source microphysics framework will incorporate the latest, state of the art neutrino interactions and cross sections that are fully self-consistent with the underlying EOS.
+
+For these simulations we will use the rotating and non-rotating 15-\msun 3D progenitors produced in Year 1.
+We will additionally run two more 3D MHD simulations using rotating, magnetic progenitors taken from \citet{heger:2005} in order to characterize the impact of the 3D structure on magnetorotational aspects of CCSNe.
+For this milestone we request a total of 250k \thet node-hours and 20 TB of online storage to carry out four total 3D simulations.
+Plus an additional 31k \thet node-hours for development and testing, the total request for \thet in Y2 is 281k node-hours.
+
+\section{Code Development}
+
+For Year 2, we will continue to make improvements to our \sparkmone application.
+As originally proposed, we will implement the TEAMS SciDAC EOS and opacity framework. 
+In collaboration with researchers at the University of Washington and the University of Tennessee, Co-PI Roberts is now working on the initial implementation of this framework.
+This effort will enhance the physical fidelity of the EOS and neutrino opacities we use in our simulations. 
+
+The second major code development effort we plan for Year 2 is the implementation of high-order, single-step methods for MHD in our CCSN application.
+This is work also supported by the TEAMS SciDAC collaboration.
+Chelsea Harris will be starting as a research associate at MSU this Fall and will be leading this effort. 
+Our \spark MHD solver is written in such a way to make implementation of this new approach straight-forward. 
+A high-order single-step method will both increase the accuracy of our simulations while also decreasing the overall communication burden. 
+This as the potential to significantly improve our computational efficiency.
+We will also continue porting our various physics routines, particularly \spark, to the AMReX-capable version of \flash.
+
+\renewcommand\bibsection{\section*{References}}
+\setlength{\bibsep}{2pt}
+%\begin{multicols}{2}
+\bibliography{Plans}
+%\end{multicols}
+
+
+\end{document}

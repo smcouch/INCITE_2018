@@ -13,3 +13,7 @@ publications.pdf
 msNotes.bib
 *~
 .ipynb_checkpoints
+*.fls
+*.synctex.gz
+.DS_STORE
+__latexindent_temp.tex

@@ -1,0 +1,69 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[pagestyles,raggedright]{titlesec}
+\usepackage{txfonts}
+\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in] {geometry}
+\usepackage{graphicx}
+
+% Set one inch margins:
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{0.25in}
+\setlength{\headsep}{0.25in}
+
+\pagestyle{fancy}
+
+\input ../macros.tex
+\input ../journal_abbr.tex
+
+\begin{document}
+
+\setlength{\parindent}{0in}
+
+\pagestyle{fancy}
+%\lhead{\doctitle{}}
+%\rhead{S.M. Couch}
+\renewcommand{\headrulewidth}{0.0pt}
+
+\begin{center} \textbf{\doctitle{}} \\
+{\bf Year 2 - CY2019 Allocation Renewal } \vspace{-0.1in}
+
+\end{center}
+
+\begin{flushleft}
+\textbf{PI}:
+Sean M. Couch, Michigan State University \\
+\medskip
+
+\textbf{Project Status Summary:}
+
+{\parindent 16pt
+
+Core-collapse supernovae (CCSNe) are the most extreme laboratories for nuclear physics in the universe.
+Stellar core collapse and the violent explosions that follow give birth to neutron stars and black holes, and in the process synthesize most of the elements heavier than helium throughout the universe.
+The behavior of matter at supranuclear densities is crucial to the CCSN mechanism, as are strong and weak interactions.
+Beyond Standard Model behavior of neutrinos may also impact the CCSN mechanism.
+Despite the key role CCSNe play in many aspects of astrophysics, and decades of research effort, {\it we still do not fully understand the details of the physical mechanism that causes these explosions.}
+This leaves frustratingly large uncertainty in many key aspects of our theoretical understanding of the universe, and also makes it difficult to constrain uncertain nuclear physics with data from CCSNe.
+
+Our INCITE project is an end-to-end, multi-year investigation of CCSNe that includes the effects of rotation, magnetic fields, and progenitor asphericity.
+The primary goals, and progress toward those goals, are:
+\begin{itemize}
+  \item Year 1: Execute a high-fidelity parameter study of 3D magnetorotational CCSNe. This effort will explore the impact of rotation and magnetic fields on the CCSN mechanism by varying the rotation rate and field strength of the initial conditions across multiple 3D simulations. This goal will consume the largest fraction of our allocation during Year 1. Thus far in Year 1, all of the planned simulations are on track and we anticipate achieving our target for this milestone by year's end. One of these simulations was run on \thet.
+  \item Year 1: Simulate 3D iron core collapse in rotating, magnetic stars. This will entail the first-ever 3D simulation of a CCSN progenitor to include rotation and magnetic fields. We have made significant progress in improving our simulation application for this goal, including running a test 3D simulation in reduced octant geometry. We are now in the process of starting the production runs for this goal on \mira.
+  \item Year 1: Execute the highest-resolution, high-fidelity global simulation of magnetorotational turbulence in CCSN ever. We are now ready to begin this simulation on \mira.
+  \item Year 2: Extend our 3D magnetorotational CCSN simulations to late times, up to 1 second post-bounce. 
+  \item Year 2: Execute a high-resolution {\it global} simulation of the magnetorotational instability and dynamo in the proto-neutron star. 
+  \item Year 2: Simulate additional 3D magnetorotational CCSN progenitors to the point of core collapse.
+  \item Year 2: Carry out CCSN mechanism simulations using the 3D progenitors produced in Year 1.
+\end{itemize}
+
+}
+\end{flushleft}
+\end{document}
