@@ -1,0 +1,373 @@
+\documentclass[11pt]{article}
+\pagestyle{empty}
+
+\usepackage[landscape]{geometry}
+\usepackage{fancyhdr}
+\usepackage{times}
+\usepackage{makecell}
+
+\usepackage[x11names]{xcolor}
+\usepackage{colortbl}
+
+\input ../macros.tex
+
+\setlength{\oddsidemargin}{-0.3in}
+\setlength{\evensidemargin}{-0.3in}
+\setlength{\textheight}{6.5in}
+\setlength{\textwidth}{9in}
+%
+\setlength{\topmargin}{-0.5in}
+\setlength{\headsep}{0.2in}
+\setlength{\topskip}{0in}
+\setlength{\headheight}{0in}
+
+%\setlength{\minrowclearance}{15pt}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\arrayrulewidth}{1.0pt}
+\setlength{\doublerulesep}{0pt}
+
+\pagestyle{fancy}
+
+\lhead{\doctitle}
+\rhead{PI: S.M. Couch}
+\renewcommand{\headrulewidth}{0.0pt}
+
+\begin{document}
+
+
+\begin{table}[t]
+\begin{tabular}{|p{2.90in}|p{3.1in}|p{3.00in}|}
+\multicolumn{3}{c}{\textbf{SUMMARY MILESTONE TABLE: YEAR 1}}\\
+
+\hline
+
+\rowcolor{Gold1}
+\textbf{Milestone$^1$} & \textbf{Details} & \textbf{Progress}\\
+\hline
+%%%%%%%%%%%%%%%%
+
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2 - Finish SIMpliPy workflow \\ management tool
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: --  \\
+  Online storage: -- \hfill Archival storage: -- \\
+}
+&
+Complete. Capable of managing automatic restarts, including job submission. Can configure large parameter studies and build custom job execution scripts. \\
+\hline
+
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2 - Implement marching cubes for EOS \\ and opacities
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: --  \\
+  Online storage: -- \hfill Archival storage: -- \\
+}
+&
+Complete. Substantial progress in improving efficiency in this part of the code through vectorization. Marching cube EOS and opacity tables did not, in the end, yield a substantial increase in performance. Other optimizations were made.\\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.2 - High-fidelity 3D Simulations of \\ Magnetorotational CCSNe
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 4.1M  \\
+  Online storage: 40 TB \hfill Archival storage: 80 TB\\
+  Resource: \thet \hfill \mira node-hours: 141k  \\
+  Online storage: 20 TB \hfill Archival storage: 40 TB  \\
+}
+&
+Complete.\\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.3 - 3D Simulations of Iron Core Collapse \\ in Rotating Stars
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 1.25M  \\
+  Online storage: 10 TB \hfill Archival storage: more \\
+}
+&
+Full 3D simulation in a non-rotating progenitor complete and publication in preparation. \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.4 - High-resolution Simulation of \\ Magnetorotational Turbulence in CCSNe
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 3.75M  \\
+  Online storage: 50 TB \hfill Archival storage: 100 TB  \\
+}
+&
+Complete.  \\
+\hline
+
+
+
+\multicolumn{3}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request -- \mira: 9.375M node-hours, 300 TB storage; \thet: 141k node-hours; 40 TB online storage}}\\
+\hline
+\end{tabular}
+\raisebox{-0.5cm}{\quad$^1$Yellow: code development milestone; Teal: simulation milestone.}\\
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[t]
+\begin{tabular}{|p{2.90in}|p{3.1in}|p{3.00in}|}
+\multicolumn{3}{c}{\textbf{SUMMARY MILESTONE TABLE: YEAR 2}}\\
+
+\hline
+
+\rowcolor{Gold1}
+\textbf{Milestone$^1$} & \textbf{Details} & \textbf{Progress}\\
+\hline
+%%%%%%%%%%%%%%%%
+
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2 - Implement TEAMS opacities \\ and EOS and NES
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: --  \\
+  Online storage: -- \hfill Archival storage: -- \\
+}
+&
+Neutrino-electron scattering has been successfully implemented in our Spark-M1 application. Work on the TEAMS opacity and EOS framework continues. \\
+\hline
+
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.5 - Long time scale simulations
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 4.1M  \\
+  Online storage: 40 TB \hfill Archival storage: 80 TB \\
+}
+&
+These simulations are running in the Capability queue on {\it Mira} now. \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.7 - High-res PNS dynamo simulation
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 3.9M  \\
+  Online storage: 50 TB \hfill Archival storage: 100 TB \\
+}
+&
+We are on track to start this simulation in the next couple weeks, consistent with the original plan. \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.6 - MHD progenitor simulations \\ for more masses
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: 1.375M  \\
+  Online storage: 10 TB \hfill Archival storage: 20 TB \\
+}
+&
+We are behind schedule on this due to required improvements and development to the progenitor application. The first non-MHD 3D progenitor simulation is complete and we will still be able to complete the planned MHD progenitor simulations before the end of 2019. \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.8 - CCSN sims with 3D progens from Year 1
+}
+&
+\makecell[l]{
+  Resource: {\it Theta} \hspace{0.9in} node-hours: 281k  \\
+  Online storage: 40 TB \hfill Archival storage: 80 TB \\
+}
+&
+These simulations will commence shortly on {\it Theta}, consistent with our original schedule.  \\
+\hline
+
+
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2 - Implement high-order MHD based \\ on differential transforms
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{0.9in} node-hours: --  \\
+  Online storage: -- \hfill Archival storage: -- \\
+}
+&
+We have finished on initial implementation of a truly high-order finite-volume MHD scheme in FLASH. Further development will be needed before it is ready for production simulations but we expect that to be the case for 2020. \\
+\hline
+
+\multicolumn{3}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request on {\it Mira}: 9.375M node-hours, 300 TB storage; \thet: 281k node-hours, 40 TB online storage  }}\\
+\hline
+\end{tabular}
+\raisebox{-0.5cm}{\quad$^1$Yellow: code development milestone; Teal: simulation milestone.}\\
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[t]
+\begin{tabular}{|p{4.00in}|p{4in}|p{1.00in}|}
+\multicolumn{3}{c}{\textbf{ORIGINAL MILESTONE TABLE: YEAR 3}}\\
+
+\hline
+
+\rowcolor{Gold1}
+\textbf{Milestone$^1$} & \textbf{Details} & \textbf{Dates}\\
+\hline
+%%%%%%%%%%%%%%%%
+
+\rowcolor{LemonChiffon1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2 - Implement simple task-based parallelism
+}
+&
+\makecell[l]{
+  Resource: \mira \hspace{1.75in} node-hours: --  \\
+  Online storage: -- \hfill Archival storage: -- \\
+}
+&
+Jan -- Mar 2020 \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.9 - MHD CCSN Simulations Using 3D Progenitors
+}
+&
+\makecell[l]{
+  Resource: \thet \hspace{1.75in} node-hours: 16M  \\
+  Online storage: 40 TB \hfill Archival storage: 80 TB \\
+}
+&
+Jan -- June 2020 \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.10 - Late time sims in 3D progenitors
+}
+&
+\makecell[l]{
+  Resource: \thet \hspace{1.75in} Core-hours: 16M  \\
+  Online storage: 40 TB \hfill Archival storage: 80 TB \\
+}
+&
+Jan -- Jun 2020 \\
+\hline
+
+\rowcolor{Aquamarine1}[0.92\tabcolsep]
+\makecell[l]{
+  \S2.11 - Enhanced physics CCSN parameter study
+}
+&
+\makecell[l]{
+  Resource: {\it Aurora} \hspace{1.75in} Core-hours: 400M  \\
+  Online storage: 2 PB \hfill Archival storage: 4 PB \\
+}
+&
+Feb -- Dec 2020 \\
+\hline
+
+
+\multicolumn{3}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+    Request on {\it Theta}: 32M SU, 100 TB storage; {\it Aurora:} 400M, 2 PB storage}}\\
+\hline
+\end{tabular}
+\raisebox{-0.5cm}{\quad$^1$Yellow: code development milestone; Teal: simulation milestone.}\\
+\end{table}
+
+\begin{table}[t]
+    \begin{tabular}{|p{4.00in}|p{4in}|p{1.00in}|}
+    \multicolumn{3}{c}{\textbf{REVISED MILESTONE TABLE: YEAR 3}}\\
+    
+    \hline
+    
+    \rowcolor{Gold1}
+    \textbf{Milestone$^1$} & \textbf{Details} & \textbf{Dates}\\
+    \hline
+    %%%%%%%%%%%%%%%%
+    
+    \rowcolor{LemonChiffon1}[0.92\tabcolsep]
+    \makecell[l]{
+      Adapt Spark-M1 to AMReX-based FLASH5
+    }
+    &
+    \makecell[l]{
+      Resource: \mira \hspace{1.75in} node-hours: --  \\
+      Online storage: -- \hfill Archival storage: -- \\
+    }
+    &
+    Jan -- Mar 2020 \\
+    \hline
+    
+    \rowcolor{Aquamarine1}[0.92\tabcolsep]
+    \makecell[l]{
+      MHD CCSN Simulations Using 3D Progenitors
+    }
+    &
+    \makecell[l]{
+      Resource: \thet \hspace{1.75in} node-hours: 250k  \\
+      Online storage: 40 TB \hfill Archival storage: 80 TB \\
+    }
+    &
+    Mar -- Oct 2020 \\
+    \hline
+    
+    \rowcolor{Aquamarine1}[0.92\tabcolsep]
+    \makecell[l]{
+      Late time sims in 3D progenitors
+    }
+    &
+    \makecell[l]{
+      Resource: \thet \hspace{1.75in} node-hours: 250k  \\
+      Online storage: 40 TB \hfill Archival storage: 80 TB \\
+    }
+    &
+    Jan -- Jun 2020 \\
+    \hline
+    
+    \rowcolor{Aquamarine1}[0.92\tabcolsep]
+    \makecell[l]{
+      Enhanced physics CCSN parameter study
+    }
+    &
+    \makecell[l]{
+      Resource: {\it Theta} \hspace{1.75in} node-hours: 500k  \\
+      Online storage: 80 TB \hfill Archival storage: 160 TB \\
+    }
+    &
+    Jul -- Dec 2020 \\
+    \hline
+    
+    
+    \multicolumn{3}{|>{\columncolor{Gold1}[0.92\tabcolsep]}l|}{\textbf{Total
+        Request on {\it Theta}: 1M node-hours, 300 TB storage}}\\
+    \hline
+    \end{tabular}
+    \raisebox{-0.5cm}{\quad$^1$Yellow: code development milestone; Teal: simulation milestone.}\\
+    \end{table}
+    
+\end{document}

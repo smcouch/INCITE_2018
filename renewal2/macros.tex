@@ -1,0 +1,74 @@
+% Macros for easier equation numbering and citing:
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\ceqn}[1]{equation~(\ref{#1})}
+\newcommand{\ceq}[1]{(\ref{#1})}
+
+% Convenient abbreviations:
+\newcommand{\flash}{{\tt FLASH }}
+\newcommand{\flashb}{{\tt FLASH}}
+\newcommand{\sn}{SN~Ia}
+\newcommand{\sne}{SNe~Ia}
+\newcommand{\intens}{I}
+\newcommand{\intensf}{I(\lambda, t)} % intensity function
+\newcommand{\flux}{F}
+\newcommand{\fluxf}{F(\lambda, t)} % flux function
+\newcommand{\inputs}{{\cal I}}
+\newcommand{\phys}{{\cal P}}
+\newcommand{\aux}{{\cal A}}
+\newcommand{\cosmo}{{\cal C}}
+\newcommand{\shape}{\tau}
+\newcommand{\obs}{{\cal O}}
+\newcommand{\Nobs}{N_{\rm obs}}
+\newcommand{\simu}{S}
+\newcommand{\Nsim}{N_{sim}}
+\newcommand{\simuo}{S_{\obs}}
+\newcommand{\pdf}{{\em pdf}}
+\newcommand{\Inf}{I}
+\newcommand{\EI}{EI}
+
+\newcommand{\like}{{\cal L}}
+\newcommand{\M}{{\cal M}}
+
+% Common astronomical & mathematical symbols from AASTeX & elsewhere:
+\def\sun{\hbox{$\odot$}}
+\def\earth{\hbox{$\oplus$}}
+\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$<$}}}}
+\def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$>$}}}}
+\def\simlt{\vcenter{\hbox{$<$}\offinterlineskip\hbox{$\sim$}}}
+\def\simgt{\vcenter{\hbox{$>$}\offinterlineskip\hbox{$\sim$}}}
+\def\apropto{\vcenter{\hbox{$\propto$}\offinterlineskip\hbox{$\sim$}}}
+\let\la=\simlt
+\let\ga=\simgt
+\newcommand{\ellipsis}{\unskip\nobreak\hskip.001pt\nobreak
+  \hbox{\kern .4em.\kern .3em.\kern .3em.\kern .4em}\penalty500%
+  \hskip.001pt \ignorespaces}
+\newcommand{\ellipsisp}{\unskip\nobreak\hskip.001pt\nobreak%
+   \hbox{.\kern .3em.\kern .3em.\kern .3em}. }
+
+
+% For Biographies
+\newcommand{\name}[1]{
+\renewcommand{\myname}{#1}
+}
+
+\newcommand{\address}[1]{
+\renewcommand{\myaddress}{#1}
+}
+
+\newcommand{\otheraddress}[1]{
+\renewcommand{\myotheraddress}{#1}
+}
+
+\newcommand{\printaddress}{{
+\small \parbox[t]{6cm}{\myaddress} \hfill
+\parbox[t]{8cm}{\myotheraddress}}
+\vspace{0.3cm}
+}
+
+% Need an initial def so the \renewcommands don't lead to choking
+\newcommand{\myname}{Joe Blow}
+\newcommand{\myaddress}{Pluto}
+\newcommand{\myotheraddress}{000-0000}
