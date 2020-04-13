@@ -19,7 +19,7 @@
 
 \title{DOE Office of Science INCITE Project:\\
 {\it Extreme-scale Simulation of Supernovae and Magnetars from Realistic Progenitors}\\
-2019 EOY Report}
+2020 Q1 Report}
 
 \author{Principal Investigator:\\Sean M. Couch\\
   Michigan State University \vspace{0.1in}\\
@@ -31,7 +31,7 @@
   MacKenzie Warren (North Carolina State University) \\
 }
 
-\date{January 1, 2020}
+\date{April 1, 2020}
 
 
 \begin{document}
@@ -55,30 +55,18 @@
   \label{fig:usage}
 \end{figure}
 
-In 2019 we expended 149.1M core-hours on Mira out of our total 2019 allocation of 150M core-hours (99.4\% usage). 
-Over the course of the year, we largely maintained a linear usage rate.
-Longer queuing times at the very end of the year slowed us down such that we did not expend quite our full allocation, but came quite close.
-Figure \ref{fig:usage} shows usage and categorized hours on Mira.
-Nearly all of our usage on Mira was at the Capability scale.
-
-After completely code tuning, and overcoming an issues with constructing a new set of initial conditions, we began production simulations on Theta in Q3. 
-This put us significantly behind the linear usage rate.
-We worked hard to overcome this and made tremendous progress during Q4.
-We expended 12.8M core-hours on Theta out of our total 2019 allocation of 17.9M core-hours (71.3\% usage). 
-This rapid progress allowed us to largely achieve our planned 2019 milestones for Theta and we are in excellent shape to make progress in 2020.
-83\% of our usage on Theta was at the Capability scale.
+So far in 2020, we have expended 25.8M core-hours out of our allocation of 64M core-hours (40.2\% usage) on Theta. Firgure \ref{fig:usage} shows our usage so far. All of our usage so far has been at the Capability scale. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Report on Project Milestones}
 %%%%%%%%%%%%%%%%%%%
 
-Our milestones for Year 2, and corresponding progress, were:
+Our milestones for Year 3, and corresponding progress, were:
 \begin{enumerate}
-    \item Long time simulations of MHD CCSNe - These simulations were restarted from simulations carried over from 2018 and ran in the Capability queue. Substantial progress was made on these simulations in 2019 and they are now complete.
-    \item High-resolution simulation of MHD dynamos in the proto-neutron star - So far in Q1/Q2 we have analyzed simulations from 2018 that will serves as the initial conditions for this high-resolution simulation. We started this simulation in Q3. Given the extreme resolution of this simulation, it ran in the Capability queue from the outset. The target goals for this simulation were largely achieved and analysis is underway now.
-    \item MHD simulation of CCSN progenitors - These simulations were deferred until 2020.
-    \item CCSN simulation with 3D progenitors - This simulation ran at Capability scale on Theta. We made substantial progress on this simulation but our delays on Theta mean that we must continue this simulation in 2020.
-    \item Implement microphysics from TEAMS SciDAC collaboration and neutrino-electron scattering (NES) - the TEAMS microphysics package is not yet ready for production simulations. During Q1, we finished an implementation of NES and are now using it in production on Theta.
+    \item Adapt Spark-M1 to AMReX-based FLASH5 - This work is already underway as part of the {\it Exastar} Exascale Computing Project. Substantial progress has been made and we anticipate completing this milestone well before the end of Year 3.
+    \item MHD CCSN Simulations Using 3D Progenitors - These simulations are deferred until suitable progenitors are available. This work will commence in Q2.
+    \item Late-time CCSN simulation with 3D progenitors - This simulation ran at Capability scale on Theta. We made substantial progress on this simulation in Q1.
+    \item Enhanced physics CCSN parameter study - This work will begin in Q2. 
 \end{enumerate}
 
 
@@ -91,21 +79,13 @@ Our milestones for Year 2, and corresponding progress, were:
 
 \noindent {\bf Publications}
 \begin{itemize}
-    \item \href{https://ui.adsabs.harvard.edu/abs/2019arXiv191203328W}{``Constraining properties of the next nearby core-collapse supernova with multi-messenger signals''}, {Warren}, M.L., {Couch}, S.M., {O'Connor}, E.P. and {Morozova}, V, submitted to {\itshape Astrophysical Journal}, arXiv:1912.03328
-    \item \href{https://ui.adsabs.harvard.edu/#abs/2019arXiv190201340C/abstract}{``Simulating Turbulence-aided Neutrino-driven Core-collapse Supernova Explosions in One Dimension''}, Couch, S. M., Warren, M. L., O'Connor, E. P. 2020, {\itshape Astrophysical Journal}, in press 
-    \item \href{https://ui.adsabs.harvard.edu/#abs/2019arXiv190109055P/abstract}{``Features of Accretion Phase Gravitational Wave Emission from Two-dimensional Rotating Core-Collapse Supernovae''}, Pajkos, M. A., Couch, S. M., Pan, K., O'Connor, E. P. 2019, {\itshape Astrophysical Journal}, 878, 13
+    \item \href{https://ui.adsabs.harvard.edu/abs/2020arXiv200110434S/abstract}{``Equation of State and Progenitor Dependence of Stellar-Mass Black-Hole Formation''},  Schneider, A. S.; O'Connor, E.; Granqvist, E.; Betranhandy, A.; Couch, S. M., accepted to {\itshape Astrophysical Journal}, arXiv:2001.10434
 \end{itemize}
 
 \noindent {\bf Presentations}
 
 \begin{itemize}
-    \item  ``Predictive Simulation of Multimessenger Signals from Core-collapse Supernovae ,'' S.M. Couch, PAX Multimessenger Astronomy Workshop, Penn State, February 2019
-    \item ``The Turbulent Frontier in Massive Stellar Death,'' S.M. Couch, Midwest Workshop on Supernovae and Transients, February 2019
-    \item ``Gravitational Waves from Core-collapse Supernovae,'' S.M. Couch, LIGO SN Group Seminar, March 2019
-    \item ``Multidimensionl Supernova Progenitors,'' S.M. Couch, SciDAC TEAMS Collaboration Meeting, May 2019
-    \item ``Predicting Supernova Neutrino Signals,'' M. Warren, Supernova Early Warning System (SNEWS) 2.0 Workshop, June 2019
-    \item ``High-order MHD for Supernovae,'' S.M. Couch, ASTRONUM 2019, July 2019
-    \item ``Toward a Predictive Theory of Core-collapse Supernova Explosions,'' S.M. Couch, Wayne State University Particle Astrophysics Seminar, October 2019.
+    \item ``Toward a Predictive Theory of Core-collapse Supernova Explosions,'' S.M. Couch, Embry Riddle Aeronautic University Physics and Astronomy Colloquium, March 2020.
 \end{itemize}
 
 % \subsubsection{Secondary}
